@@ -1584,10 +1584,11 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
         nome : agencias.agencias[contAgencia]["Nome Agência "]
     }
     if (contAgencia >= agencias.length) {
-        contAgencia++;
+        contAgencia=0;
 
     } else {
-        contAgencia=0;
+        contAgencia++;
+       
     }
     res.end(JSON.stringify(agencias.agencias[contAgencia]));
 
