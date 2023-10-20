@@ -1324,10 +1324,12 @@
                 D2C: document.getElementById('D2C').checked,
                 Omni: document.getElementById('Omni').checked,
                 marketplace:document.getElementById('marketplace').checked,
+                shopifyplus:document.getElementById('certificacao').checked,
                 next: 1};
 
-            
-
+                
+                $('#formulario').fadeOut(1000);
+                $('#resultado').hide();
 
         
 
@@ -1356,9 +1358,18 @@
 
                         console.log("data");
                         console.dir(data);
+                    //$('#agencia')[0].value = data.nome;   
+
+                    $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
+                    $('#parceria').html('<b>Franquia Parceira: </b>' + data["Parceria com Franquia "] );
+                    $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
+                    sleep(1000).then(() => { $('#resultado').fadeIn(1000); });
+                   
+                    "Parceria com Franquia "
 
                     
-					$toast("Agência recomendada para o projeto: " + data.nome  , "#FF9100");
+                   
+					//$toast("Agência recomendada para o projeto: " + data.nome  , "#FF9100");
                        
 
                        
@@ -1390,7 +1401,9 @@
                     .catch((err) => console.log(err));
             });        
         }
-
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
         
 
         function buscaUltimoCodigoCliente() {
@@ -1629,9 +1642,6 @@
 
                 let campomarketplace = document.getElementById('marketplace');
                 campomarketplace.disabled = false;
-
-
-
 
                 let navegacao = document.getElementById('navegacao');
                 let edicao = document.getElementById('edicao');
