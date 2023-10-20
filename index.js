@@ -1583,7 +1583,7 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     let agencia = {
         nome : agencias.agencias[contAgencia]["Nome Agência "]
     }
-    if (contAgencia < agencias.length) {
+    if (contAgencia >= agencias.length) {
         contAgencia++;
 
     } else {
