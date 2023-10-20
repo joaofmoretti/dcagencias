@@ -1361,7 +1361,6 @@
                     //$('#agencia')[0].value = data.nome;   
 
                     $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
-                    $('#parceria').html('<b>Franquia Parceira: </b>' + data["Parceria com Franquia "] );
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
                     sleep(1000).then(() => { $('#resultado').fadeIn(1000); });
                    
