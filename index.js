@@ -1463,6 +1463,17 @@ app.get('/projeto/', (req, res) => {
     res.sendFile(__dirname + '/views/projeto.html');
 });
 
+app.get('/prospeccao/', (req, res) => {
+    
+    res.writeHead(301, {
+        Location: `http://179.223.166.224:3000/`
+      }).end();
+});
+
+
+
+
+
 function validaToken(requisicao) {
     return;
     let tokenText = requisicao.header(campoToken);
