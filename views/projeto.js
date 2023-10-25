@@ -1284,6 +1284,7 @@
         let clienteAtual = null;
         let novoCliente = false;
         let token = '';
+        let agenciaSugerida = null;
 
         function buscaTokenUsuario() {
             fetch('/user/getUserToken/', {
@@ -1318,6 +1319,7 @@
                 nome: document.getElementById('nome').value,
                 
                 segmento: document.getElementById('segmento').value,
+                agencia: document.getElementById('agenciapref').value,
                
                 b2b: document.getElementById('b2b').checked,
                 b2c: document.getElementById('b2c').checked,
@@ -1335,7 +1337,7 @@
 
        
                let method = "POST";
-               let endereco = '/api/v1/projeto/';
+               let endereco = '/api/v1/sugestaoagencia/';
          
 
            var myHeaders = new Headers();
@@ -1360,11 +1362,13 @@
                         console.dir(data);
                     //$('#agencia')[0].value = data.nome;   
 
+                    agenciaSugerida = data;
+
                     $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
                     sleep(1000).then(() => { $('#resultado').fadeIn(1000); });
                    
-                    "Parceria com Franquia "
+                    
 
                     
                    
@@ -1379,6 +1383,101 @@
                     .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
 
         }
+
+        function saveProject() {
+            
+        
+
+       
+               let method = "POST";
+               let endereco = '/api/v1/projeto/';
+         
+
+           var myHeaders = new Headers();
+            myHeaders.append("Token", '');
+            myHeaders.append("Content-Type", "application/json");
+
+            
+
+            var raw = JSON.stringify(agenciaSugerida);
+
+            var requestOptions = {
+            method: method,
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch(endereco , requestOptions).then((res) => res.json())
+                    .then((data) => {
+
+                                         
+                    
+
+                    
+                   
+					$toast("Projeto confirmado", "#FF9100");
+                       
+
+                       
+                      
+                       
+                       
+                    })
+                    .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+
+        }
+
+        function carregarAgencias() {
+            
+        
+
+       
+            let method = "get";
+            let endereco = '/api/v1/agencias/nomes/';
+      
+
+        var myHeaders = new Headers();
+         myHeaders.append("Token", '');
+         myHeaders.append("Content-Type", "application/json");
+
+         
+
+         
+         var requestOptions = {
+         method: method,
+         headers: myHeaders,
+         
+         redirect: 'follow'
+         };
+
+         fetch(endereco , requestOptions).then((res) => res.json())
+                 .then((data) => {
+
+                                      
+                    let dropdown = document.getElementById('agenciapref');
+                    let option;
+    
+                    for (let i = 0; i < data.length; i++) {
+                        option = document.createElement('option');
+                        option.text = data[i];
+                        option.value = data[i];
+                        dropdown.add(option);
+                    }
+                 
+                
+                    
+
+                    
+
+                    
+                   
+                    
+                    
+                 })
+                 .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+
+     }
 
         function eliminaCliente() {
 

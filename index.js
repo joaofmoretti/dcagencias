@@ -1284,6 +1284,12 @@ let agencias = {
     "Agências Homologadas VTEX ":[]
     };
 
+    let nomeAgencias = [];
+
+    for (let ca =0; ca <  agencias.agencias.length; ca++) {
+        nomeAgencias.push(agencias.agencias[ca]['Nome Agência ']);
+    }
+
 const { application } = require('express');
 const { json } = require('body-parser');
 
@@ -1520,6 +1526,31 @@ app.get('/api/v1/clientes/primeiro/', (req, res) => {
     res.end(JSON.stringify(clientes[0].id));
 });
     
+app.get('/api/v1/agencias/nomes/', (req, res) => {
+    
+    console.log("get no metodo de listagem de nomes de agencias");
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(nomeAgencias));
+}); 
+
+app.get('/api/v1/projetos/', (req, res) => {
+    
+    console.log("get no metodo de listagem de nomes de projetos");
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(projetos));
+}); 
+
+app.get('/api/v1/agencias/', (req, res) => {
+    
+    console.log("get no metodo de listagem de agencias");
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(agencias.agencias));
+}); 
+
+
 app.get('/api/v1/clientes/', (req, res) => {
     validaToken(req);
     console.log("get no metodo de listagem de clientes");
@@ -1582,6 +1613,30 @@ app.get('/api/v1/clientes/nome/:nome', (req, res) => {
 
 });
 
+app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
+	
+	
+    res.writeHead(200, {"Content-Type": "application/json"});
+    let sugestao = req.body;
+    console.log(sugestao);
+    
+
+
+ 
+    if (contAgencia >= agencias.length) {
+        contAgencia=0;
+
+    } else {
+        contAgencia++;
+       
+    }
+    let agenciasugerida = agencias.agencias[contAgencia];
+    agenciasugerida.cliente = sugestao.nome;
+
+    res.end(JSON.stringify(agenciasugerida));
+
+});
+
 app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
 	
 	
@@ -1591,17 +1646,8 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     projetos.push(projeto)
 
 
-    let agencia = {
-        nome : agencias.agencias[contAgencia]["Nome Agência "]
-    }
-    if (contAgencia >= agencias.length) {
-        contAgencia=0;
-
-    } else {
-        contAgencia++;
-       
-    }
-    res.end(JSON.stringify(agencias.agencias[contAgencia]));
+    
+    res.end(JSON.stringify(projeto));
 
 });
 

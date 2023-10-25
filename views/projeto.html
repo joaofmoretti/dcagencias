@@ -288,29 +288,32 @@
 
 
             <div class="form-group d-flex align-items-center">
-
                 <select id="segmento" class="form-control" placeholder="Segmento" />
-                <option value="">Segmento</option>
-                <option value="Calçados">Calçados </option>
-                <option value="Casaemóveis">Casa e móveis</option>
-                <option value="ComidasBebidasGrocery">Comidas Bebidas / Grocery</option>
-                <option value="Cosméticos">Cosméticos</option>
-                <option value="EducaçãoLivrosePapelaria">Educação Livros e Papelaria</option>
-                <option value="Eletrônicoseeletrodomésticos">Eletrônicos e eletrodomésticos</option>
-                <option value="Esportes">Esportes</option>
-                <option value="FarmáciaeSaúde">Farmácia e Saúde</option>
-                <option value="FerramentasAcessórios">Ferramentas Acessórios </option>
-                <option value="Importados">Importados </option>
-                <option value="Infantil ">Infantil</option>
-                <option value="ítensautomotivos">ítens automotivos</option>
-                <option value="Modaeacessórios">Moda e acessórios</option>
-                <option value="Pet">Pet</option>
-                <option value="PresentesFlores">Presentes Flores</option>
-                <option value="Turismo">Turismo </option>
-                <option value="Governo">Governo</option>
-
-
+                    <option value="">Segmento</option>
+                    <option value="Calçados">Calçados </option>
+                    <option value="Casaemóveis">Casa e móveis</option>
+                    <option value="ComidasBebidasGrocery">Comidas Bebidas / Grocery</option>
+                    <option value="Cosméticos">Cosméticos</option>
+                    <option value="EducaçãoLivrosePapelaria">Educação Livros e Papelaria</option>
+                    <option value="Eletrônicoseeletrodomésticos">Eletrônicos e eletrodomésticos</option>
+                    <option value="Esportes">Esportes</option>
+                    <option value="FarmáciaeSaúde">Farmácia e Saúde</option>
+                    <option value="FerramentasAcessórios">Ferramentas Acessórios </option>
+                    <option value="Importados">Importados </option>
+                    <option value="Infantil ">Infantil</option>
+                    <option value="ítensautomotivos">ítens automotivos</option>
+                    <option value="Modaeacessórios">Moda e acessórios</option>
+                    <option value="Pet">Pet</option>
+                    <option value="PresentesFlores">Presentes Flores</option>
+                    <option value="Turismo">Turismo </option>
+                    <option value="Governo">Governo</option>
                 </select>
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <select id="agenciapref" class="form-control" placeholder="Agência Preferencial" />
+                <option value="">Agência Preferencial</option>
+            </select>   
             </div>
 
             <div class="form-group d-flex align-items-center">
@@ -409,8 +412,8 @@
 
             <br> <br>
             <div id="final">
-                <div class="btn btn-primary mb-3" onclick="Javascript:window.location.reload()">Confirmar</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:window.location.reload()">Cancelar</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:saveProject()">Confirmar</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:salvar()">Sugerir outra Agência</div>
             </div>
         </form>    
 
@@ -425,6 +428,7 @@
     <script type="text/javascript" src="#"></script>
 
     <script type="text/javascript">
+        carregarAgencias();
         var myLink = document.querySelectorAll('a[href="#"]');
         myLink.forEach(function (link) {
             link.addEventListener('click', function (e) {
