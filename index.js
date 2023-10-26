@@ -1,6 +1,8 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 
+let mapaAgenciaClient = new Map();
+
 let app = express();
 
 let campoToken = "Token";
@@ -1296,6 +1298,7 @@ const { json } = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/views/form.html'));
+app.use(express.static(__dirname + '/views/agenciasfila.html'));
 app.use(express.static(__dirname + '/views/styleforms.css'));
 app.use(express.static(__dirname + '/views/form.js'));
 console.log(__dirname);
@@ -1305,6 +1308,7 @@ app.use(express.static(__dirname + '/views/stylelogin.css'));
 let router = express.Router();
 app.use("/form/",router);
 app.use("/login/",router);
+app.use(("/agenciasfila/", router))
 let encodeUrl = bodyParser.urlencoded({ extended: false });
 
 let projetos = []
@@ -1464,6 +1468,11 @@ app.get('/form/', (req, res) => {
     res.sendFile(__dirname + '/views/form.html');
 });
 
+app.get('/agenciasfila/', (req, res) => {
+    
+    res.sendFile(__dirname + '/views/agenciasfila.html');
+});
+
 app.get('/projeto/', (req, res) => {
     
     res.sendFile(__dirname + '/views/projeto.html');
@@ -1599,17 +1608,36 @@ app.get('/api/v1/clientes/:id', (req, res) => {
 
 });
 
-app.get('/api/v1/clientes/nome/:nome', (req, res) => {
-    validaToken(req);
-    let clienteLocalizado = clientes.find(cliente => cliente.nome.toLowerCase().includes(req.params.nome.toLowerCase()));
+app.get('/api/v1/sugestaoagencia/nome/:nome', (req, res) => {
+   
+    let agenciasdoCliente = mapaAgenciaClient.get(req.params.nome);
+    let statusHttp = 200;
+   
+
+    res.writeHead(statusHttp, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(agenciasdoCliente));
+
+});
+
+
+app.get('/api/v1/sugestaoagencia/nome/:nome/next/:next', (req, res) => {
+   
+    let agenciasdoCliente = mapaAgenciaClient.get(req.params.nome);
+    let next = Number.parseInt(req.params.next);
+
+    console.log('next ' + next);
     let statusHttp = 200;
 
-    if (clienteLocalizado == null) {
+    let agenciaLocalizada = agenciasdoCliente[next];
+
+    if (agenciaLocalizada == null) {
         statusHttp = 404;
     }
 
+   
+
     res.writeHead(statusHttp, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(clienteLocalizado));
+    res.end(JSON.stringify(agenciaLocalizada));
 
 });
 
@@ -1621,29 +1649,99 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     console.log(sugestao);
     
 
+    let agenciasSugeridas = [];
 
- 
-    if (contAgencia >= agencias.length) {
-        contAgencia=0;
+    for (let iag = 0; iag < agencias.agencias.length; iag++) {
+        let agenciasugerida = agencias.agencias[iag];
+        let score = 0;
 
-    } else {
-        contAgencia++;
-       
+        if (agenciasugerida["Homologado TOTVS "].toLowerCase().trim() == 'homologado') {
+            score = score + 50
+        }
+        
+        if (agenciasugerida["Atuante na plataforma Shopify "] != undefined && agenciasugerida["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
+
+            
+            score = score + 50
+        }
+
+        let qtprojetos = 0;
+        
+        if (agenciasugerida["Quant. projetos Shopify "] != undefined) {
+
+            if (typeof agenciasugerida["Quant. projetos Shopify "] == 'string') {
+                qtprojetos = Number.parseInt(agenciasugerida["Quant. projetos Shopify "].match(/(\d+)/)[0]);
+            } else if (typeof agenciasugerida["Quant. projetos Shopify "] == 'number') {
+                qtprojetos = agenciasugerida["Quant. projetos Shopify "]
+            }
+
+            score = score + qtprojetos;
+        }    
+
+        if (agenciasugerida['Certificação Shopify '].toLowerCase().trim().indexOf('foundation')) {
+            score = score + 100;
+        }
+
+        if (agenciasugerida['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
+            score = score + 100;
+
+            if (sugestao.shopifyplus) {
+                score = score + 500;
+            }
+        }
+
+        if (agenciasugerida['Nome Agência '].toLowerCase().trim().indexOf(sugestao.agencia.toLowerCase().trim()) > -1) {
+            score = score + 500;
+        }
+
+        agenciasugerida.score = score;
+        agenciasSugeridas.push(agenciasugerida);
     }
-    let agenciasugerida = agencias.agencias[contAgencia];
-    agenciasugerida.cliente = sugestao.nome;
 
-    res.end(JSON.stringify(agenciasugerida));
+    agenciasSugeridas.sort((a, b) => (a.score < b.score ? 1 : -1));
+
+    mapaAgenciaClient.set(sugestao.nome, agenciasSugeridas);
+
+    let primeira = agenciasSugeridas[0];
+    
+    primeira.cliente = sugestao.nome;
+    console.log(primeira)
+    res.end(JSON.stringify(primeira));
 
 });
 
+app.get('/api/v1/projetos/', (req, res) => {
+   
+    
+    let statusHttp = 200;
+
+   
+
+    
+   
+
+    res.writeHead(statusHttp, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(projetos));
+
+});
+
+
 app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
 	
-	
+	console.log("salvando o projeto");
     res.writeHead(200, {"Content-Type": "application/json"});
     let projeto = req.body;
     console.log(projeto);
-    projetos.push(projeto)
+    
+    projetos.push(projeto);
+    let agenciaalocada = agencias.agencias.find(a => a['Nome Agência '].toLowerCase() == projeto['Nome Agência '].toLowerCase());
+    console.log("Agencia localizada " + agenciaalocada['Nome Agência ']);
+    console.log("posicao da agencia " + agencias.agencias.indexOf(agenciaalocada)) ;
+
+    let posicaoAtual = agencias.agencias.indexOf(agenciaalocada);
+    let posicaofinal = agencias.agencias.length - 1;
+
+    array_move(agencias.agencias, posicaoAtual, posicaofinal );
 
 
     
@@ -1651,7 +1749,16 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
 
 });
 
-
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
+};
 
 app.post('/api/v1/clientes/', encodeUrl, (req, res) => {
 	

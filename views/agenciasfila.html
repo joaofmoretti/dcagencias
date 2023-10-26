@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro de Projeto</title>
+    <title>Fila de Agencias</title>
     <style>
         @font-face {
             font-family: Arial !important;
@@ -274,173 +274,86 @@
             }
         }
     </style>
-    <script src="/form/projeto.js"></script>
+    
     <link rel="stylesheet" href="/form/styleasteroid.css" />
     <script src="/form/asteroid-alert.js"></script>
 </head>
 
 <body classname="snippet-body">
-    <div class="wrapper" id="formulario">
-        <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Cadastro do projeto</div>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"><span class="far fa-user"></span></div>
-                <input id="nome" autocomplete="off" type="text" class="form-control" placeholder="Nome do cliente">
-            </div>
+    
+        <div class="wrapper" id="formulario">
+            <form action="#">
+                <div class="h5 font-weight-bold text-center mb-3">Fila de Agencias</div>
+                <div class="form-group d-flex align-items-center">
 
 
-            <div class="form-group d-flex align-items-center">
-                <!-- form-control -->
-                
-                <select id="segmento" class="form-control" placeholder="Segmento" />
-                    <option value="">Segmento</option>
-                    <option value="Calçados" class="others">Calçados </option>
-                    <option value="Casaemóveis" class="others" >Casa e móveis</option>
-                    <option value="ComidasBebidasGrocery" class="others">Comidas Bebidas / Grocery</option>
-                    <option value="Cosméticos" class="others">Cosméticos</option>
-                    <option value="EducaçãoLivrosePapelaria" class="others">Educação Livros e Papelaria</option>
-                    <option value="Eletrônicoseeletrodomésticos" class="others">Eletrônicos e eletrodomésticos</option>
-                    <option value="Esportes" class="others">Esportes</option>
-                    <option value="FarmáciaeSaúde" class="others">Farmácia e Saúde</option>
-                    <option value="FerramentasAcessórios" class="others">Ferramentas Acessórios </option>
-                    <option value="Importados" class="others">Importados </option>
-                    <option value="Infantil " class="others">Infantil</option>
-                    <option value="ítensautomotivos" class="others">ítens automotivos</option>
-                    <option value="Modaeacessórios" class="others">Moda e acessórios</option>
-                    <option value="Pet" class="others">Pet</option>
-                    <option value="PresentesFlores" class="others">Presentes Flores</option>
-                    <option value="Turismo" class="others">Turismo </option>
-                    <option value="Governo"class="others" >Governo</option>
-                </select>
-            </div>
-
-            <div class="form-group d-flex align-items-center">
-                <select id="agenciapref" class="form-control" placeholder="Agência Preferencial" />
-                <option value="">Agência Preferencial</option>
-            </select>   
-            </div>
-
-            <div class="form-group d-flex align-items-center">
-
-                <span autocomplete="off" type="text" class="form-control">Modelos de Negócio</span>
-            </div>
-
-
-
-
-            <div class="mb-2">
                 <table width="100%">
                     <tr>
                         <td>
-                            <label class="option">B2B
-                                <input type="checkbox" id="b2b">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="option">B2C
-                                <input type="checkbox" id="b2c">
-                                <span class="checkmark"></span>
-                            </label>
+                            <b>Posição</b>
 
-                            <label class="option">D2C
-                                <input type="checkbox" id="D2C">
-                                <span class="checkmark"></span>
-                            </label>
+
                         </td>
                         <td>
-                            <label class="option">Marketplace
-                                <input type="checkbox" id="marketplace">
-                                <span class="checkmark"></span>
-                            </label>
+                            <b>Nome da Agência</b>
 
-                            <label class="option">Omni
-                                <input type="checkbox" id="Omni">
-                                <span class="checkmark"></span>
-                            </label>
+
                         </td>
                     </tr>
-                </table>
 
+                        <script>
+                            let method = "get";
+                    let endereco = '/api/v1/agencias';
+        
 
+                        var myHeaders = new Headers();
+                        myHeaders.append("Token", '');
+                        myHeaders.append("Content-Type", "application/json");
 
-            </div>
+                    
 
+                    
+                    var requestOptions = {
+                    method: method,
+                    headers: myHeaders,
+                    
+                    redirect: 'follow'
+                    };
 
+                    fetch(endereco , requestOptions).then((res) => res.json())
+                            .then((data) => {
 
-
-
-
-
-            <table width="100%">
-                <tr>
-                    <td>
-                        <div class="mb-2">
-                            <label class="option">Certificação shopify Plus
-                                <input id="certificacao" type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-
-
-                    </td>
-                </tr>
-            </table>
-            <div class="mb-2">
-            </div>
-
-
-
-            <div id="edicao">
-                <div class="btn btn-primary mb-3" onclick="Javascript:salvar()">Sugerir Agência</div>
+                                    console.log(data);            
+                            
                 
+                                for (let i = 0; i < data.length; i++) {
+                                    document.writeln('<tr><td>' + i + '</td><td>' + data[i]['Nome Agência '] + '</td></tr>')
+                                    
+                                }
+                                
+                            })
+                            .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+
+                
+
+                                </script>
+
+
+
+                    
+                </table>
+           
             </div>
-
-
-
 
         </form>
     </div>
 
-    <div class="wrapper" id="resultado" >
-        <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Resultado</div>
-            <br><br>
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"></div>
-                <div  id="agencia" class="h5 font-weight-bold text-center mb-3"></div>
-            </div>
-          
-            <div class="form-group d-flex align-items-center">
-                <div class="icon"></div>
-                <div  id="responsavel" class="h5 font-weight-bold text-center mb-3"></div>
-            </div>
 
-            <br> <br>
-            <div id="final">
-                <div class="btn btn-primary mb-3" onclick="Javascript:saveProject()">Confirmar</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:outraAgencia()">Sugerir outra Agência</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:voltar()">Voltar</div>
-            </div>
-        </form>    
-
-    </div>
-    <script>$('#resultado').hide()</script>
 
 
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
 
-    <script type="text/javascript">
-        carregarAgencias();
-        var myLink = document.querySelectorAll('a[href="#"]');
-        myLink.forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-            });
-        });
-    </script>
 
 </body>
 

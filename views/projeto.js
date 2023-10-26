@@ -1285,6 +1285,7 @@
         let novoCliente = false;
         let token = '';
         let agenciaSugerida = null;
+        let proximaAgencia = 0;
 
         function buscaTokenUsuario() {
             fetch('/user/getUserToken/', {
@@ -1300,6 +1301,11 @@
         }
        // buscaTokenUsuario();
 
+       function voltar() {
+        $('#resultado').fadeOut(500);
+        sleep(500).then(() => { $('#formulario').fadeIn(500); })
+       }
+
         function primeiro() {
             buscaPrimeiroCliente();
             codigoCliente = primeiroCliente;
@@ -1312,6 +1318,62 @@
             carregaCliente();
         }
 
+        function outraAgencia() {
+
+           
+             
+                
+                
+        
+
+       
+               let method = "GET";
+               let endereco = '/api/v1/sugestaoagencia/nome/' + document.getElementById('nome').value + '/next/' + proximaAgencia++;
+         
+
+           var myHeaders = new Headers();
+            myHeaders.append("Token", '');
+            myHeaders.append("Content-Type", "application/json");
+
+            
+
+            
+
+            var requestOptions = {
+            method: method,
+            headers: myHeaders,
+            
+            redirect: 'follow'
+            };
+
+            fetch(endereco , requestOptions).then((res) => res.json())
+                    .then((data) => {
+
+                        console.log("data");
+                        console.dir(data);
+                    //$('#agencia')[0].value = data.nome;   
+
+                    agenciaSugerida = data;
+
+                    $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
+                    $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
+                   // sleep(500).then(() => { $('#resultado').fadeIn(500); });
+                   
+                    
+
+                    
+                   
+					//$toast("Agência recomendada para o projeto: " + data.nome  , "#FF9100");
+                       
+
+                       
+                      
+                       
+                       
+                    })
+                    .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+
+        }
         
 
         function salvar() {
@@ -1330,9 +1392,10 @@
                 next: 1};
 
                 
-                $('#formulario').fadeOut(1000);
-                $('#resultado').hide();
-
+                $('#formulario').fadeOut(500);
+                if ($('#resultado')[0].style.display != 'none') {
+                    $('#resultado').hide();
+                }
         
 
        
@@ -1366,7 +1429,7 @@
 
                     $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
-                    sleep(1000).then(() => { $('#resultado').fadeIn(1000); });
+                    sleep(500).then(() => { $('#resultado').fadeIn(500); });
                    
                     
 
@@ -1424,7 +1487,7 @@
                        
                        
                     })
-                    .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+                    .catch((err) => {$confirm("Erro ao salvar projeto", "#E74C3C"); console.dir(err);});
 
         }
 
@@ -1437,9 +1500,9 @@
             let endereco = '/api/v1/agencias/nomes/';
       
 
-        var myHeaders = new Headers();
-         myHeaders.append("Token", '');
-         myHeaders.append("Content-Type", "application/json");
+             var myHeaders = new Headers();
+            myHeaders.append("Token", '');
+            myHeaders.append("Content-Type", "application/json");
 
          
 
@@ -1460,19 +1523,11 @@
     
                     for (let i = 0; i < data.length; i++) {
                         option = document.createElement('option');
+                        option.style.color = "black";
                         option.text = data[i];
                         option.value = data[i];
                         dropdown.add(option);
                     }
-                 
-                
-                    
-
-                    
-
-                    
-                   
-                    
                     
                  })
                  .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
