@@ -1819,14 +1819,14 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     console.log(projeto);
     
     projetos.push(projeto);
-    let agenciaalocada = agencias.agencias.find(a => a['Nome Agência '].toLowerCase() == projeto['Nome Agência '].toLowerCase());
+    let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência '].toLowerCase() == projeto['Nome Agência '].toLowerCase());
     console.log("Agencia localizada " + agenciaalocada['Nome Agência ']);
-    console.log("posicao da agencia " + agencias.agencias.indexOf(agenciaalocada)) ;
+    console.log("posicao da agencia " + agenciasHomologadas.indexOf(agenciaalocada)) ;
 
-    let posicaoAtual = agencias.agencias.indexOf(agenciaalocada);
-    let posicaofinal = agencias.agencias.length - 1;
+    let posicaoAtual = agenciasHomologadas.indexOf(agenciaalocada);
+    let posicaofinal = agenciasHomologadas.length - 1;
 
-    array_move(agencias.agencias, posicaoAtual, posicaofinal );
+    array_move(agenciasHomologadas, posicaoAtual, posicaofinal );
 
 
     
@@ -1845,105 +1845,6 @@ function array_move(arr, old_index, new_index) {
     return arr; // for testing
 };
 
-app.post('/api/v1/clientes/', encodeUrl, (req, res) => {
-	
-	//throw("Explosões!!!!!!");
-    validaToken(req);
-    console.log("post de cliente");
-    let codigoStatushttp = 201;
-    let novoCliente = req.body;
-
-    let maiorid = Math.max(...clientes.map( o => o.id ));
-
-    
-    if (maiorid > 0) {
-        maiorid++;
-    } else {
-        maiorId = 1;
-    }
-
-    novoCliente.id = maiorid;
-    clientes.push(novoCliente);
-
-    res.writeHead(codigoStatushttp, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(novoCliente));
-
-});
-//
-app.put('/api/v1/clientes/:id',  encodeUrl, (req, res) => {
-   
-    
-    validaToken(req);
-    
-    console.log(req);
-	
-	//throw("Explosões!!!!!!");
-
-
-    let clienteAntigo = clientes.find(cliente => cliente.id == req.params.id);
-    if (clienteAntigo == null) {
-        res.writeHead(400, {"Content-Type": "application/json"});
-        res.end(JSON.stringify("Cliente não localizado com o id " + req.params.id));
-    } else {
-        let novoCliente = req.body;
-        let campos = ['id','nome','regiao','parceiro','nps', 'prev', 'next'];
-             console.log("Validando campos ");
-
-            console.log(novoCliente);
-
-        //if (Object.keys(novoCliente).some(o => campos.includes(o))) {
-            console.log("Achou os campos");
-            clienteAntigo.nome = novoCliente.nome;
-            clienteAntigo.regiao = novoCliente.regiao;
-            clienteAntigo.parceiro = novoCliente.parceiro;
-            clienteAntigo.nps = novoCliente.nps;
-
-            clienteAntigo.logistica = novoCliente.logistica;
-            clienteAntigo.distribuicao = novoCliente.distribuicao;
-            clienteAntigo.construcao = novoCliente.construcao;
-            clienteAntigo.fabrica = novoCliente.fabrica;
-
-            clienteAntigo.b2b = novoCliente.b2b;
-            clienteAntigo.b2c = novoCliente.b2c;
-            clienteAntigo.b2b2c = novoCliente.b2b2c;
-            clienteAntigo.b2b2b = novoCliente.b2b2b;
-			
-			clienteAntigo.marketplace = novoCliente.marketplace;
-
-            console.log("clienteAntigo.nps " + clienteAntigo.nps);
-
-            res.writeHead(201, {"Content-Type": "application/json"});
-            res.end(JSON.stringify(clienteAntigo));
-
-
-       // } else {
-            //res.writeHead(400, {"Content-Type": "application/json"});
-            //res.end(JSON.stringify("Objeto JSon de cliente Inválido! "));
-        //}
-    }
-});
-
-app.delete('/api/v1/clientes/:id' , (req, res) => {
-    //validaToken(req);
-    console.log('delete req.params.id ' + req.params.id);
-    let clienteaDeletar = clientes.find(cliente => cliente.id == req.params.id);
-    if (clienteaDeletar == null) {
-        res.writeHead(400, {"Content-Type": "application/json"});
-        res.end(JSON.stringify("Cliente não existe com o código " + req.params.id ));
-    } else {
-        let posicao = clientes.indexOf(clienteaDeletar);
-        console.log("posicao " + posicao);
-        clientes.splice(posicao, 1);
-        if (clientes[posicao +1] != null) {
-            posicao = clientes[posicao +1].id;
-        } else {
-            posicao = clientes[posicao - 1].id;
-        }
-        res.writeHead(201, {"Content-Type": "application/json"});
-        res.end(JSON.stringify(posicao));
-    }
-
-});
 
 app.get("/user/getUserToken/", (requisicao, resposta) => {
     let dados = {
