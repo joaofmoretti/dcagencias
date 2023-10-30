@@ -1285,7 +1285,7 @@
         let novoCliente = false;
         let token = '';
         let agenciaSugerida = null;
-        let proximaAgencia = 0;
+        let proximaAgencia = 1;
 
         function buscaTokenUsuario() {
             fetch('/user/getUserToken/', {
@@ -1460,7 +1460,7 @@
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
 
-            
+            agenciaSugerida.cliente = $("#nome")[0].value;
 
             var raw = JSON.stringify(agenciaSugerida);
 

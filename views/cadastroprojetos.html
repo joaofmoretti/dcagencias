@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fila de Agências</title>
+    <title>Cadastro de Projetos Confirmados</title>
     <style>
         @font-face {
             font-family: Arial !important;
@@ -282,7 +282,7 @@
 <body classname="snippet-body">
     <div class="wrapper" id="formulario">
         <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Fila de agências</div>
+            <div class="h5 font-weight-bold text-center mb-3">Cadastro de Projetos Confirmados</div>
            
 
 
@@ -293,21 +293,19 @@
             <table width="100%" border="2">
                 <thead> 
                     <tr>
-                        <td align="center">
+                       
+                        <td align="center" style="color:white;">
                             <div class="mb-2">
-                                <label class="option"><b>Posição</b>
-                                </label>
-                            </div>
-
-
-                        </td>
-                        <td align="center">
-                            <div class="mb-2">
-                                <label class="option"><b>Agência</b>
+                                <label class="option"><b>Cliente</b>
                                 </label>
                             </div>
                         </td>
-                        
+                        <td align="center" style="color:white;">
+                            <div class="mb-2">
+                                <label class="option"><b>Agência Responsável</b>
+                                </label>
+                            </div>
+                        </td>
 
                     </tr>
                 </thead>        
@@ -354,7 +352,7 @@
     <script>
          $(document).ready(function () { 
             let method = "get";
-            let endereco = '/api/v1/agencias';
+            let endereco = '/api/v1/projetos';
             var myHeaders = new Headers();
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
@@ -369,12 +367,12 @@
             fetch(endereco , requestOptions).then((res) => res.json())
                     .then((data) => {
 
-                        let agenciasHomologadas = data.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');            
+                            console.log(data);            
                         
         
-                        for (let i = 0; i < agenciasHomologadas.length; i++) {
+                        for (let i = 0; i < data.length; i++) {
                             console.log(i);
-                            let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + '</div></td><td align="center"><div class="mb-2" style="color:white;">' + agenciasHomologadas[i]['Nome Agência '] + ' </div></td></tr>' ;
+                            let codlinha = '<tr><div class="mb-2"><td align="center" style="color:white;">' + data[i]['cliente'] + '</td><td align="center" style="color:white;">'  + data[i]["Nome Agência "] + ' </td></div></tr>' ;
                             tableBody.append(codlinha);    
                         }
                         

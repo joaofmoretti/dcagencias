@@ -1299,6 +1299,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/views/form.html'));
 app.use(express.static(__dirname + '/views/agenciasfila.html'));
+app.use(express.static(__dirname + '/views/cadastroagencia.html'));
+app.use(express.static(__dirname + '/views/cadastroprojetos.html'));
 app.use(express.static(__dirname + '/views/styleforms.css'));
 app.use(express.static(__dirname + '/views/form.js'));
 console.log(__dirname);
@@ -1309,6 +1311,8 @@ let router = express.Router();
 app.use("/form/",router);
 app.use("/login/",router);
 app.use(("/agenciasfila/", router))
+app.use(("/cadastroagencia/", router))
+app.use(("/cadastroprojetos/", router))
 let encodeUrl = bodyParser.urlencoded({ extended: false });
 
 let projetos = []
@@ -1471,6 +1475,16 @@ app.get('/form/', (req, res) => {
 app.get('/agenciasfila/', (req, res) => {
     
     res.sendFile(__dirname + '/views/agenciasfila.html');
+});
+
+app.get('/cadastroagencias/', (req, res) => {
+    
+    res.sendFile(__dirname + '/views/cadastroagencias.html');
+});
+
+app.get('/cadastroprojetos/', (req, res) => {
+    
+    res.sendFile(__dirname + '/views/cadastroprojetos.html');
 });
 
 app.get('/projeto/', (req, res) => {
@@ -1650,19 +1664,22 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     
 
     let agenciasSugeridas = [];
+    let agenciasHomologadas = agencias.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
 
-    for (let iag = 0; iag < agencias.agencias.length; iag++) {
-        let agenciasugerida = agencias.agencias[iag];
-        let score = 0;
+    console.log("agencias homologadas " + agenciasHomologadas.length);
 
-        if (agenciasugerida["Homologado TOTVS "].toLowerCase().trim() == 'homologado') {
-            score = score + 50
-        }
+    for (let iag = 0; iag < agenciasHomologadas.length; iag++) {
+        let agenciasugerida = agenciasHomologadas[iag];
+        let nomeAgencia = agenciasugerida['Nome Agência '].toLowerCase().trim();
+        ;
+
+        if (!agenciasugerida["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
         
+        let score = 3000 - (iag * 200);
         if (agenciasugerida["Atuante na plataforma Shopify "] != undefined && agenciasugerida["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
 
             
-            score = score + 50
+            score = score + 100
         }
 
         let qtprojetos = 0;
@@ -1683,18 +1700,74 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         }
 
         if (agenciasugerida['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
-            score = score + 100;
+            score = score + 200;
 
             if (sugestao.shopifyplus) {
                 score = score + 500;
             }
         }
 
-        if (agenciasugerida['Nome Agência '].toLowerCase().trim().indexOf(sugestao.agencia.toLowerCase().trim()) > -1) {
+       
+
+        if (nomeAgencia.indexOf(sugestao.agencia.toLowerCase().trim()) > -1) {
             score = score + 500;
         }
 
+        let casesAG = agencias["CASES POR AGÊNCIA "].filter(caso => caso.AGÊNCIA.toLowerCase().indexOf(nomeAgencia) > -1)
+        let plataformCaseScore = 0
+        let segmentoCaseScore = 0;
+        let b2bCaseScore = 0;
+        let b2cCaseScore = 0;
+        let d2dCaseScore = 0;
+        let marketplaceCaseScore = 0;
+        let omniCaseScore = 0;
+
+        for (let conta=0; conta < casesAG.length; conta++) {
+            let caso = casesAG[conta];
+
+            if (caso['PLATAFORMA '].toLowerCase().indexOf("shopify") > -1) {
+                plataformCaseScore = 500;
+            }
+
+            if (caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) {
+                segmentoCaseScore = 1000;
+            }
+
+            if (caso['Especialidade B2B B2C'] != undefined) {
+                let mercados = caso['Especialidade B2B B2C'].toLowerCase();
+                if (sugestao.b2b && (mercados.indexOf('b2b') > -1)) {
+                    b2bCaseScore =  1500;
+                }
+
+                if (sugestao.b2c && (mercados.indexOf('b2c') > -1)) {
+                    b2cCaseScore = 1500;
+                }
+
+              
+
+                if (sugestao.d2c && (mercados.indexOf('d2c') > -1)) {
+                    d2dCaseScore =  1500;
+                }
+
+                if (sugestao.marketplace && (mercados.indexOf('marketplace') > -1)) {
+                   marketplaceCaseScore =  1500;
+                }
+
+                if (sugestao.Omni && (mercados.indexOf('omni') > -1)) {
+                    omniCaseScore = 1500;
+                }
+
+            }
+
+
+
+
+        }
+        score = score + plataformCaseScore + segmentoCaseScore + b2bCaseScore + b2cCaseScore + d2dCaseScore +marketplaceCaseScore + omniCaseScore;
+
+
         agenciasugerida.score = score;
+       // agenciasugerida.cliente = sugestao.nome;
         agenciasSugeridas.push(agenciasugerida);
     }
 
@@ -1702,11 +1775,13 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
     mapaAgenciaClient.set(sugestao.nome, agenciasSugeridas);
 
-    let primeira = agenciasSugeridas[0];
+   
+
+   console.log("primeira agencia sugerida como resposta");
     
-    primeira.cliente = sugestao.nome;
-    console.log(primeira)
-    res.end(JSON.stringify(primeira));
+   
+    console.log(agenciasSugeridas[0])
+    res.end(JSON.stringify(agenciasSugeridas[0]));
 
 });
 
