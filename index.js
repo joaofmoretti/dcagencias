@@ -1286,10 +1286,12 @@ let agencias = {
     "Agências Homologadas VTEX ":[]
     };
 
+    let agenciasHomologadas = agencias.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+
     let nomeAgencias = [];
 
-    for (let ca =0; ca <  agencias.agencias.length; ca++) {
-        nomeAgencias.push(agencias.agencias[ca]['Nome Agência ']);
+    for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
+        nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
     }
 
 const { application } = require('express');
@@ -1573,6 +1575,14 @@ app.get('/api/v1/agencias/', (req, res) => {
     res.end(JSON.stringify(agencias.agencias));
 }); 
 
+app.get('/api/v1/agencias/homologadas', (req, res) => {
+    
+    console.log("get no metodo de listagem de agencias");
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(agenciasHomologadas));
+}); 
+
 
 app.get('/api/v1/clientes/', (req, res) => {
     validaToken(req);
@@ -1664,7 +1674,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     
 
     let agenciasSugeridas = [];
-    let agenciasHomologadas = agencias.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+    
 
     console.log("agencias homologadas " + agenciasHomologadas.length);
 
