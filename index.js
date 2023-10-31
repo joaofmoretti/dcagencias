@@ -1645,7 +1645,7 @@ app.get('/api/v1/sugestaoagencia/nome/:nome', (req, res) => {
 
 
 app.get('/api/v1/sugestaoagencia/nome/:nome/next/:next', (req, res) => {
-   
+   console.log("proxima agencia sugerida");
     let agenciasdoCliente = mapaAgenciaClient.get(req.params.nome);
     let next = Number.parseInt(req.params.next);
 
@@ -1679,37 +1679,36 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     console.log("agencias homologadas " + agenciasHomologadas.length);
 
     for (let iag = 0; iag < agenciasHomologadas.length; iag++) {
-        let agenciasugerida = agenciasHomologadas[iag];
-        let nomeAgencia = agenciasugerida['Nome Agência '].toLowerCase().trim();
-        ;
-
-        if (!agenciasugerida["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
+        let agenciaAvaliada = agenciasHomologadas[iag];
+        let nomeAgencia = agenciaAvaliada['Nome Agência '].toLowerCase().trim();
         
-        let score = 3000 - (iag * 200);
-        if (agenciasugerida["Atuante na plataforma Shopify "] != undefined && agenciasugerida["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
+
+        if (!agenciaAvaliada["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
+
+        if (sugestao.shopifyplus && (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus') == -1)) continue
+        
+        let score = 0;
+
+        if (sugestao.agencia.trim() == '') {
+            score =  3000 - (iag * 200);
+        } 
+
+
+        if (agenciaAvaliada["Atuante na plataforma Shopify "] != undefined && agenciaAvaliada["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
 
             
             score = score + 100
         }
 
-        let qtprojetos = 0;
+       
         
-        if (agenciasugerida["Quant. projetos Shopify "] != undefined) {
+    
 
-            if (typeof agenciasugerida["Quant. projetos Shopify "] == 'string') {
-                qtprojetos = Number.parseInt(agenciasugerida["Quant. projetos Shopify "].match(/(\d+)/)[0]);
-            } else if (typeof agenciasugerida["Quant. projetos Shopify "] == 'number') {
-                qtprojetos = agenciasugerida["Quant. projetos Shopify "]
-            }
-
-            score = score + qtprojetos;
-        }    
-
-        if (agenciasugerida['Certificação Shopify '].toLowerCase().trim().indexOf('foundation')) {
+        if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('foundation')) {
             score = score + 100;
         }
 
-        if (agenciasugerida['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
+        if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
             score = score + 200;
 
             if (sugestao.shopifyplus) {
@@ -1735,13 +1734,15 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
 
-            if (caso['PLATAFORMA '].toLowerCase().indexOf("shopify") > -1) {
-                plataformCaseScore = 500;
+            if (caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) {
+                segmentoCaseScore = 500;
             }
 
-            if (caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) {
-                segmentoCaseScore = 1000;
+            if ((caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) && (caso['PLATAFORMA '].toLowerCase().indexOf("shopify") > -1)) {
+                plataformCaseScore = 1000;
             }
+
+            
 
             if (caso['Especialidade B2B B2C'] != undefined) {
                 let mercados = caso['Especialidade B2B B2C'].toLowerCase();
@@ -1776,9 +1777,9 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         score = score + plataformCaseScore + segmentoCaseScore + b2bCaseScore + b2cCaseScore + d2dCaseScore +marketplaceCaseScore + omniCaseScore;
 
 
-        agenciasugerida.score = score;
-       // agenciasugerida.cliente = sugestao.nome;
-        agenciasSugeridas.push(agenciasugerida);
+        agenciaAvaliada.score = score;
+       // agenciaAvaliada.cliente = sugestao.nome;
+        agenciasSugeridas.push(agenciaAvaliada);
     }
 
     agenciasSugeridas.sort((a, b) => (a.score < b.score ? 1 : -1));
