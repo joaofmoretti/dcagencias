@@ -1371,7 +1371,7 @@
                        
                        
                     })
-                    .catch((err) => {$confirm("Agência recomendada: Buda Digital ", "#E74C3C"); console.dir(err);});
+                    .catch((err) => {$confirm("Esta é a última agência disponível para teste projeto", "#E74C3C"); proximaAgencia=0; console.dir(err);});
 
         }
         
