@@ -1678,14 +1678,17 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
     console.log("agencias homologadas " + agenciasHomologadas.length);
 
+    let agenciaPreferida;
+
     for (let iag = 0; iag < agenciasHomologadas.length; iag++) {
         let agenciaAvaliada = agenciasHomologadas[iag];
-        let nomeAgencia = agenciaAvaliada['Nome Agência '].toLowerCase().trim();
+        
         
 
         if (!agenciaAvaliada["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
 
         if (sugestao.shopifyplus && (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus') == -1)) continue
+        let nomeAgencia = agenciaAvaliada['Nome Agência '].toLowerCase().trim();
         
         let score = 0;
 
@@ -1719,6 +1722,8 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
        
 
         if (nomeAgencia.indexOf(sugestao.agencia.toLowerCase().trim()) > -1) {
+            console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agencia.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agencia.toLowerCase().trim()) );
+            agenciaPreferida = agenciaAvaliada;
             score = score + 500;
         }
 
@@ -1784,6 +1789,23 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
     agenciasSugeridas.sort((a, b) => (a.score < b.score ? 1 : -1));
 
+    if (agenciaPreferida != null) {
+        console.log("melhor: " + agenciasSugeridas[0]['Nome Agência '] + ' ' + agenciasSugeridas[0].score + " favorita: " + agenciaPreferida['Nome Agência '] + ' ' + agenciaPreferida.score);
+        if (agenciasSugeridas[0].score > agenciaPreferida.score) {
+            let porcentagem = 100 - ((agenciaPreferida.score * 100) / agenciasSugeridas[0].score);
+            console.log("porcentagem " + porcentagem);
+            if (porcentagem < 30) {
+
+                let posicaoAtual = agenciasSugeridas.indexOf(agenciaPreferida);
+                let posicaofinal = 0;
+                console.log("Posicao da agencia preferida no ranking atual " + posicaoAtual);
+                array_move(agenciasSugeridas, posicaoAtual, posicaofinal );
+
+            }
+        }
+    }
+
+
     mapaAgenciaClient.set(sugestao.nome, agenciasSugeridas);
 
    
@@ -1791,7 +1813,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
    console.log("primeira agencia sugerida como resposta");
     
    
-    console.log(agenciasSugeridas[0])
+    console.log(agenciasSugeridas[0]['Nome Agência '] + ' score ' + agenciasSugeridas[0].score);
     res.end(JSON.stringify(agenciasSugeridas[0]));
 
 });
