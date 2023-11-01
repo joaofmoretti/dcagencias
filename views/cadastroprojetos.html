@@ -377,7 +377,7 @@
         
                         for (let i = 0; i < data.length; i++) {
                             console.log(i);
-                            let codlinha = '<tr><div class="mb-2"><td align="center" border="1" style="color:white;">' + data[i]['cliente'] + '</td><td align="center" style="color:white;" border="1">'  + data[i]["Nome Agência "] + ' </td></div></tr>' ;
+                            let codlinha = '<tr><div class="mb-2"><td align="center" border="1" style="color:white;">' + data[i].nome + '</td><td align="center" style="color:white;" border="1">'  + data[i].agencia + ' </td></div></tr>' ;
                             tableBody.append(codlinha);    
                         }
                         
