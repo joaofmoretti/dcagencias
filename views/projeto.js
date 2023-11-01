@@ -55,11 +55,11 @@
         
 
         function salvar() {
-            projeto = {id: 0, 
+            projeto = {
                 nome: document.getElementById('nome').value,
                 
                 segmento: document.getElementById('segmento').value,
-                agencia: document.getElementById('agenciapref').value,
+                agenciapreferencial: document.getElementById('agenciapref').value,
                
                 b2b: document.getElementById('b2b').checked,
                 b2c: document.getElementById('b2c').checked,

@@ -8,9 +8,9 @@ let app = express();
 let campoToken = "Token";
 let segredo = '';
 
-let agencias = require('./views/AgenciasParceiras.json');
+let dados = require('./views/AgenciasParceiras.json');
 
-let agenciasHomologadas = agencias.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
 
 let nomeAgencias = [];
 
@@ -214,7 +214,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         
         let score = 0;
 
-        if (sugestao.agencia.trim() == '') {
+        if (sugestao.agenciapreferencial.trim() == '') {
             score =  3000 - (iag * 200);
         } 
 
@@ -243,8 +243,8 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
        
 
-        if (nomeAgencia.indexOf(sugestao.agencia.toLowerCase().trim()) > -1) {
-            console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agencia.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agencia.toLowerCase().trim()) );
+        if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
+            console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
             agenciaPreferida = agenciaAvaliada;
             score = score + 500;
         }
