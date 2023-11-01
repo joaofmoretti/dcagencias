@@ -141,7 +141,7 @@
 
             //agenciaSugerida.cliente = $("#nome")[0].value;
             projeto.agencia = agenciaSugerida["Nome Agência "];
-            projeto.scoreAgencia = agenciaSugerida.score;
+            projeto.score = agenciaSugerida.score;
             projeto.dataSolicitacao = new Date();
 
             var raw = JSON.stringify(projeto);
