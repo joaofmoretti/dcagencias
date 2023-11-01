@@ -38,7 +38,7 @@ app.use("/form/",router);
 app.use("/login/",router);
 app.use("/projeto/",router);
 app.use(("/agencias/", router))
-app.use(("/cadastroprojetos/", router))
+app.use(("/projetos/", router))
 let encodeUrl = bodyParser.urlencoded({ extended: false });
 
 let projetos = []
@@ -64,7 +64,7 @@ app.get('/agencias/consulta', (req, res) => {
     res.sendFile(__dirname + '/views/cadastroagencias.html');
 });
 
-app.get('/cadastroprojetos/', (req, res) => {
+app.get('/projetos/consulta', (req, res) => {
     
     res.sendFile(__dirname + '/views/cadastroprojetos.html');
 });
@@ -74,30 +74,8 @@ app.get('/projeto/', (req, res) => {
     res.sendFile(__dirname + '/views/projeto.html');
 });
 
-app.get('/prospeccao/', (req, res) => {
-    
-    res.writeHead(301, {
-        Location: `http://179.223.166.224:3000/`
-      }).end();
-});
 
 
-
-
-
-function validaToken(requisicao) {
-    return;
-    let tokenText = requisicao.header(campoToken);
-    
-    let tokenVerificado = jwt.verify(tokenText, segredo);
-    
-    if (!tokenVerificado) {
-        console.log("erro no token ");
-        throw("Erro de verificação do token");
-    } else {
-        console.log("Token verificado com sucesso!")
-    }
-}
 
 app.post('/login/', encodeUrl, (requisicao, resposta) => {
 
