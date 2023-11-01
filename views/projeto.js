@@ -3,6 +3,7 @@
 
         let token = '';
         let agenciaSugerida = null;
+        let projeto = null;
         let proximaAgencia = 1;
 
    
@@ -44,8 +45,8 @@
 
                         agenciaSugerida = data;
 
-                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
-                        $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
+                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + agenciaSugerida["Site Agência "] + '"/>' + agenciaSugerida["Nome Agência "] +'</a>');
+                        $('#responsavel').html('<b>Responsavel: </b>' + agenciaSugerida["Nome responsável "] );
                   
                     })
                     .catch((err) => {$confirm("Esta é a última agência disponível para teste projeto", "#E74C3C"); proximaAgencia=0; console.dir(err);});
@@ -54,7 +55,7 @@
         
 
         function salvar() {
-            let cliente = {id: 0, 
+            projeto = {id: 0, 
                 nome: document.getElementById('nome').value,
                 
                 segmento: document.getElementById('segmento').value,
@@ -86,7 +87,7 @@
 
             
 
-            var raw = JSON.stringify(cliente);
+            var raw = JSON.stringify(projeto);
 
             var requestOptions = {
             method: method,
@@ -137,9 +138,12 @@
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
 
-            agenciaSugerida.cliente = $("#nome")[0].value;
+            //agenciaSugerida.cliente = $("#nome")[0].value;
+            projeto.agencia = agenciaSugerida["Nome Agência "];
+            projeto.scoreAgencia = agenciaSugerida.score;
+            projeto.dataSolicitacao = new Date();
 
-            var raw = JSON.stringify(agenciaSugerida);
+            var raw = JSON.stringify(projeto);
 
             var requestOptions = {
             method: method,

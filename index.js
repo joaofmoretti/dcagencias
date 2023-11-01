@@ -357,7 +357,7 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     console.log(projeto);
     
     projetos.push(projeto);
-    let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência '].toLowerCase() == projeto['Nome Agência '].toLowerCase());
+    let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência '].toLowerCase() == projeto.agencia.toLowerCase());
     console.log("Agencia localizada " + agenciaalocada['Nome Agência ']);
     console.log("posicao da agencia " + agenciasHomologadas.indexOf(agenciaalocada)) ;
 
