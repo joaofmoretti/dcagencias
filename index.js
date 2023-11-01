@@ -37,8 +37,7 @@ let router = express.Router();
 app.use("/form/",router);
 app.use("/login/",router);
 app.use("/projeto/",router);
-app.use(("/agenciasfila/", router))
-app.use(("/cadastroagencia/", router))
+app.use(("/agencias/", router))
 app.use(("/cadastroprojetos/", router))
 let encodeUrl = bodyParser.urlencoded({ extended: false });
 
@@ -55,12 +54,12 @@ app.get('/form/', (req, res) => {
     res.sendFile(__dirname + '/views/form.html');
 });
 
-app.get('/agenciasfila/', (req, res) => {
+app.get('/agencias/fila', (req, res) => {
     
     res.sendFile(__dirname + '/views/agenciasfila.html');
 });
 
-app.get('/cadastroagencias/', (req, res) => {
+app.get('/agencias/consulta', (req, res) => {
     
     res.sendFile(__dirname + '/views/cadastroagencias.html');
 });
@@ -142,7 +141,7 @@ app.get('/api/v1/agencias/', (req, res) => {
     console.log("get no metodo de listagem de agencias");
 
     res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(agencias.agencias));
+    res.end(JSON.stringify(dados.agencias));
 }); 
 
 app.get('/api/v1/agencias/homologadas', (req, res) => {
@@ -403,8 +402,8 @@ app.get("/user/getUserToken/", (requisicao, resposta) => {
     resposta.send(jsonRes);
 });
 
-app.get('/form/styleforms.css', (req, res) => {
-    res.sendFile(__dirname + '/views/styleforms.css'); 
+app.get('/form/styleapp.css', (req, res) => {
+    res.sendFile(__dirname + '/views/styleapp.css'); 
 });
 
 app.get('/form/styleasteroid.css', (req, res) => {

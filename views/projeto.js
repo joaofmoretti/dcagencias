@@ -5,6 +5,7 @@
         let agenciaSugerida = null;
         let projeto = null;
         let proximaAgencia = 1;
+        let filadeAgencias = [];
 
    
 
@@ -219,5 +220,44 @@
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    function carregaFila() {
+               let method = "get";
+        let endereco = '/api/v1/agencias/homologadas';
+        var myHeaders = new Headers();
+        myHeaders.append("Token", '');
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+                method: method,
+                headers: myHeaders,
+                
+                redirect: 'follow'
+            };
+        let tableBody = $("table tbody"); 
+        fetch(endereco , requestOptions).then((res) => res.json())
+                .then((data) => {
+
+              
+
+                    let mudouFila = !(JSON.stringify(filadeAgencias) == JSON.stringify(data));
+                   
+
+                    if (mudouFila) {
+
+                        filadeAgencias = data;
+                        tableBody.empty();
+                        for (let i = 0; i < filadeAgencias.length; i++) {
+                        
+                            let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência '] + ' </div></td></tr>' ;
+                            tableBody.append(codlinha);    
+                            
+                        }
+
+                    }
+                    
+                })
+                .catch((err) => console.log(err));
+        }
         
 
