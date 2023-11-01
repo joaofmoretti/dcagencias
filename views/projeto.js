@@ -67,7 +67,7 @@
                 Omni: document.getElementById('Omni').checked,
                 marketplace:document.getElementById('marketplace').checked,
                 shopifyplus:document.getElementById('certificacao').checked,
-                next: 1};
+                };
 
                 
                 $('#formulario').fadeOut(500);
