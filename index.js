@@ -121,6 +121,16 @@ app.get('/api/v1/projetos/', (req, res) => {
 app.get('/api/v1/agencias/', (req, res) => {
     
     console.log("get no metodo de listagem de agencias");
+    for (let ca =0; ca <  dados.agencias.length; ca++) {
+        
+        dados.agencias[ca].posicaoFila = agenciasHomologadas.indexOf(dados.agencias[ca])+1;
+        if (dados.agencias[ca].qtProj == undefined) {
+            dados.agencias[ca][ca].qtProj = 0;
+        } 
+        if (dados.agencias[ca].score == undefined) {
+            dados.agencias[ca].score = 0;
+        }
+    }
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(dados.agencias));
