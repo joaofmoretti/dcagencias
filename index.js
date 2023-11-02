@@ -125,7 +125,7 @@ app.get('/api/v1/agencias/', (req, res) => {
         
         dados.agencias[ca].posicaoFila = agenciasHomologadas.indexOf(dados.agencias[ca])+1;
         if (dados.agencias[ca].qtProj == undefined) {
-            dados.agencias[ca][ca].qtProj = 0;
+            dados.agencias[ca].qtProj = 0;
         } 
         if (dados.agencias[ca].score == undefined) {
             dados.agencias[ca].score = 0;
