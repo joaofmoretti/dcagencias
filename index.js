@@ -16,6 +16,10 @@ let nomeAgencias = [];
 
 for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
     nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+    agenciasHomologadas[ca].posicaoFila = ca+1;
+    if (agenciasHomologadas[ca].qtProj == undefined) {
+        agenciasHomologadas[ca].qtProj = 0;
+    } 
 }
 
 const { application } = require('express');
@@ -303,7 +307,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             }
         }
     }
-
+    
 
     mapaAgenciaClient.set(sugestao.nome, agenciasSugeridas);
 
@@ -351,6 +355,7 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
 
     array_move(agenciasHomologadas, posicaoAtual, posicaofinal );
 
+    agenciaalocada.posicaoFila = posicaofinal;
 
     
     res.end(JSON.stringify(projeto));
