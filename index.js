@@ -338,6 +338,14 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     console.log("Agencia localizada " + agenciaalocada['Nome Agência ']);
     console.log("posicao da agencia " + agenciasHomologadas.indexOf(agenciaalocada)) ;
 
+
+    if (agenciaalocada.qtProj != undefined) {
+        agenciaalocada.qtProj++;
+    } else {
+        agenciaalocada.qtProj=1;
+    }
+
+
     let posicaoAtual = agenciasHomologadas.indexOf(agenciaalocada);
     let posicaofinal = agenciasHomologadas.length - 1;
 
