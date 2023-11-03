@@ -10,8 +10,21 @@
    
 
        function voltar() {
+        $('#classificacao').hide();
         $('#resultado').fadeOut(500);
         sleep(500).then(() => { $('#formulario').fadeIn(500); })
+       }
+
+       function voltarparaResultado() {
+       
+        $('#classificacao').fadeOut(500);
+        sleep(500).then(() => { $('#resultado').fadeIn(500); })
+       }
+
+       function mostrarClassificacao() {
+        $('#resultado').fadeOut(500);
+        
+        sleep(500).then(() => { $('#classificacao').fadeIn(500); })
        }
 
 
@@ -110,7 +123,7 @@
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
                     sleep(500).then(() => { $('#resultado').fadeIn(500); });
                    
-                    
+                    carregaClassifica();
 
                     
                    
@@ -260,4 +273,44 @@
                 .catch((err) => console.log(err));
         }
         
+        function carregaClassifica() {
+            let method = "get";
+            let endereco = '/api/v1/sugestaoagencia/nome/' + document.getElementById('nome').value;
+            var myHeaders = new Headers();
+            myHeaders.append("Token", '');
+            myHeaders.append("Content-Type", "application/json");
+
+            var requestOptions = {
+                    method: method,
+                    headers: myHeaders,
+                    
+                    redirect: 'follow'
+                };
+            let tableBody = $("#classificados tbody"); 
+            fetch(endereco , requestOptions).then((res) => res.json())
+                    .then((data) => {
+
+                
+
+                        let mudouFila = !(JSON.stringify(filadeAgencias) == JSON.stringify(data));
+                        
+
+                        if (mudouFila) {
+
+                            filadeAgencias = data;
+                            tableBody.empty();
+                            for (let i = 0; i < filadeAgencias.length; i++) {
+                            
+                                let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + 
+                                '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência '] + 
+                                ' </div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i].score + '</div></td></tr>' ;
+                                tableBody.append(codlinha);    
+                                
+                            }
+
+                        }
+                        
+                    })
+                    .catch((err) => console.log(err));
+            }
 
