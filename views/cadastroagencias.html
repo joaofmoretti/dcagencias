@@ -38,7 +38,7 @@ var requestOptions = {
  redirect: 'follow'
 };
 
-fetch("api/v1/agencias/", requestOptions)
+fetch("../api/v1/agencias/", requestOptions)
  .then(response => response.json())
  .then(result => {tabledata = result;
 

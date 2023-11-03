@@ -408,7 +408,7 @@ app.get("/user/getUserToken/", (requisicao, resposta) => {
     resposta.send(jsonRes);
 });
 
-app.get('/form/styleapp.css', (req, res) => {
+app.get('/styleapp.css', (req, res) => {
     res.sendFile(__dirname + '/views/styleapp.css'); 
 });
 
