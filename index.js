@@ -109,7 +109,7 @@ app.get('/login/', (req, res) => {
     
 app.get('/api/v1/agencias/nomes/', (req, res) => {
     
-    console.log("get no metodo de listagem de nomes de agencias");
+  
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(nomeAgencias));
@@ -117,7 +117,7 @@ app.get('/api/v1/agencias/nomes/', (req, res) => {
 
 app.get('/api/v1/projetos/', (req, res) => {
     
-    console.log("get no metodo de listagem de nomes de projetos");
+   
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(projetos));
@@ -125,7 +125,7 @@ app.get('/api/v1/projetos/', (req, res) => {
 
 app.get('/api/v1/agencias/', (req, res) => {
     
-    console.log("get no metodo de listagem de agencias");
+   
     for (let ca =0; ca <  dados.agencias.length; ca++) {
         
         dados.agencias[ca].posicaoFila = agenciasHomologadas.indexOf(dados.agencias[ca])+1;
@@ -460,6 +460,7 @@ app.get('/tabulator.min.js', (req, res) => {
   app.get('/luxon.min.js', (req, res) => {
     res.sendFile(__dirname + '/views/libs/luxon.min.js'); 
 
+});
 
 app.listen(5001, () => {
     console.log("Aplicação de API subiu na porta 5001");
