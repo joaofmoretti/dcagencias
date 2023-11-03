@@ -15,7 +15,7 @@
 </head>
 
 <body classname="snippet-body">
-    <div class="wrapper" id="formulario">
+    <div class="wrapper" id="formulario" style="max-width: 1050px;">
         <form action="#">
             <div class="h5 font-weight-bold text-center mb-3">Agencias Parceiras</div>
 
@@ -41,18 +41,43 @@ var requestOptions = {
 fetch("../api/v1/agencias/", requestOptions)
  .then(response => response.json())
  .then(result => {tabledata = result;
+    
+
+    for (let contadorAgencia = 0; contadorAgencia < tabledata.length; contadorAgencia++) {
+        if (tabledata[contadorAgencia]['Homologado TOTVS '].toLowerCase().indexOf('homologado') > -1) {
+            tabledata[contadorAgencia].totvs = true;
+        } else {
+            tabledata[contadorAgencia].totvs = false;
+        }
+
+        if (tabledata[contadorAgencia]['Certificação Shopify '].toLowerCase().indexOf('foundations') > -1) {
+            tabledata[contadorAgencia].shopify = true;
+        } else {
+            tabledata[contadorAgencia].shopify = false;
+        }
+
+        if (tabledata[contadorAgencia]['Certificação Shopify '].toLowerCase().indexOf('plus') > -1) {
+            tabledata[contadorAgencia].plus = true;
+        } else {
+            tabledata[contadorAgencia].plus = false;
+        }
+
+    }
+    console.log(tabledata);
+
 
    var table = new Tabulator("#example-table", {
    height:"311px",
    data:tabledata,
    renderHorizontal:"virtual",
    columns:[
-       {title:"Agência", field:"Nome Agência ", width:150, editor:"input"},
-       {title:"Homologada TOTVS", field:"Homologado TOTVS ", width:150, editor:"input"},
+       {title:"Agência", field:"Nome Agência ", width:200, editor:false},
+       {title:"Homologado", field:"totvs", hozAlign:"center", editor:false, formatter:"tickCross"},
        {title:"Responsável", field:"Nome responsável ", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
        //{title:"Cidade", field:"Cidade ", width:100},
        //{title:"UF", field:"Estado ", width:60},
-       {title:"Shopify", field:"Certificação Shopify ", width:200, editor:false},
+       {title:"Shopify", field:"shopify", hozAlign:"center", editor:false, formatter:"tickCross"},
+       {title:"Plus", field:"plus", hozAlign:"center", editor:false, formatter:"tickCross"},
        {title:"Último Score", field:"score", hozAlign:"center", width:130},
        {title:"#Fila", field:"posicaoFila", hozAlign:"center", width:110},
        {title:"Projetos", field:"qtProj", hozAlign:"center", width:110}
