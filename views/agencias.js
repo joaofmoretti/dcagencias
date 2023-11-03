@@ -104,10 +104,10 @@ function filtraHomologadas() {
     console.log('filtro ' + homologadas);
     
     if (homologadas) {
-        $("#homologs")[0].innerText = 'Todas';
+        $("#homologs")[0].innerText = 'Apenas Homologadas';
         homologadas = false;
     } else {
-        $("#homologs")[0].innerText = 'Apenas Homologadas';
+        $("#homologs")[0].innerText = 'Todas';
         homologadas = true;
     }
     atualizaAgencias();
