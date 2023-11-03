@@ -245,7 +245,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             score = score + 500;
         }
 
-        let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso.AGÊNCIA.toLowerCase().indexOf(nomeAgencia) > -1)
+        let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1)
         let plataformCaseScore = 0
         let segmentoCaseScore = 0;
         let b2bCaseScore = 0;
@@ -256,19 +256,20 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
+            console.log(caso);
+            if (caso["Segmento:"] != undefined) {
+                if (caso["Segmento:"].toLowerCase().indexOf(sugestao.segmento) > -1) {
+                    segmentoCaseScore = 500;
+                }
 
-            if (caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) {
-                segmentoCaseScore = 500;
+                if ((caso['Segmento:'].toLowerCase().indexOf(sugestao.segmento) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
+                    plataformCaseScore = 1000;
+                }
             }
-
-            if ((caso['SEGMENTO '].toLowerCase().indexOf(sugestao.segmento) > -1) && (caso['PLATAFORMA '].toLowerCase().indexOf("shopify") > -1)) {
-                plataformCaseScore = 1000;
-            }
-
             
 
-            if (caso['Especialidade B2B B2C'] != undefined) {
-                let mercados = caso['Especialidade B2B B2C'].toLowerCase();
+            if (caso['Modelos de negócios atendidos:'] != undefined) {
+                let mercados = caso['Modelos de negócios atendidos:'].toLowerCase();
                 if (sugestao.b2b && (mercados.indexOf('b2b') > -1)) {
                     b2bCaseScore =  1500;
                 }
