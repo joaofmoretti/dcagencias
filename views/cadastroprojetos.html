@@ -172,39 +172,7 @@ fetch("../api/v1/projetos/", requestOptions)
             });
         });
     </script>
-    <script>
-         $(document).ready(function () { 
-            let method = "get";
-            let endereco = '/api/v1/projetos';
-            var myHeaders = new Headers();
-            myHeaders.append("Token", '');
-            myHeaders.append("Content-Type", "application/json");
-
-            var requestOptions = {
-                    method: method,
-                    headers: myHeaders,
-                    
-                    redirect: 'follow'
-            };
-            let tableBody = $("table tbody"); 
-            fetch(endereco , requestOptions).then((res) => res.json())
-                    .then((data) => {
-
-                            console.log(data);            
-                        
-        
-                        for (let i = 0; i < data.length; i++) {
-                            console.log(i);
-                            let codlinha = '<tr><div class="mb-2"><td align="center" border="1" style="color:white;">' + data[i].nome + '</td><td align="center" style="color:white;" border="1">'  + data[i].agencia + ' </td></div></tr>' ;
-                            tableBody.append(codlinha);    
-                        }
-                        
-                    })
-                    .catch((err) => console.log(err));
-    })                
-    
-
-    </script>
+   
 
 </body>
 

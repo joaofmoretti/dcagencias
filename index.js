@@ -431,6 +431,10 @@ app.get('/form/projeto.js', (req, res) => {
     res.sendFile(__dirname + '/views/projeto.js'); 
 });
 
+app.get('/agencias.js', (req, res) => {
+    res.sendFile(__dirname + '/views/agencias.js'); 
+});
+
 app.get('/form/asteroid-alert.js', (req, res) => {
     res.sendFile(__dirname + '/views/asteroid-alert.js'); 
 });
