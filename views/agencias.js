@@ -102,7 +102,7 @@ function atualizaAgencias() {
 
 function filtraHomologadas() {
     
-    atualizaAgencias();
+    
     if (homologadas) {
         $("#homologs")[0].innerText = 'Todas';
         homologadas = true;
@@ -110,4 +110,5 @@ function filtraHomologadas() {
         $("#homologs")[0].innerText = 'Apenas Homologadas';
         homologadas = false;
     }
+    atualizaAgencias();
 }
