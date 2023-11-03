@@ -4,53 +4,72 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro de Agências</title>
-
-
+    <title>Consulta de Agências Parceiras</title>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/form/styleapp.css" />
-    <script src="/form/projeto.js"></script>
-    <link rel="stylesheet" href="/form/styleasteroid.css" />
-    <script src="/form/asteroid-alert.js"></script>
+    <link rel="stylesheet" href="/styleapp.css" />
+   <link href="/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/tabulator.min.js"></script>
+    <script src="/luxon.min.js"></script>
+   
 </head>
 
 <body classname="snippet-body">
     <div class="wrapper" id="formulario">
         <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Agências Parceiras</div>
-           
+            <div class="h5 font-weight-bold text-center mb-3">Agencias Parceiras</div>
+
+            <div id="example-table"></div>
+
+
+            
+    <script>
+        var tabledata = [];
+
+//Create Date Editor
+
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var requestOptions = {
+ method: 'GET',
+ Headers: myHeaders,
+ redirect: 'follow'
+};
+
+fetch("api/v1/agencias/", requestOptions)
+ .then(response => response.json())
+ .then(result => {tabledata = result;
+
+   var table = new Tabulator("#example-table", {
+   height:"311px",
+   data:tabledata,
+   renderHorizontal:"virtual",
+   columns:[
+       {title:"Agência", field:"Nome Agência ", width:150, editor:"input"},
+       {title:"Homologada TOTVS", field:"Homologado TOTVS ", width:150, editor:"input"},
+       {title:"Responsável", field:"Nome responsável ", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
+       //{title:"Cidade", field:"Cidade ", width:100},
+       //{title:"UF", field:"Estado ", width:60},
+       {title:"Shopify", field:"Certificação Shopify ", width:200, editor:false},
+       {title:"Último Score", field:"score", hozAlign:"center", width:130},
+       {title:"#Fila", field:"posicaoFila", hozAlign:"center", width:110},
+       {title:"Projetos", field:"qtProj", hozAlign:"center", width:110}
+       
+   ],
+});
 
 
 
 
+  })
+ .catch(error => console.log(error));
 
 
-            <table width="100%" border="2">
-                <thead> 
-                    <tr>
-                       
-                        <td align="center" style="color:white;">
-                            <div class="mb-2">
-                                <label class="option"><b>Nome</b>
-                                </label>
-                            </div>
-                        </td>
-                        <td align="center" style="color:white;">
-                            <div class="mb-2">
-                                <label class="option"><b>Homologado</b>
-                                </label>
-                            </div>
-                        </td>
 
-                    </tr>
-                </thead>        
-                <tbody> 
-                    <tr> 
-                       
-                    </tr> 
-                </tbody> 
 
-            </table>
+   </script>
            
 
             <br>
@@ -58,10 +77,10 @@
 
             <div id="edicao">
                 <div class="btn btn-primary mb-3" onclick="Javascript:document.location.reload()">Atualizar</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:document.location='../../projetos/consulta'">Projetos Cadastrados</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:document.location='../../agencias/fila'">Fila de Agências</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:document.location='/projetos/consulta/'">Consulta de Projetos</div>
                 
             </div>
+
 
 
 
@@ -74,9 +93,7 @@
 
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
-    <script type="text/javascript" src="#"></script>
+
 
     <script type="text/javascript">
         var myLink = document.querySelectorAll('a[href="#"]');
@@ -89,7 +106,7 @@
     <script>
          $(document).ready(function () { 
             let method = "get";
-            let endereco = '/api/v1/agencias';
+            let endereco = '/api/v1/projetos';
             var myHeaders = new Headers();
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
@@ -99,7 +116,7 @@
                     headers: myHeaders,
                     
                     redirect: 'follow'
-                };
+            };
             let tableBody = $("table tbody"); 
             fetch(endereco , requestOptions).then((res) => res.json())
                     .then((data) => {
@@ -109,7 +126,7 @@
         
                         for (let i = 0; i < data.length; i++) {
                             console.log(i);
-                            let codlinha = '<tr><div class="mb-2"><td align="center" style="color:white;">' + data[i]['Nome Agência '] + '</td><td align="center" style="color:white;">'  + data[i]["Homologado TOTVS "] + ' </td></div></tr>' ;
+                            let codlinha = '<tr><div class="mb-2"><td align="center" border="1" style="color:white;">' + data[i].nome + '</td><td align="center" style="color:white;" border="1">'  + data[i].agencia + ' </td></div></tr>' ;
                             tableBody.append(codlinha);    
                         }
                         

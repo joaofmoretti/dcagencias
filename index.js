@@ -33,6 +33,11 @@ app.use(express.static(__dirname + '/views/cadastroagencia.html'));
 app.use(express.static(__dirname + '/views/cadastroprojetos.html'));
 app.use(express.static(__dirname + '/views/styleforms.css'));
 app.use(express.static(__dirname + '/views/form.js'));
+app.use(express.static(__dirname + '/views/libs/tabulator.min.css'));
+app.use(express.static(__dirname + '/views/libs/tabulator.min.js'));
+app.use(express.static(__dirname + '/views/libs/luxon.min.js'));
+
+
 console.log(__dirname);
 app.use(express.static(__dirname + '/views/login.html'));
 app.use(express.static(__dirname + '/views/stylelogin.css'));
@@ -443,6 +448,18 @@ app.get('/icon_38.png', (req, res) => {
 app.get('/favicon.ico', (req, res) => {
     res.sendFile(__dirname + '/views/icon_38.png'); 
 });
+
+app.get('/tabulator.min.css', (req, res) => {
+    res.sendFile(__dirname + '/views/libs/tabulator.min.css'); 
+  });
+
+app.get('/tabulator.min.js', (req, res) => {
+    res.sendFile(__dirname + '/views/libs/tabulator.min.js'); 
+});
+  
+  app.get('/luxon.min.js', (req, res) => {
+    res.sendFile(__dirname + '/views/libs/luxon.min.js'); 
+
 
 app.listen(5001, () => {
     console.log("Aplicação de API subiu na porta 5001");
