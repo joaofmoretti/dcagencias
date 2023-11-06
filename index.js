@@ -120,12 +120,12 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
     let resultString = "Dados cadastrais de agencias parceiras atualizado com sucesso";
     let httpCode = 200;
     console.log("postando dados cadastrais das agencias a parceiras");
-    console.log(req.body);
+    //console.log(req.body);
     let dadosAntigos = []
     dadosAntigos.push(dados.agencias);
 
     try {
-        dados.agencias = req.body;
+        dados  = req.body;
         agenciasHomologadas = [];
 
 
