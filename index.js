@@ -133,6 +133,10 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
         
         
         nomeAgencias = [];
+        console.log(" dados Antigoooooooooooooosssssssss");
+        console.log(dadosAntigos);
+        console.log("Fim dados Antigoooooooooooooooossssssssssssssssssssssss");
+
         
         for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
             nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
