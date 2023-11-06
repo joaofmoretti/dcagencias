@@ -147,6 +147,21 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
     res.end(JSON.stringify(resultString));
 });
 
+app.get('/api/v1/projetos/id/:id', (req, res) => {
+    
+    console.log("novo metodo projetos filtro ");
+    console.log(req.params);
+    console.log(req.params.id);
+    
+   let filtrados = projetos.filter((pro) => pro.id > req.params.id);
+
+   console.log(filtrados)
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(filtrados));
+});
+
+
 app.get('/api/v1/projetos/', (req, res) => {
     
    
@@ -155,13 +170,7 @@ app.get('/api/v1/projetos/', (req, res) => {
     res.end(JSON.stringify(projetos));
 });
 
-app.get('/api/v1/projetos/id/id:', (req, res) => {
-    
-   let filtrados = projetos.filter((pro) => pro.id > req.param.id);
 
-    res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(filtrados));
-});
 
 
 
