@@ -124,7 +124,7 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
     let dadosAntigos = {
         "agencias": dados.agencias
     };
-    dadosAntigos.push(dados.agencias);
+    
 
     try {
         dados  = req.body;
