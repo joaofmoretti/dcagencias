@@ -115,6 +115,75 @@ app.get('/api/v1/agencias/nomes/', (req, res) => {
     res.end(JSON.stringify(nomeAgencias));
 }); 
 
+app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
+    
+    let resultString = "Dados cadastrais de agencias parceiras atualizado com sucesso";
+    let httpCode = 200;
+    console.log("postando dados cadastrais das agencias a parceiras");
+    console.log(req.body);
+    let dadosAntigos = []
+    dadosAntigos.push(dados.agencias);
+
+    try {
+        dados.agencias = req.body;
+        agenciasHomologadas = [];
+
+
+        agenciasHomologadas = dados.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+        
+        
+        nomeAgencias = [];
+        
+        for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
+            nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+            let dadoAnterior = dadosAntigos.filter((da) => da['Nome Agência '].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência '].toLowerCase().trim());
+            agenciasHomologadas[ca].posicaoFila = ca+1;
+            if (dadoAnterior != null) {
+                if (dadoAnterior.qtProj != undefined) {
+                    agenciasHomologadas[ca].qtProj = dadoAnterior.qtProj;
+                } else {
+                    agenciasHomologadas[ca].qtProj = 0;
+                }
+                if (dadoAnterior.score != undefined) {
+                    agenciasHomologadas[ca].score = dadoAnterior.score;
+                } else {
+                    agenciasHomologadas[ca].score = 0;
+                }
+            } else {
+                agenciasHomologadas[ca].score = 0;
+                agenciasHomologadas[ca].qtProj = 0;
+            }
+        }
+    } catch (erro) {
+        resultString = "Erro ao atualizar dados das agências " + erro;
+        httpCode = 500;
+    }
+
+    res.writeHead(httpCode, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(resultString));
+});
+
+
+app.post('/api/v1/agencias/dados/cases', (req, res) => {
+    
+    let resultString = "Cases de  agencias parceiras atualizado com sucesso";
+    let httpCode = 200;
+    console.log("postando dados de cases");
+    console.log(req.body);
+    
+    try {
+        dados['CASES POR AGÊNCIA '] = []
+        dados['CASES POR AGÊNCIA '] = req.body;
+        
+    } catch (erro) {
+        resultString = "Erro ao atualizar dados das agências " + erro;
+        httpCode = 500;
+    }
+
+    res.writeHead(httpCode, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(resultString));
+});
+
 app.post('/api/v1/agencias/dados/', (req, res) => {
     
     let resultString = "Dados de agencias parceiras atualizado com sucesso";
