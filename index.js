@@ -384,6 +384,7 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     res.writeHead(200, {"Content-Type": "application/json"});
     let projeto = req.body;
     console.log(projeto);
+    projeto.id = Date.now();
     
     projetos.push(projeto);
     let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência '].toLowerCase() == projeto.agencia.toLowerCase());
