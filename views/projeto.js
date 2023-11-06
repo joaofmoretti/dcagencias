@@ -112,7 +112,9 @@
 
             fetch(endereco , requestOptions).then((res) => res.json())
                     .then((data) => {
-
+                        $("#btConfirma").show();
+                        $("#btOutraAgencia").show();
+                        
                         console.log("data");
                         console.dir(data);
                     //$('#agencia')[0].value = data.nome;   
@@ -140,7 +142,8 @@
         }
 
         function saveProject() {
-            
+            $("#btConfirma").hide();
+            $("#btOutraAgencia").hide();
         
 
        
