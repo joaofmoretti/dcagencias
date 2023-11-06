@@ -153,7 +153,18 @@ app.get('/api/v1/projetos/', (req, res) => {
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(projetos));
-}); 
+});
+
+app.get('/api/v1/projetos/id/id:', (req, res) => {
+    
+   let filtrados = projetos.filter((pro) => pro.id > req.param.id);
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(filtrados));
+});
+
+
+
 
 app.get('/api/v1/agencias/', (req, res) => {
     
