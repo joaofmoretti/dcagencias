@@ -121,6 +121,8 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
     let httpCode = 200;
     console.log("postando dados das agencias");
     console.log(req.body);
+    let dadosAntigos = []
+    dadosAntigos.push(dados);
 
     try {
         dados = req.body;
@@ -129,14 +131,28 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
 
         agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
         
+        
         nomeAgencias = [];
         
         for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
             nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+            let dadoAnterior = dadosAntigos.agencias.filter((da) => da['Nome Agência '].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência '].toLowerCase().trim());
             agenciasHomologadas[ca].posicaoFila = ca+1;
-            if (agenciasHomologadas[ca].qtProj == undefined) {
+            if (dadoAnterior != null) {
+                if (dadoAnterior.qtProj != undefined) {
+                    agenciasHomologadas[ca].qtProj = dadoAnterior.qtProj;
+                } else {
+                    agenciasHomologadas[ca].qtProj = 0;
+                }
+                if (dadoAnterior.score != undefined) {
+                    agenciasHomologadas[ca].score = dadoAnterior.score;
+                } else {
+                    agenciasHomologadas[ca].score = 0;
+                }
+            } else {
+                agenciasHomologadas[ca].score = 0;
                 agenciasHomologadas[ca].qtProj = 0;
-            } 
+            }
         }
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
