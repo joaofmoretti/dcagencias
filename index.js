@@ -115,6 +115,38 @@ app.get('/api/v1/agencias/nomes/', (req, res) => {
     res.end(JSON.stringify(nomeAgencias));
 }); 
 
+app.post('/api/v1/agencias/dados/', (req, res) => {
+    
+    let resultString = "Dados de agencias parceiras atualizado com sucesso";
+    let httpCode = 200;
+    console.log("postando dados das agencias");
+    console.log(req.body);
+
+    try {
+        dados = req.body;
+        agenciasHomologadas = [];
+
+
+        agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+        
+        nomeAgencias = [];
+        
+        for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
+            nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+            agenciasHomologadas[ca].posicaoFila = ca+1;
+            if (agenciasHomologadas[ca].qtProj == undefined) {
+                agenciasHomologadas[ca].qtProj = 0;
+            } 
+        }
+    } catch (erro) {
+        resultString = "Erro ao atualizar dados das agências " + erro;
+        httpCode = 500;
+    }
+
+    res.writeHead(httpCode, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(resultString));
+});
+
 app.get('/api/v1/projetos/', (req, res) => {
     
    

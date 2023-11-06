@@ -84,9 +84,9 @@ function atualizaAgencias() {
     };
 
     if (homologadas) {
-        url = "https://projetos-lbj5.onrender.com/api/v1/agencias/homologadas";
+        url = "/api/v1/agencias/homologadas";
     } else {
-        url = "https://projetos-lbj5.onrender.com/api/v1/agencias";
+        url = "/api/v1/agencias";
     }
 
 
