@@ -269,15 +269,16 @@ app.get('/api/v1/projetos/', (req, res) => {
 
 app.get('/api/v1/agencias/cases', (req, res) => {
     
-   
+    //console.log(dados.agencias);
     
     res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(dados.cases));
+    res.end(JSON.stringify(dados['CASES POR AGÊNCIA ']));
 }); 
 
 
 
 app.get('/api/v1/agencias/', (req, res) => {
+    
     
    
     for (let ca =0; ca <  dados.agencias.length; ca++) {
