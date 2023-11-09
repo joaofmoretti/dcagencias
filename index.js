@@ -1,5 +1,6 @@
 let express = require('express');
 let bodyParser = require('body-parser');
+var fs = require('fs');
 
 let mapaAgenciaClient = new Map();
 
@@ -122,11 +123,11 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
     console.log("postando dados cadastrais das agencias a parceiras");
     //console.log(req.body);
     let dadosAntigos = {
-        "agencias": dados.agencias
+        "agencias": [...dados.agencias]
     };
-    
-
+  
     try {
+        dados.agencias  = [];
         dados.agencias  = req.body;
         agenciasHomologadas = [];
 
@@ -157,7 +158,11 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
                 agenciasHomologadas[ca].qtProj = 0;
             }
         }
+  
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) })  
+    
     } catch (erro) {
+        console.log(erro);
         resultString = "Erro ao atualizar dados das agências " + erro;
         httpCode = 500;
     }
@@ -177,6 +182,7 @@ app.post('/api/v1/agencias/dados/cases', (req, res) => {
     try {
         dados['CASES POR AGÊNCIA '] = []
         dados['CASES POR AGÊNCIA '] = req.body;
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
         
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
@@ -225,7 +231,9 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
                 agenciasHomologadas[ca].score = 0;
                 agenciasHomologadas[ca].qtProj = 0;
             }
+
         }
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) })
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
         httpCode = 500;
