@@ -233,7 +233,7 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
             }
 
         }
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) })
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
         httpCode = 500;
@@ -267,7 +267,13 @@ app.get('/api/v1/projetos/', (req, res) => {
 });
 
 
-
+app.get('/api/v1/agencias/cases', (req, res) => {
+    
+   
+    
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(dados.cases));
+}); 
 
 
 
