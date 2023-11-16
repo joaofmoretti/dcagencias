@@ -1,6 +1,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 var fs = require('fs');
+const cors = require('cors');
 
 let mapaAgenciaClient = new Map();
 
@@ -27,6 +28,7 @@ const { application } = require('express');
 const { json } = require('body-parser');
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/views/form.html'));
 app.use(express.static(__dirname + '/views/agenciasfila.html'));
