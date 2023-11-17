@@ -180,7 +180,17 @@
 					$toast("Projeto confirmado", "#FF9100");
                        
 
-                       
+                    document.getElementById('nome').value = '';
+                
+                    document.getElementById('segmento').selectedIndex = 0;
+                    document.getElementById('agenciapref').selectedIndex = 0;
+                   
+                    document.getElementById('b2b').checked = false;
+                    document.getElementById('b2c').checked = false;
+                    document.getElementById('D2C').checked = false;
+                    document.getElementById('Omni').checked = false;
+                    document.getElementById('marketplace').checked = false;
+                    document.getElementById('certificacao').checked = false;
                       
                        
                        
@@ -202,7 +212,7 @@
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
 
-         
+          
 
          
          var requestOptions = {
