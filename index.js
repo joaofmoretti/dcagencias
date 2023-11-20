@@ -519,14 +519,17 @@ app.post('/api/v1/score/', (req, res) => {
 
     dados.pontuacao = newPontos;
     
-    res.writeHead(statusHttp, {"Content-Type": "application/json"});
+    
     try {
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => { throw new Error(err) }  );
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {});
+            res.writeHead(statusHttp, {"Content-Type": "application/json"});
         res.end(JSON.stringify("Pontuacao atualizadda com sucesso"));
      } catch (erro) {
+        console.log(222);
+        console.log(erro);
         res.writeHead(401, {"Content-Type": "application/json"});
-        res.end(JSON.stringify(erro));
-    }
+            res.end(JSON.stringify(erro));
+     }
     
 
 });
