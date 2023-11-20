@@ -300,7 +300,7 @@ app.get('/api/v1/agencias/', (req, res) => {
 
 app.get('/api/v1/agencias/homologadas', (req, res) => {
     
-    console.log("get no metodo de listagem de agencias");
+   
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(agenciasHomologadas));
