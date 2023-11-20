@@ -11,20 +11,27 @@
 
        function voltar() {
         $('#classificacao').hide();
-        $('#resultado').fadeOut(500);
-        sleep(500).then(() => { $('#formulario').fadeIn(500); })
+        $('#filaagencias').hide();
+        $('#resultado').fadeOut(200);
+        sleep(200).then(() => { $('#formulario').fadeIn(200); })
        }
 
        function voltarparaResultado() {
        
-        $('#classificacao').fadeOut(500);
-        sleep(500).then(() => { $('#resultado').fadeIn(500); })
+        $('#classificacao').fadeOut(200);
+        sleep(200).then(() => { $('#resultado').fadeIn(200); })
        }
 
        function mostrarClassificacao() {
-        $('#resultado').fadeOut(500);
+        $('#resultado').fadeOut(200);
         
-        sleep(500).then(() => { $('#classificacao').fadeIn(500); })
+        sleep(200).then(() => { $('#classificacao').fadeIn(200); })
+       }
+
+       function mostrarFilaAgencias() {
+        $('#formulario').fadeOut(200);
+        
+        sleep(200).then(() => { $('#filaagencias').fadeIn(200); })
        }
 
 
@@ -69,6 +76,7 @@
         
 
         function salvar() {
+            if(!validateForm()) return;
             projeto = {
                 nome: document.getElementById('nome').value,
                 
@@ -84,7 +92,7 @@
                 };
 
                 
-                $('#formulario').fadeOut(500);
+                $('#formulario').fadeOut(200);
                 if ($('#resultado')[0].style.display != 'none') {
                     $('#resultado').hide();
                 }
@@ -123,7 +131,7 @@
 
                     $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
-                    sleep(500).then(() => { $('#resultado').fadeIn(500); });
+                    sleep(200).then(() => { $('#resultado').fadeIn(200); });
                    
                     carregaClassifica();
 
@@ -141,10 +149,36 @@
 
         }
 
+        function validateForm() {
+           let allok = true;
+           if ($('#nome').val() == '') {
+            $('#divnomecliente').css('border-bottom', '1px solid #ed0f0f');
+            $('#nome').attr("placeholder", "Informe o nome do cliente do projeto");
+            allok = false;
+           } else {
+            $('#nome').attr("placeholder", "Nome do Cliente");
+            $('#divnomecliente').css('border-bottom', '1px solid #ccc');
+           }
+
+           if ($('#segmento').val() == '') {
+            $('#divsegmento').css('border-bottom', '1px solid #ed0f0f');
+            $('#segmento option:first').text('Informe o segmento de atuação do cliente');
+            allok = false;
+           } else {
+            $('#divsegmento').css('border-bottom', '1px solid #ccc');
+            $('#segmento option:first').text('Segmento');
+           }
+           return allok;
+        }
+
+
         function saveProject() {
+
+           
+
+
             $("#btConfirma").hide();
             $("#btOutraAgencia").hide();
-        
 
        
                let method = "POST";
@@ -260,7 +294,7 @@
                 
                 redirect: 'follow'
             };
-        let tableBody = $("table tbody"); 
+        let tableBody = $("#fila tbody"); 
         fetch(endereco , requestOptions).then((res) => res.json())
                 .then((data) => {
 

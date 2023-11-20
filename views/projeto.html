@@ -19,16 +19,16 @@
     <div class="wrapper" id="formulario">
         <form action="#">
             <div class="h5 font-weight-bold text-center mb-3">Cadastro do projeto</div>
-            <div class="form-group d-flex align-items-center">
+            <div id="divnomecliente" class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-user"></span></div>
-                <input id="nome" autocomplete="off" type="text" class="form-control" placeholder="Nome do cliente">
+                <input id="nome" autocomplete="off" type="text" class="form-control" placeholder="Nome do cliente" required>
             </div>
 
 
-            <div class="form-group d-flex align-items-center">
+            <div id="divsegmento" class="form-group d-flex align-items-center">
                 <!-- form-control -->
 
-                <select id="segmento" class="form-control" placeholder="Segmento" />
+                <select id="segmento" class="form-control" placeholder="Segmento" required />
                 <option value="">Segmento</option>
                 <option value="Calçados" class="others">Calçados</option>
                 <option value="Casa e móveis" class="others">Casa e móveis</option>
@@ -126,7 +126,7 @@
 
             <div id="edicao">
                 <div class="btn btn-primary mb-3" onclick="Javascript:salvar()">Sugerir Agência</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:document.location='/agencias/fila'">Fila de Agências</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:mostrarFilaAgencias()">Fila de Agências</div>
 
             </div>
 
@@ -212,6 +212,57 @@
         </form>
     </div>
     <script>$('#classificacao').hide()</script>
+    <div class="wrapper" id="filaagencias">
+       
+            <div class="h5 font-weight-bold text-center mb-3">Fila de agências</div>
+           
+
+
+            <table id="fila" width="100%" border="2" align="center">
+                <thead> 
+                    <tr>
+                        <td align="center">
+                            <div class="mb-2">
+                                <label class="option"><b>Posição</b>
+                                </label>
+                            </div>
+
+
+                        </td>
+                        <td align="center">
+                            <div class="mb-2">
+                                <label class="option"><b>Agência</b>
+                                </label>
+                            </div>
+                        </td>
+                        
+
+                    </tr>
+                </thead>        
+                <tbody> 
+                    <tr> 
+                       
+                    </tr> 
+                </tbody> 
+
+            </table>
+           
+
+            <br>
+            <div id="edicao">
+                <div class="btn btn-primary mb-3" onclick="Javascript:voltar()">Voltar</div>
+            </div>    
+
+
+
+
+
+    </div>
+    <script>$('#filaagencias').hide()</script>
+
+
+
+
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -225,6 +276,13 @@
             });
         });
     </script>
+
+<script>
+    $(document).ready(function () { 
+       carregaFila(); 
+       setInterval(carregaFila, 3000);         
+   })                
+</script>
 
 </body>
 
