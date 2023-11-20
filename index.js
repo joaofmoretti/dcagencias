@@ -369,7 +369,8 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         let score = 0;
 
         if (sugestao.agenciapreferencial.trim() == '') {
-            score =  dados.pontuacao.base - (iag * dados.pontuacao.MultiPosicaoFila);
+            console.log('dados.pontuacao.Base ' + dados.pontuacao.base + ' iag  ' + iag + ' dados.pontuacao.MultiPosicaoFila ' + dados.pontuacao.MultiPosicaoFila);
+            score =  dados.pontuacao.Base - (iag * dados.pontuacao.MultiPosicaoFila);
         } 
 
 
@@ -525,7 +526,7 @@ app.post('/api/v1/score/', (req, res) => {
             res.writeHead(statusHttp, {"Content-Type": "application/json"});
         res.end(JSON.stringify("Pontuacao atualizadda com sucesso"));
      } catch (erro) {
-        console.log(222);
+     
         console.log(erro);
         res.writeHead(401, {"Content-Type": "application/json"});
             res.end(JSON.stringify(erro));
