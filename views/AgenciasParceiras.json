@@ -2941,5 +2941,19 @@
       "SEGMENTO ": "Supermercado "
      }
     ],
-    "Agências Homologadas VTEX ":[]
+    "Agências Homologadas VTEX ":[],
+    "pontuacao" : {
+        "Base" : 3000,
+        "MultiPosicaoFila": 200,
+        "Atuanteshopify" : 100,
+        "certShopify": 200,
+        "certShopifyPlus": 200,
+        "projetoShopifyPlus": 500,
+        "agenciaPreferencial" : 500,
+        "caseSegmento": 500,
+        "caseSegmentoPlatafoma": 1000,
+        "caseModeloNegocio": 1500,
+        "porcentagemAgenciaPreferencial": 30
+
+    }
     }

@@ -26,6 +26,7 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
 
 const { application } = require('express');
 const { json } = require('body-parser');
+const { throws } = require('assert');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -368,14 +369,14 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         let score = 0;
 
         if (sugestao.agenciapreferencial.trim() == '') {
-            score =  3000 - (iag * 200);
+            score =  dados.pontuacao.base - (iag * dados.pontuacao.MultiPosicaoFila);
         } 
 
 
         if (agenciaAvaliada["Atuante na plataforma Shopify "] != undefined && agenciaAvaliada["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
 
             
-            score = score + 100
+            score = score + dados.pontuacao.Atuanteshopify
         }
 
        
@@ -383,14 +384,14 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     
 
         if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('foundation')) {
-            score = score + 100;
+            score = score + dados.pontuacao.certShopify;
         }
 
         if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
-            score = score + 200;
+            score = score + dados.pontuacao.certShopifyPlus;
 
             if (sugestao.shopifyplus) {
-                score = score + 500;
+                score = score + dados.pontuacao.projetoShopifyPlus;
             }
         }
 
@@ -399,7 +400,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
             console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
             agenciaPreferida = agenciaAvaliada;
-            score = score + 500;
+            score = score + dados.pontuacao.agenciaPreferencial;
         }
 
         let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1)
@@ -416,11 +417,11 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             console.log(caso);
             if (caso["Segmento:"] != undefined) {
                 if (caso["Segmento:"].toLowerCase().indexOf(sugestao.segmento) > -1) {
-                    segmentoCaseScore = 500;
+                    segmentoCaseScore = dados.pontuacao.caseSegmento;
                 }
 
                 if ((caso['Segmento:'].toLowerCase().indexOf(sugestao.segmento) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
-                    plataformCaseScore = 1000;
+                    plataformCaseScore = dados.pontuacao.caseSegmentoPlatafoma;
                 }
             }
             
@@ -428,25 +429,25 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             if (caso['Modelos de negócios atendidos:'] != undefined) {
                 let mercados = caso['Modelos de negócios atendidos:'].toLowerCase();
                 if (sugestao.b2b && (mercados.indexOf('b2b') > -1)) {
-                    b2bCaseScore =  1500;
+                    b2bCaseScore =  dados.pontuacao.caseModeloNegocio;
                 }
 
                 if (sugestao.b2c && (mercados.indexOf('b2c') > -1)) {
-                    b2cCaseScore = 1500;
+                    b2cCaseScore = dados.pontuacao.caseModeloNegocio;
                 }
 
               
 
                 if (sugestao.d2c && (mercados.indexOf('d2c') > -1)) {
-                    d2dCaseScore =  1500;
+                    d2dCaseScore =  dados.pontuacao.caseModeloNegocio;
                 }
 
                 if (sugestao.marketplace && (mercados.indexOf('marketplace') > -1)) {
-                   marketplaceCaseScore =  1500;
+                   marketplaceCaseScore =  dados.pontuacao.caseModeloNegocio;
                 }
 
                 if (sugestao.Omni && (mercados.indexOf('omni') > -1)) {
-                    omniCaseScore = 1500;
+                    omniCaseScore = dados.pontuacao.caseModeloNegocio;
                 }
 
             }
@@ -470,7 +471,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         if (agenciasSugeridas[0].score > agenciaPreferida.score) {
             let porcentagem = 100 - ((agenciaPreferida.score * 100) / agenciasSugeridas[0].score);
             console.log("porcentagem " + porcentagem);
-            if (porcentagem < 30) {
+            if (porcentagem < dados.pontuacao.porcentagemAgenciaPreferencial) {
 
                 let posicaoAtual = agenciasSugeridas.indexOf(agenciaPreferida);
                 let posicaofinal = 0;
@@ -494,11 +495,39 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
 });
 
+
+app.get('/api/v1/score/', (req, res) => {
+    let statusHttp = 200;
+    
+    res.writeHead(statusHttp, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(dados.pontuacao));
+
+});
+
+
 app.get('/api/v1/projetos/', (req, res) => {
     let statusHttp = 200;
     
     res.writeHead(statusHttp, {"Content-Type": "application/json"});
     res.end(JSON.stringify(projetos));
+
+});
+
+app.post('/api/v1/score/', (req, res) => {
+    let statusHttp = 200;
+    let newPontos = req.body;
+
+    dados.pontuacao = newPontos;
+    
+    res.writeHead(statusHttp, {"Content-Type": "application/json"});
+    try {
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => { throw new Error(err) }  );
+        res.end(JSON.stringify("Pontuacao atualizadda com sucesso"));
+     } catch (erro) {
+        res.writeHead(401, {"Content-Type": "application/json"});
+        res.end(JSON.stringify(erro));
+    }
+    
 
 });
 
