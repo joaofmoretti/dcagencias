@@ -651,7 +651,7 @@ app.get('/asteroid-alert.js', (req, res) => {
 
 
 app.get('/AgenciasParceiras.json', (req, res) => {
-    res.sendFile(__dirname + './views/AgenciasParceiras.json'); 
+    res.sendFile(__dirname + '/views/AgenciasParceiras.json'); 
 });
 
 app.get('/icon_38.png', (req, res) => {
