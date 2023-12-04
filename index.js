@@ -397,7 +397,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         }
 
        
-        if (sugestao.agenciapreferencial.toLowerCase().trim() != '') {}
+        if (sugestao.agenciapreferencial.toLowerCase().trim() != '') {
             if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
                 console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
                 agenciaPreferida = agenciaAvaliada;
