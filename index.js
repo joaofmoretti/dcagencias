@@ -22,6 +22,11 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
     if (agenciasHomologadas[ca].qtProj == undefined) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
+    try {
+        agenciasHomologadas[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(agenciasHomologadas[ca]['Nome Agência ']) > -1).length
+    } catch (erroSemCases) {
+        agenciasHomologadas[ca].qtCases = 0;
+    }
 }
 
 const { application } = require('express');
@@ -413,7 +418,11 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         let d2dCaseScore = 0;
         let marketplaceCaseScore = 0;
         let omniCaseScore = 0;
-
+        if (casesAG != null) {
+            agenciaAvaliada.qtCases = casesAG.length;
+        } else {
+            agenciaAvaliada.qtCases = 0; 
+        }
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
             console.log(caso);
