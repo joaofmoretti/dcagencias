@@ -494,6 +494,8 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     console.log(agenciasSugeridas[0]['Nome Agência '] + ' score ' + agenciasSugeridas[0].score);
     res.end(JSON.stringify(agenciasSugeridas[0]));
 
+    console.log(sugestao);
+
 });
 
 
