@@ -397,12 +397,13 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         }
 
        
-
-        if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
-            console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
-            agenciaPreferida = agenciaAvaliada;
-            score = score + dados.pontuacao.agenciaPreferencial;
-        }
+        if (sugestao.agenciapreferencial.toLowerCase().trim() != '') {}
+            if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
+                console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
+                agenciaPreferida = agenciaAvaliada;
+                score = score + dados.pontuacao.agenciaPreferencial;
+            }
+        } 
 
         let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1)
         let plataformCaseScore = 0
@@ -524,7 +525,7 @@ app.post('/api/v1/score/', (req, res) => {
     
     
     try {
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {});
+        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err)});
             res.writeHead(statusHttp, {"Content-Type": "application/json"});
         res.end(JSON.stringify("Pontuacao atualizadda com sucesso"));
      } catch (erro) {
