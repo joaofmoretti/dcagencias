@@ -510,7 +510,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
 function contaCases(nomedaAgencia) {
     let nomeAgencia = nomedaAgencia.toLowerCase().trim();
-	let casosdaAgencia = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1);
+	let casosdaAgencia = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomeAgencia) > -1);
 
     if (casosdaAgencia != null) {
         return casosdaAgencia.length;
