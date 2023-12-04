@@ -460,7 +460,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         score = score + plataformCaseScore + segmentoCaseScore + b2bCaseScore + b2cCaseScore + d2dCaseScore +marketplaceCaseScore + omniCaseScore;
 
 
-        agenciaAvaliada.score = score;
+        agenciaAvaliada.score = score - iag;
        // agenciaAvaliada.cliente = sugestao.nome;
         agenciasSugeridas.push(agenciaAvaliada);
     }
