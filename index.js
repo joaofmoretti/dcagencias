@@ -298,6 +298,13 @@ app.get('/api/v1/agencias/', (req, res) => {
         if (dados.agencias[ca].score == undefined) {
             dados.agencias[ca].score = 0;
         }
+
+        try {
+            dados.agencias[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].indexOf(dados.agencias[ca]['Nome Agência ']) > -1).length;
+        } catch (erroSemCases) {
+            dados.agencias[ca].qtCases = 0;
+        }
+
     }
 
     res.writeHead(200, {"Content-Type": "application/json"});

@@ -62,8 +62,9 @@ function carregaAgencias() {
                         {title:"Plus", field:"plus", hozAlign:"center", editor:false, formatter:"tickCross"},
                         {title:"Último Score", field:"score", hozAlign:"center", width:130},
                         {title:"#Fila", field:"posicaoFila", hozAlign:"center", width:80},
-                        {title:"Projetos", field:"qtProj", hozAlign:"center", width:80},
-                        {title:"Cases", field:"qtCases", hozAlign:"center", width:80}
+                        {title:"Cases", field:"qtCases", hozAlign:"center", width:80},
+                        {title:"Projetos", field:"qtProj", hozAlign:"center", width:110},
+                        
                         
                     ],
             })
