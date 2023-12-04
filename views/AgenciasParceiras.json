@@ -28,6 +28,7 @@
     "Tempo médio de implantação VTEX ": 120,
     "posicaoFila": 1,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -54,6 +55,7 @@
     "Tempo médio de implantação VTEX ": "100 dias",
     "posicaoFila": 2,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -83,6 +85,7 @@
     "Tempo médio de implantação VTEX ": 90,
     "posicaoFila": 3,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -110,6 +113,7 @@
     "Tempo médio de implantação Shopify ": 75,
     "posicaoFila": 4,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -136,6 +140,7 @@
     "Tempo médio de implantação VTEX ": "90 dias",
     "posicaoFila": 5,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -185,6 +190,7 @@
     "Tempo médio de implantação VTEX ": 180,
     "posicaoFila": 6,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -215,6 +221,7 @@
     "Tempo médio de implantação VTEX ": 90,
     "posicaoFila": 7,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -350,6 +357,7 @@
     "Tempo médio de implantação VTEX ": "140 dias",
     "posicaoFila": 8,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -380,6 +388,7 @@
     "Tempo médio de implantação VTEX ": 120,
     "posicaoFila": 9,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -473,6 +482,7 @@
     "Tempo médio de implantação Shopify ": "50 dias",
     "posicaoFila": 10,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -525,6 +535,7 @@
     "Tempo médio de implantação Shopify ": "50 dias úteis (possível reduzir pela metade pelo dobro do valor) Limite 7 dias úteis",
     "posicaoFila": 11,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -551,6 +562,7 @@
     "Tempo médio de implantação Shopify ": "De 20 a 60 dias úteis",
     "posicaoFila": 12,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -580,6 +592,7 @@
     "Tempo médio de implantação VTEX ": "45 dias úteis com layout",
     "posicaoFila": 13,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -601,6 +614,7 @@
     "Possui arquiteto ": "SIM ",
     "posicaoFila": 14,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -628,6 +642,7 @@
     "Tempo médio de implantação VTEX ": "90 dias ",
     "posicaoFila": 15,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
@@ -655,6 +670,7 @@
     "Tempo médio de implantação VTEX ": "60 dias ",
     "posicaoFila": 16,
     "qtProj": 0,
+    "qtCases": 0,
     "score": 0
     },
     {
