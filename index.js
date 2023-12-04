@@ -23,7 +23,7 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
     try {
-        agenciasHomologadas[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(agenciasHomologadas[ca]['Nome Agência ']) > -1).length
+        agenciasHomologadas[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].indexOf(agenciasHomologadas[ca]['Nome Agência ']) > -1).length;
     } catch (erroSemCases) {
         agenciasHomologadas[ca].qtCases = 0;
     }
