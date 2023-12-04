@@ -22,11 +22,9 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
     if (agenciasHomologadas[ca].qtProj == undefined) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
-    try {
-        agenciasHomologadas[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].indexOf(agenciasHomologadas[ca]['Nome Agência ']) > -1).length;
-    } catch (erroSemCases) {
-        agenciasHomologadas[ca].qtCases = 0;
-    }
+    
+    agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência ']);
+    
 }
 
 const { application } = require('express');
@@ -299,11 +297,8 @@ app.get('/api/v1/agencias/', (req, res) => {
             dados.agencias[ca].score = 0;
         }
 
-        try {
-            dados.agencias[ca].qtCases = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].indexOf(dados.agencias[ca]['Nome Agência ']) > -1).length;
-        } catch (erroSemCases) {
-            dados.agencias[ca].qtCases = 0;
-        }
+        dados.agencias[ca].qtCases = contaCases(dados.agencias[ca]['Nome Agência ']);
+       
 
     }
 
@@ -425,11 +420,9 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         let d2dCaseScore = 0;
         let marketplaceCaseScore = 0;
         let omniCaseScore = 0;
-        if (casesAG != null) {
-            agenciaAvaliada.qtCases = casesAG.length;
-        } else {
-            agenciaAvaliada.qtCases = 0; 
-        }
+        
+            agenciaAvaliada.qtCases = contaCases(nomeAgencia);
+        
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
             console.log(caso);
@@ -515,6 +508,17 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 
 });
 
+function contaCases(nomedaAgencia) {
+    let nomeAgencia = nomedaAgencia.toLowerCase().trim();
+	let casosdaAgencia = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1);
+
+    if (casosdaAgencia != null) {
+        return casosdaAgencia.length;
+
+    } else {
+        return 0;
+    }
+}
 
 app.get('/api/v1/score/', (req, res) => {
     let statusHttp = 200;
