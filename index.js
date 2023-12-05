@@ -412,7 +412,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             }
         } 
 
-        let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().indexOf(nomeAgencia) > -1)
+        let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomeAgencia) > -1)
         let plataformCaseScore = 0
         let segmentoCaseScore = 0;
         let b2bCaseScore = 0;
