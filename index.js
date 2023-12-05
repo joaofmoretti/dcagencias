@@ -427,11 +427,11 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
             let caso = casesAG[conta];
             console.log(caso);
             if (caso["Segmento:"] != undefined) {
-                if (caso["Segmento:"].toLowerCase().indexOf(sugestao.segmento) > -1) {
+                if (caso["Segmento:"].toLowerCase().trim().indexOf(sugestao.segmento.toLowerCase().trim()) > -1) {
                     segmentoCaseScore = dados.pontuacao.caseSegmento;
                 }
 
-                if ((caso['Segmento:'].toLowerCase().indexOf(sugestao.segmento) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
+                if ((caso["Segmento:"].toLowerCase().trim().indexOf(sugestao.segmento.toLowerCase().trim()) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
                     plataformCaseScore = dados.pontuacao.caseSegmentoPlatafoma;
                 }
             }
