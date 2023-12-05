@@ -45,7 +45,6 @@ app.use(express.static(__dirname + '/views/libs/tabulator.min.js'));
 app.use(express.static(__dirname + '/views/libs/luxon.min.js'));
 
 
-console.log(__dirname);
 app.use(express.static(__dirname + '/views/login.html'));
 app.use(express.static(__dirname + '/views/stylelogin.css'));
 
@@ -504,7 +503,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
     console.log(agenciasSugeridas[0]['Nome Agência '] + ' score ' + agenciasSugeridas[0].score);
     res.end(JSON.stringify(agenciasSugeridas[0]));
 
-    console.log(sugestao);
+    
 
 });
 
@@ -564,7 +563,7 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
 	console.log("salvando o projeto");
     res.writeHead(200, {"Content-Type": "application/json"});
     let projeto = req.body;
-    console.log(projeto);
+    //console.log(projeto);
     projeto.id = Date.now();
     
     projetos.push(projeto);
