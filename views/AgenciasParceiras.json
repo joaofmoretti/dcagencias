@@ -598,7 +598,7 @@
     "Tempo médio de implantação Shopify ": "De 20 a 60 dias úteis",
     "posicaoFila": 12,
     "qtProj": 0,
-    "qtCases": 0,
+    "qtCases": 19,
     "score": 489
     },
     {
@@ -800,7 +800,7 @@
     "Agência:": "Disco",
     "Cases (Site da  loja):": "www.mahta.bio",
     "Modelos de negócios atendidos:": "D2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify Advanced"
     },
     {
@@ -821,7 +821,7 @@
     "Agência:": "Disco",
     "Cases (Site da  loja):": "www.wessel.com.br",
     "Modelos de negócios atendidos:": "D2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify"
     },
     {
@@ -835,7 +835,7 @@
     "Agência:": "Disco",
     "Cases (Site da  loja):": "www.happybody.com.br",
     "Modelos de negócios atendidos:": "D2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify Plus"
     },
     {
@@ -919,7 +919,7 @@
     "Agência:": "CheckStore Full E-commerce",
     "Cases (Site da  loja):": "coffeemais.com",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify Plus"
     },
     {
@@ -1052,7 +1052,7 @@
     "Agência:": "CheckStore Full E-commerce",
     "Cases (Site da  loja):": "baggiocafe.com.br/",
     "Modelos de negócios atendidos:": "D2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify"
     },
     {
@@ -1157,7 +1157,7 @@
     "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://compre.estreladistribuicao.com.br/",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
@@ -1423,14 +1423,14 @@
     "Agência:": "Myeshop",
     "Cases (Site da  loja):": "https://www.lojadoce.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Vtex"
     },
     {
     "Agência:": "Myeshop",
     "Cases (Site da  loja):": "https://www.reserva35.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Vtex"
     },
     {
@@ -1556,14 +1556,14 @@
     "Agência:": "Myeshop",
     "Cases (Site da  loja):": "https://loja.carpaltratores.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "Vtex"
     },
     {
     "Agência:": "Myeshop",
     "Cases (Site da  loja):": "https://www.zelao.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "Vtex"
     },
     {
@@ -1598,7 +1598,7 @@
     "Agência:": "Myeshop",
     "Cases (Site da  loja):": "https://www.spaturbo.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "Vtex"
     },
     {
@@ -1654,7 +1654,7 @@
     "Agência:": "CRP mango",
     "Cases (Site da  loja):": "https://loja.vinicolaaurora.com.br/",
     "Modelos de negócios atendidos:": "D2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -1731,7 +1731,7 @@
     "Agência:": "Buda Digital",
     "Cases (Site da  loja):": "https://mahta.bio",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify Plus"
     },
     {
@@ -1822,7 +1822,7 @@
     "Agência:": "Buda Digital",
     "Cases (Site da  loja):": "https://wessel.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify Advanced"
     },
     {
@@ -1934,21 +1934,21 @@
     "Agência:": "Shakers",
     "Cases (Site da  loja):": "https://curavino.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "Shopify"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.cafecamposaltos.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://klube.korin.com.br/",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -1969,21 +1969,21 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.docvineria.com/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.carone.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "http://fuscaopreto.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -1997,14 +1997,14 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.lavagnoli.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.supercordeiro.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2018,7 +2018,7 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.cricare.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2032,14 +2032,14 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.lojautamb2b.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://lojautam.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2060,7 +2060,7 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.azulatacarejo.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2095,21 +2095,21 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.casadoconfeiteiro.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.cojiba.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://portofrescatto.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2144,7 +2144,7 @@
     "Agência:": "Vinci",
     "Cases (Site da  loja):": "https://www.machadocarnes.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2214,7 +2214,7 @@
     "Agência:": "Econverse",
     "Cases (Site da  loja):": "https://www.cafeorfeu.com.br/?gad=1&gclid=CjwKCAjw-eKpBhAbEiwAqFL0mt9SL7yayKAXSkZE50ubLjAP90NvSY3vlIyFpnPYIvVXPLpeK2XEyBoCYfMQAvD_BwE",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2256,7 +2256,7 @@
     "Agência:": "Econverse",
     "Cases (Site da  loja):": "https://www.cellarvinhos.com/?utm_source=google&utm_medium=cpc&utm_campaign=[SEARCH]BottomFunnel-Institucional&utm_content=Brand-Exata&utm_term=cellar%20vinhos",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2291,49 +2291,49 @@
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.cafesantamonica.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.ccndistribuidora.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.voglershop.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.zanepan.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.lojapecas.toyotaempilhadeiras.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.ciadowhisky.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
     "Agência:": "2B digital",
     "Cases (Site da  loja):": "www.megaadega.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2464,84 +2464,84 @@
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.emporioquatroestrelas.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX + deco.cx no Front End"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.casadosabao.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO, empresa na lista das 300 maiores segundo a SBVC"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.chocolife.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.chocolatdujour.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.madrugaosuplementos.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.talcha.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX CMS"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.decanter.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.crsbrands.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Bebidas",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://loja.chevroletnova.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX CMS"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.adoromeucarro.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX CMS"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.lojapivot.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX IO"
     },
     {
     "Agência:": "E-plus",
     "Cases (Site da  loja):": "https://www.rochapecas.com.br/",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Automotivo",
+    "Segmento:": "Ítens automotivos",
     "Plataforma do Case ": "VTEX IO"
     },
     {
@@ -2947,7 +2947,7 @@
     "Agência:": "Método/ Figi ",
     "Cases (Site da  loja):": "https://www.mercadinhossaoluiz.com.br",
     "Modelos de negócios atendidos:": "B2C",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2968,7 +2968,7 @@
     "Agência:": "Método/ Figi ",
     "Cases (Site da  loja):": "https://www.biscoite.com.br",
     "Modelos de negócios atendidos:": "Omni",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
@@ -2989,7 +2989,7 @@
     "Agência:": "Método/ Figi ",
     "Cases (Site da  loja):": "https://perolaon.com.br",
     "Modelos de negócios atendidos:": "B2B",
-    "Segmento:": "Alimentício",
+    "Segmento:": "Comidas Bebidas /Grocery",
     "Plataforma do Case ": "VTEX"
     },
     {
