@@ -421,7 +421,7 @@ app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
         let marketplaceCaseScore = 0;
         let omniCaseScore = 0;
         
-            agenciaAvaliada.qtCases = contaCases(nomeAgencia);
+        agenciaAvaliada.qtCases = contaCases(nomeAgencia);
         
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];

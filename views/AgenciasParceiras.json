@@ -28,8 +28,8 @@
     "Tempo médio de implantação VTEX ": 120,
     "posicaoFila": 1,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 25,
+    "score": 2000
     },
     {
     "Nome Agência ": "Maeztra",
@@ -56,7 +56,7 @@
     "posicaoFila": 2,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 399
     },
     {
     "Nome Agência ": "Vinci",
@@ -85,8 +85,8 @@
     "Tempo médio de implantação VTEX ": 90,
     "posicaoFila": 3,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 31,
+    "score": 1998
     },
     {
     "Nome Agência ": "Disco",
@@ -113,8 +113,8 @@
     "Tempo médio de implantação Shopify ": 75,
     "posicaoFila": 4,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 18,
+    "score": 497
     },
     {
     "Nome Agência ": "E-Plus ",
@@ -140,8 +140,8 @@
     "Tempo médio de implantação VTEX ": "90 dias",
     "posicaoFila": 5,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 67,
+    "score": 2396
     },
     {
     "Nome Agência ": "Eazy Go",
@@ -164,7 +164,11 @@
     "Principais projetos implantados VTEX ": "https://www.maxior.com.br/; www.liway.com.br; https://www.kayland.com.br/",
     "Quant. projetos implantados VTEX ": 8,
     "Possui arquiteto ": "SIM",
-    "Tempo médio de implantação VTEX ": "30 dias para Go live e 10 dias para implantar o front end"
+    "Tempo médio de implantação VTEX ": "30 dias para Go live e 10 dias para implantar o front end",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Benova",
@@ -191,7 +195,7 @@
     "posicaoFila": 6,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 395
     },
     {
     "Nome Agência ": "CRP Mango",
@@ -221,8 +225,8 @@
     "Tempo médio de implantação VTEX ": 90,
     "posicaoFila": 7,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 15,
+    "score": 1994
     },
     {
     "Nome Agência ": "Codeby",
@@ -249,7 +253,11 @@
     "Principais projetos implantados SHOPIFY ": "https://waaw.com.br/\nhttps://fr.dengo.com/\nhttps://www.squeem.com/",
     "Possui arquiteto ": "SIM",
     "Tempo médio de implantação Shopify ": 60,
-    "Tempo médio de implantação VTEX ": 60
+    "Tempo médio de implantação VTEX ": 60,
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "TDZAIN",
@@ -275,7 +283,11 @@
     "Principais projetos implantados SHOPIFY ": "annabbags.com",
     "Possui arquiteto ": "SIM",
     "Tempo médio de implantação Shopify ": 90,
-    "Tempo médio de implantação VTEX ": 45
+    "Tempo médio de implantação VTEX ": 45,
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Simples.Inovação",
@@ -301,7 +313,11 @@
     "Principais projetos implantados SHOPIFY ": "Fiber, Everlast e Ekazza",
     "Possui arquiteto ": "SIM",
     "Tempo médio de implantação Shopify ": "45 dias",
-    "Tempo médio de implantação VTEX ": "80 dias"
+    "Tempo médio de implantação VTEX ": "80 dias",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Resultate ",
@@ -327,7 +343,11 @@
     "Principais projetos implantados SHOPIFY ": 0,
     "Possui arquiteto ": "SIM",
     "Tempo médio de implantação Shopify ": 15,
-    "Tempo médio de implantação VTEX ": 20
+    "Tempo médio de implantação VTEX ": 20,
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "2B Digital",
@@ -357,8 +377,8 @@
     "Tempo médio de implantação VTEX ": "140 dias",
     "posicaoFila": 8,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 25,
+    "score": 1993
     },
     {
     "Nome Agência ": "Myeshop",
@@ -388,8 +408,8 @@
     "Tempo médio de implantação VTEX ": 120,
     "posicaoFila": 9,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 63,
+    "score": 2492
     },
     {
     "Nome Agência ": "Mofo Design",
@@ -412,7 +432,11 @@
     "Atuante na plataforma Shopify ": "SIM",
     "Principais projetos implantados SHOPIFY ": "https://www.recargaclub.com.br/, https://www.demodeatelie.com.br/, https://trocatech.com.br/",
     "Possui arquiteto ": "NÃO ",
-    "Tempo médio de implantação Shopify ": 55
+    "Tempo médio de implantação Shopify ": 55,
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Aventum",
@@ -432,7 +456,11 @@
     "OBS/Motivo ": "Reprovado  - Identificamos que este candidato possui empresa unipessoal e não homologamos empresas de um único sócio.",
     "Atuante na plataforma VTEX ": "NÃO",
     "Atuante na plataforma Shopify ": "NÃO ",
-    "Possui arquiteto ": "NÃO "
+    "Possui arquiteto ": "NÃO ",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Sirius Digital ",
@@ -456,7 +484,11 @@
     "Principais projetos implantados VTEX ": "https://www.sipolatti.com.br/, https://www.frettahome.com.br/, https://www.copacabana-use.com/, https://www.navegamer.com.br/, https://loja.daten.com.br/",
     "Quant. projetos implantados VTEX ": 25,
     "Possui arquiteto ": "NÃO",
-    "Tempo médio de implantação VTEX ": 90
+    "Tempo médio de implantação VTEX ": 90,
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Shakers ",
@@ -482,8 +514,8 @@
     "Tempo médio de implantação Shopify ": "50 dias",
     "posicaoFila": 10,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 14,
+    "score": 491
     },
     {
     "Nome Agência ": "Jobspace Creative",
@@ -509,7 +541,11 @@
     "Principais projetos implantados SHOPIFY ": 0,
     "Possui arquiteto ": "NÃO",
     "Tempo médio de implantação Shopify ": "60 dias",
-    "Tempo médio de implantação VTEX ": "90 dias"
+    "Tempo médio de implantação VTEX ": "90 dias",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Alfinet",
@@ -536,7 +572,7 @@
     "posicaoFila": 11,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 490
     },
     {
     "Nome Agência ": "Buda Digital",
@@ -563,7 +599,7 @@
     "posicaoFila": 12,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 489
     },
     {
     "Nome Agência ": "Econverse",
@@ -592,8 +628,8 @@
     "Tempo médio de implantação VTEX ": "45 dias úteis com layout",
     "posicaoFila": 13,
     "qtProj": 0,
-    "qtCases": 0,
-    "score": 0
+    "qtCases": 19,
+    "score": 2488
     },
     {
     "Nome Agência ": "Método/ Figi ",
@@ -615,7 +651,7 @@
     "posicaoFila": 14,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 387
     },
     {
     "Nome Agência ": "Fit Gestão ",
@@ -643,7 +679,7 @@
     "posicaoFila": 15,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 886
     },
     {
     "Nome Agência ": "Codeblue",
@@ -671,7 +707,7 @@
     "posicaoFila": 16,
     "qtProj": 0,
     "qtCases": 0,
-    "score": 0
+    "score": 385
     },
     {
     "Nome Agência ": "Branchstack - Bs",
@@ -695,7 +731,11 @@
     "Principais projetos implantados SHOPIFY ": "https://wessel.com.br, https://br.deuscustoms.com, https://omeuchip.com",
     "Possui arquiteto ": "SIM ",
     "Tempo médio de implantação Shopify ": "120 DIAS ",
-    "Tempo médio de implantação VTEX ": "120 DIAS "
+    "Tempo médio de implantação VTEX ": "120 DIAS ",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     },
     {
     "Nome Agência ": "Alce Rocks",
@@ -713,7 +753,11 @@
     "Certificado/ Homologado VTEX ": "SEM CERTIFICAÇÃO ",
     "Certificação Shopify ": "SHOPIFY FOUNDATIONS, SHOPIFY PLUS",
     "Homologado TOTVS ": "Aguardando documentação ",
-    "Parceira RD STATION ": "SIM "
+    "Parceira RD STATION ": "SIM ",
+    "posicaoFila": 0,
+    "qtProj": 0,
+    "score": 0,
+    "qtCases": 0
     }
     ],
     "CASES POR AGÊNCIA ": [
@@ -1019,98 +1063,98 @@
     "Plataforma do Case ": "Shopify Plus"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.wnf.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Cosméticos",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.pingoo.wapstore.dev.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Casa e Móveis",
     "Plataforma do Case ": "WAP.Store"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.wb.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Eletrônicos e Eletrodomésticos",
     "Plataforma do Case ": "WAP.Store"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.myahaas.com.br/",
     "Modelos de negócios atendidos:": "MARKETPLACE",
     "Segmento:": "Calçados",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://loja.myvillage.com.br/",
     "Modelos de negócios atendidos:": "MARKETPLACE",
     "Segmento:": "Casa e Móveis",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.princesatoalhas.com.br/",
     "Modelos de negócios atendidos:": "MARKETPLACE",
     "Segmento:": "Casa e Móveis",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.loppasmeias.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Calçados",
     "Plataforma do Case ": "WAP.Store"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.pratafina.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Moda e Acessórios",
     "Plataforma do Case ": "WAP.Store"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.todosim.org.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Moda e Acessórios",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.movtech.org/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Educação, livros e papelaria",
     "Plataforma do Case ": "Deco"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.vistabeagle.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Moda e Acessórios",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.b2b.benq.com.br/",
     "Modelos de negócios atendidos:": "B2B",
     "Segmento:": "Eletrônicos e Eletrodomésticos",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://www.amoedo.com.br/",
     "Modelos de negócios atendidos:": "B2C",
     "Segmento:": "Moda e Acessórios",
     "Plataforma do Case ": "VTEX IO"
     },
     {
-    "Agência:": "Codeblu",
+    "Agência:": "Codeblue",
     "Cases (Site da  loja):": "https://compre.estreladistribuicao.com.br/",
     "Modelos de negócios atendidos:": "B2B",
     "Segmento:": "Alimentício",
