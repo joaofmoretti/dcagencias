@@ -7,6 +7,16 @@
         let proximaAgencia = 1;
         let filadeAgencias = [];
 
+        function setSFforB2B() {
+
+            if ($("#b2b")[0].checked) {
+                $("#certificacao").prop( "checked", true );
+                $("#certificacao").prop("disabled", true );
+            } else {
+                $("#certificacao").prop("disabled", false );
+            }
+
+        }
    
 
        function voltar() {
