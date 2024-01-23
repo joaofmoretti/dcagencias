@@ -69,6 +69,11 @@ app.get('/form/', (req, res) => {
     res.sendFile(__dirname + '/views/form.html');
 });
 
+app.get('/calc/', (req, res) => {
+    
+    res.sendFile(__dirname + '/views/calculadora.html');
+});
+
 app.get('/agencias/fila', (req, res) => {
     
     res.sendFile(__dirname + '/views/agenciasfila.html');
@@ -624,6 +629,10 @@ app.get("/user/getUserToken/", (requisicao, resposta) => {
 
 app.get('/styleapp.css', (req, res) => {
     res.sendFile(__dirname + '/views/styleapp.css'); 
+});
+
+app.get('/stylecalc.css', (req, res) => {
+    res.sendFile(__dirname + '/views/stylecalc.css'); 
 });
 
 app.get('/form/styleasteroid.css', (req, res) => {

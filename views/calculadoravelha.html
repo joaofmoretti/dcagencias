@@ -1,0 +1,85 @@
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylecalc.css" />
+    <!--script src="/form/projeto.js"></script-->
+    
+</head>
+
+<body classname="snippet-body">
+    <div class="wrapper" id="classificacao">
+        <form action="#">
+            <div class="h5 font-weight-bold text-center mb-3">Empodera Digital Commerce Calculadora</div>
+           
+
+
+            <table id="fila" width="100%" border="2" align="center">
+                        
+                <tbody> 
+                    <tr> 
+                       <td>
+                            <label for="tempB">Choose a comfortable temperature:</label><br />
+                            <input type="range" id="tempB" name="temp" list="values" />
+
+                            <datalist id="values">
+                                <option value="0" label="very cold!"></option>
+                                <option value="25" label="cool"></option>
+                                <option value="50" label="medium"></option>
+                                <option value="75" label="getting warm!"></option>
+                                
+                            </datalist>
+                       </td>
+                    </tr> 
+                </tbody> 
+
+            </table>
+           
+
+            <br>
+            <div id="edicao">
+                <div class="btn btn-primary mb-3" onclick="Javascript:history.back(1)">Voltar</div>
+            </div>    
+
+
+
+
+
+
+
+
+        </form>
+    </div>
+
+    </div>
+   
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script type="text/javascript">
+        var myLink = document.querySelectorAll('a[href="#"]');
+        myLink.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+    <script>
+         $(document).ready(function () { 
+           // carregaFila(); 
+            //setInterval(carregaFila, 3000);         
+        })                
+    </script>
+
+</body>
+    
+
+
+</html>

@@ -1,0 +1,155 @@
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylecalc.css" />
+    <!--script src="/form/projeto.js"></script-->
+    
+</head>
+
+<body classname="snippet-body">
+    <div class="wrapper" id="classificacao">
+        <form action="#">
+            <div class="h5 font-weight-bold text-center mb-3">Empodera Digital Commerce Calculadora</div>
+           
+          <br><br><br>
+
+            <table id="fila" width="100%" border="0" align="center">
+                        
+                <tbody> 
+                    <tr> 
+                       <td>
+                        <div class="range">
+                            <div class="range-slider">
+                              <input
+                                type="range"
+                                min="0"
+                                max="75"
+                                value="0"
+                                id="range"
+                                step="25"
+                              />
+                              
+                            </div>
+                        
+                            <div class="value">0</div>
+                          </div>
+                          <br><br>
+                          <div class="h5 font-weight-bold text-center mb-3">RD CRM</div>
+                       </td>
+                       <td>
+                        <div class="range">
+                            <div class="range-slider">
+                              <input
+                                type="range"
+                                min="0"
+                                max="75"
+                                value="0"
+                                id="range"
+                                step="25"
+                              />
+                              
+                            </div>
+                        
+                            <div class="value">0</div>
+                          </div>
+                          <br><br>
+                          <div class="h5 font-weight-bold text-center mb-3">RD MKT</div>
+                       </td>
+
+                       <td>
+                        <div class="range">
+                            <div class="range-slider">
+                              <input
+                                type="range"
+                                min="0"
+                                max="75"
+                                value="0"
+                                id="range"
+                                step="25"
+                              />
+                              
+                            </div>
+                        
+                            <div class="value">0</div>
+                          </div>
+                          <br><br>
+                          <div class="h5 font-weight-bold text-center mb-3">RD Mentor</div>
+                       </td>
+
+         
+
+               
+
+
+
+                    </tr> 
+                </tbody> 
+
+            </table>
+           
+
+            <br>
+               
+
+
+
+
+
+        </form>
+    </div>
+
+    </div>
+   
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script type="text/javascript">
+        var myLink = document.querySelectorAll('a[href="#"]');
+        myLink.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+    <script>
+         $(document).ready(function () { 
+            const sliderEl = document.querySelector("#range")
+            const sliderValue = document.querySelector(".value")
+
+            sliderEl.addEventListener("input", (event) => {
+            const tempSliderValue = event.target.value; 
+
+            if (event.target.value == 25) {
+                sliderValue.textContent = "Basic"
+            } else  if (event.target.value == 50) {    
+                sliderValue.textContent = "Standart"
+            } else  if (event.target.value == 75) {    
+                sliderValue.textContent = "Pro"
+            }  else  {    
+                sliderValue.textContent = ""
+            }      
+            
+            
+           // sliderValue.textContent = tempSliderValue;
+            
+            const progress = (tempSliderValue / sliderEl.max) * 100;
+            
+            sliderEl.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+            })
+
+        })                
+    </script>
+
+</body>
+    
+
+
+</html>
