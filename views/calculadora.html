@@ -13,92 +13,103 @@
 </head>
 
 <body classname="snippet-body">
+  <div class="h5 font-weight-bold text-center mb-3">Empodera Digital Commerce Calculadora</div>
     <div class="wrapper" id="classificacao">
         <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Empodera Digital Commerce Calculadora</div>
+          <div class="h5 font-weight-bold text-center mb-3">Ofertas Digital Commerce</div>
            
-          <br><br><br>
+                    
+          <div class="equalizer">
+            <div class="section">
+              <div class="title">RD Station</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">22</span>
+                  <input type="range" class="vertical" min="4700" max="22000" step="100" value="4700" data-filter="highShelf" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">crm</span>  
+                </div>
+                <div class="range-slider">
+                  <span class="scope">50</span>
+                  <input type="range" class="vertical" min="-50" max="50" value="50" data-filter="highShelf" data-param="gain">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">mkt</span>  
+                </div>
+                <div class="range-slider">
+                  <span class="scope">50</span>
+                  <input type="range" class="vertical" min="-50" max="50" value="50" data-filter="highShelf" data-param="gain">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">men</span>  
+                </div>
+              </div>
+            </div>
+              
+            <div class="section">
+              <div class="title">Lexos</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">220</span>
+                  <input type="range" class="vertical" min="35" max="220" step="1" value="35" data-filter="lowShelf" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">lex</span>  
+                </div>
+                
+              </div>
+            </div>
+                
+            <div class="section">
+              <div class="title">Tallos</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">5.9</span>
+                  <input type="range" class="vertical" min="800" max="5900" step="100" value="800" data-filter="highPass" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">Tal</span>  
+                </div>
+              
+              </div>
+            </div>  
+              
+            <div class="section">
+              <div class="title">Shopify</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">1600</span>
+                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">sho</span>  
+                </div>
+                
+              </div>
+            </div>
 
-            <table id="fila" width="100%" border="0" align="center">
-                        
-                <tbody> 
-                    <tr> 
-                       <td>
-                        <div class="range">
-                            <div class="range-slider">
-                              <input
-                                type="range"
-                                min="0"
-                                max="75"
-                                value="0"
-                                id="range"
-                                step="25"
-                              />
-                              
-                            </div>
-                        
-                            <div class="value">0</div>
-                          </div>
-                          <br><br>
-                          <div class="h5 font-weight-bold text-center mb-3">RD CRM</div>
-                       </td>
-                       <td>
-                        <div class="range">
-                            <div class="range-slider">
-                              <input
-                                type="range"
-                                min="0"
-                                max="75"
-                                value="0"
-                                id="range"
-                                step="25"
-                              />
-                              
-                            </div>
-                        
-                            <div class="value">0</div>
-                          </div>
-                          <br><br>
-                          <div class="h5 font-weight-bold text-center mb-3">RD MKT</div>
-                       </td>
+            <div class="section">
+              <div class="title">Exact Sales</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">1600</span>
+                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">exa</span>  
+                </div>
+                
+              </div>
+            </div>
 
-                       <td>
-                        <div class="range">
-                            <div class="range-slider">
-                              <input
-                                type="range"
-                                min="0"
-                                max="75"
-                                value="0"
-                                id="range"
-                                step="25"
-                              />
-                              
-                            </div>
-                        
-                            <div class="value">0</div>
-                          </div>
-                          <br><br>
-                          <div class="h5 font-weight-bold text-center mb-3">RD Mentor</div>
-                       </td>
-
-         
-
-               
-
-
-
-                    </tr> 
-                </tbody> 
-
-            </table>
-           
-
-            <br>
-               
-
-
-
+            <div class="section">
+              <div class="title">Tail</div>
+              <div class="sliders">
+                <div class="range-slider">
+                  <span class="scope">1600</span>
+                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
+                  <span class="scope scope-min">&nbsp;</span>
+                  <span class="param">tail</span>  
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
 
 
         </form>
@@ -118,35 +129,49 @@
                 e.preventDefault();
             });
         });
+
+        var context = new (window.AudioContext || window.webkitAudioContext)();
+
+var highShelf = context.createBiquadFilter();
+var lowShelf = context.createBiquadFilter();
+var highPass = context.createBiquadFilter();
+var lowPass = context.createBiquadFilter();
+
+highShelf.connect(lowShelf);
+lowShelf.connect(highPass);
+highPass.connect(lowPass);
+lowPass.connect(context.destination);
+
+highShelf.type = "highshelf";
+highShelf.frequency.value = 4700;
+highShelf.gain.value = 50;
+
+lowShelf.type = "lowshelf";
+lowShelf.frequency.value = 35;
+lowShelf.gain.value = 50;
+
+highPass.type = "highpass";
+highPass.frequency.value = 800;
+highPass.Q.value = 0.7;
+
+lowPass.type = "lowpass";
+lowPass.frequency.value = 880;
+lowPass.Q.value = 0.7;
+
+var ranges = document.querySelectorAll('input[type=range]');
+ranges.forEach(function(range){
+  range.addEventListener('input', function() {
+    window[this.dataset.filter][this.dataset.param].value = this.value;
+  });
+});
+
+
+
+
+
     </script>
-    <script>
-         $(document).ready(function () { 
-            const sliderEl = document.querySelector("#range")
-            const sliderValue = document.querySelector(".value")
-
-            sliderEl.addEventListener("input", (event) => {
-            const tempSliderValue = event.target.value; 
-
-            if (event.target.value == 25) {
-                sliderValue.textContent = "Basic"
-            } else  if (event.target.value == 50) {    
-                sliderValue.textContent = "Standart"
-            } else  if (event.target.value == 75) {    
-                sliderValue.textContent = "Pro"
-            }  else  {    
-                sliderValue.textContent = ""
-            }      
-            
-            
-           // sliderValue.textContent = tempSliderValue;
-            
-            const progress = (tempSliderValue / sliderEl.max) * 100;
-            
-            sliderEl.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
-            })
-
-        })                
-    </script>
+         
+    
 
 </body>
     
