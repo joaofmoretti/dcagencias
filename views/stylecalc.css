@@ -228,7 +228,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .wrapper {
-  max-width: 40%;
+  max-width: 80%;
   margin: 50px auto;
   padding: 20px 30px;
   min-height: 300px;
