@@ -4,113 +4,164 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calculadora</title>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/stylecalc.css" />
-    <!--script src="/form/projeto.js"></script-->
+    <title>Digital Commerce Intera</title>
     
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/styleapp.css" />
+   <link href="/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/tabulator.min.js"></script>
+    <script src="/luxon.min.js"></script>
+   
 </head>
 
 <body classname="snippet-body">
-  <div class="h5 font-weight-bold text-center mb-3">Empodera Digital Commerce Calculadora</div>
-    <div class="wrapper" id="classificacao">
+    <div class="wrapper" id="formulario" style="max-width: 1050px;">
         <form action="#">
-          <div class="h5 font-weight-bold text-center mb-3">Ofertas Digital Commerce</div>
-          <table id="fila" border="0" align="center"><tr><td align="center">
-                    
-          <div class="equalizer">
-            <div class="section">
-              <div class="title">RD Station</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">PRO</span>
-                  <input type="range" class="vertical" min="4700" max="22000" step="100" value="4700" data-filter="highShelf" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">crm</span>  
-                </div>
-                <div class="range-slider">
-                  <span class="scope">Basic</span>
-                  <input type="range" class="vertical" min="-50" max="50" value="50" data-filter="highShelf" data-param="gain">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">mkt</span>  
-                </div>
-                <div class="range-slider">
-                  <span class="scope">Enter</span>
-                  <input type="range" class="vertical" min="-50" max="50" value="50" data-filter="highShelf" data-param="gain">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">men</span>  
-                </div>
-              </div>
-            </div>
-              
-            <div class="section">
-              <div class="title">Lexos</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">Starter</span>
-                  <input type="range" class="vertical" min="35" max="220" step="1" value="35" data-filter="lowShelf" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">lex</span>  
-                </div>
-                
-              </div>
-            </div>
-                
-            <div class="section">
-              <div class="title">Tallos</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">Pro</span>
-                  <input type="range" class="vertical" min="800" max="5900" step="100" value="800" data-filter="highPass" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">Tal</span>  
-                </div>
-              
-              </div>
-            </div>  
-              
-            <div class="section">
-              <div class="title">Shopify</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">Starter</span>
-                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">sho</span>  
-                </div>
-                
-              </div>
-            </div>
+            <div class="h5 font-weight-bold text-center mb-3">Digital Commerce Intera</div>
 
-            <div class="section">
-              <div class="title">Exact Sales</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">Enter</span>
-                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">exa</span>  
-                </div>
-                
-              </div>
-            </div>
+            <div id="example-table"></div>
 
-            <div class="section">
-              <div class="title">Tail</div>
-              <div class="sliders">
-                <div class="range-slider">
-                  <span class="scope">Basic</span>
-                  <input type="range" class="vertical" min="80" max="1600" step="10" value="880" data-filter="lowPass" data-param="frequency">
-                  <span class="scope scope-min">&nbsp;</span>
-                  <span class="param">tail</span>  
-                </div>
-                
-              </div>
-            </div>
+
             
-          </div>
-          </td></tr></table>
+    <script>
+        let table;
+        var tabledata = [];
+
+
+        function plano(plano) {
+
+            var novosdados = [
+                {produto:"Shopify", plano:"Advanced", valor:"2000", descricao:"Shopify Advanced 3000 users", height:1, col:"red", dob:"", cheese:1},
+                {produto:"Lexos", plano:"Corporate+", valor:"2459", descricao:"Lexos Coporate+ 5000", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+                {produto:"RD CRM", plano:"Pro 10 users", valor:"765", descricao:"RD CRM Pro com 10 mil usuarios", height:1, col:"red", dob:"", cheese:1},
+                {produto:"RD MKT", plano:"Pro 5K", valor:"999", descricao:"RD Market Professsional com 5 mil users", height:1, col:"red", dob:"", cheese:1},
+                {produto:"RD Conversas", plano:"Avançado 3,5K", valor:"3.500", descricao:"RD Conversas Avancado 3,5/k", height:1, col:"red", dob:"", cheese:1},
+                {produto:"Mentor IA", plano:"Pro", valor:"30000", descricao:"Plano Professional", height:1, col:"red", dob:"", cheese:1},
+                {produto:"Exact Sales", plano:"Professional", valor:"3322", descricao:"Exact Sales Professional", height:1, col:"red", dob:"", cheese:1},
+            ];
+           
+
+            table.replaceData(novosdados);
+           
+        }
+
+//Create Date Editor
+var dateEditor = function(cell, onRendered, success, cancel){
+   //cell - the cell component for the editable cell
+   //onRendered - function to call when the editor has been rendered
+   //success - function to call to pass thesuccessfully updated value to Tabulator
+   //cancel - function to call to abort the edit and return to a normal cell
+
+   //create and style input
+   //var cellValue = luxon.DateTime.fromFormat(cell.getValue(), "dd/MM/yyyy").toFormat("yyyy-MM-dd"),
+   var cellValue = luxon.DateTime.fromISO(cell.getValue(), "dd/MM/yyyy").toFormat("dd/MM/yyyy"),
+   input = document.createElement("input");
+
+   input.setAttribute("type", "date");
+
+   input.style.padding = "4px";
+   input.style.width = "100%";
+   input.style.boxSizing = "border-box";
+
+   input.value = cellValue;
+
+   onRendered(function(){
+    console.log("onRendered");
+       input.focus();
+       input.style.height = "10%";
+   });
+
+   function onChange(){
+       if(input.value != cellValue){
+           success(luxon.DateTime.fromFormat(input.value, "yyyy-MM-dd").toFormat("dd/MM/yyyy"));
+       }else{
+           cancel();
+       }
+   }
+
+   //submit new value on blur or change
+   input.addEventListener("blur", onChange);
+
+   //submit new value on enter
+   input.addEventListener("keydown", function(e){
+       if(e.keyCode == 13){
+           onChange();
+       }
+
+       if(e.keyCode == 27){
+           cancel();
+       }
+   });
+
+   return input;
+};
+//{title:"Rating", field:"rating",  formatter:"star", hozAlign:"center", width:100, editor:true},
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var requestOptions = {
+ method: 'GET',
+ Headers: myHeaders,
+ redirect: 'follow'
+};
+
+fetch("../api/v1/projetos", requestOptions)
+ .then(response => response.json())
+ .then(result => {
+    tabledata = [
+        {produto:"Shopify", plano:"Basic", valor:"2000", descricao:"Permite criar um ecommerce com xxxx", height:1, col:"red", dob:"", cheese:1},
+        {produto:"Lexos", plano:"Advanced", valor:"3000", descricao:"Lexos com 1500 usuários no", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+        {produto:"RD CRM", plano:"Basic", valor:"1212", descricao:"RDCRM Basic 20 usuários blabla", height:1, col:"red", dob:"", cheese:1},
+        {produto:"RD MKT", plano:"Basic", valor:"4000", descricao:"RD Market basico com 20 usuarios", height:1, col:"red", dob:"", cheese:1},
+        {produto:"RD Conversas", plano:"Basic", valor:"5000", descricao:"RD Conversas Basico 5 usuários ", height:1, col:"red", dob:"", cheese:1},
+        {produto:"Mentor IA", plano:"Pro", valor:"1512", descricao:"Mentor IA Pro como 300 usuários simultaneos", height:1, col:"red", dob:"", cheese:1},
+        {produto:"Exact Sales", plano:"Basic", valor:"10012", descricao:"Exact Ssales Basic com 30 usuários", height:1, col:"red", dob:"", cheese:1},
+       
+
+]
+
+    console.log(tabledata)
+
+   table = new Tabulator("#example-table", {
+   height:"240px",
+   backgroundColor: "linear-gradient(to bottom, #000428, #004683);",
+   data:tabledata,
+   renderHorizontal:"virtual",
+   columns:[
+       {title:"Produto", field:"produto", width:150, editor:"input"},
+       {title:"Plano", field:"plano", width:170,  editor:"select", editorParams:{values:["Basic", "Advanced", "Pro"]}},
+       {title:"Valor", field:"valor", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
+       {title:"Descrição", field:"descricao", width:380},
+       //{title:"Data de Solicitação", field:"dataSolicitacao", hozAlign:"center", sorter:"date", width:140,  formatter:"date" },
+       
+   ],
+});
+
+
+
+
+  })
+ .catch(error => console.log(error));
+
+
+
+//Build Tabulator
+
+   </script>
+           
+
+            <br>
+
+
+            <div id="edicao">
+                <div class="btn btn-primary mb-3" onclick="Javascript:plano('manufatura')">Combo Varejo</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:alert('a caminho')">Combo Manufatura</div>
+                
+            </div>
+
+
+
 
 
         </form>
@@ -130,52 +181,11 @@
                 e.preventDefault();
             });
         });
-
-        var context = new (window.AudioContext || window.webkitAudioContext)();
-
-var highShelf = context.createBiquadFilter();
-var lowShelf = context.createBiquadFilter();
-var highPass = context.createBiquadFilter();
-var lowPass = context.createBiquadFilter();
-
-highShelf.connect(lowShelf);
-lowShelf.connect(highPass);
-highPass.connect(lowPass);
-lowPass.connect(context.destination);
-
-highShelf.type = "highshelf";
-highShelf.frequency.value = 4700;
-highShelf.gain.value = 50;
-
-lowShelf.type = "lowshelf";
-lowShelf.frequency.value = 35;
-lowShelf.gain.value = 50;
-
-highPass.type = "highpass";
-highPass.frequency.value = 800;
-highPass.Q.value = 0.7;
-
-lowPass.type = "lowpass";
-lowPass.frequency.value = 880;
-lowPass.Q.value = 0.7;
-
-var ranges = document.querySelectorAll('input[type=range]');
-ranges.forEach(function(range){
-  range.addEventListener('input', function() {
-    window[this.dataset.filter][this.dataset.param].value = this.value;
-  });
-});
-
-
-
-
-
     </script>
-         
-    
+   
 
 </body>
-    
+
 
 
 </html>
