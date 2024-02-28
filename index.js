@@ -180,6 +180,9 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
   let emailRequisitante = requisicao.body.payload.email.toString().toLowerCase();
   let fonteRD = (origem == "RD STATION");
   let nomeAPN;
+  let codigoEtapaFunilRD = '651f23bc471bcb000d59202c';
+  let idUserOportunidade = apresentador.id;
+  let nameUserOportunidade = apresentador.name;
 
  console.debug("origem: " + origem);
 
@@ -200,6 +203,10 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
   if (fonteRD) {
 
     nomeAPN = "Joyce Lopes";
+    codigoEtapaFunilRD = "6335b2d8e9137a0014b0dc24";
+    idUserOportunidade = "635036d5a4137d0017eb6f34"
+    nameUserOportunidade = "Joyce Lopes";
+
     //emailRequisitante = "Joyce Lopes";
       
       /*if (emailRequisitante == 'jonathan.lopes@rdstation.com') {
@@ -220,17 +227,17 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
     let conteudobody = {
       campaign: {_id: campaingId},
       deal: {
-        deal_stage_id: '651f23bc471bcb000d59202c', // Trocar a etpaa para  6335b2d8e9137a0014b0dc24
+        deal_stage_id: codigoEtapaFunilRD, 
         name: oferta + ' - ' + nomeEmpresa,
         rating: 2,
-        user_id: apresentador.id, // Aqui é a Joyce se for RD
+        user_id: idUserOportunidade, // Aqui é a Joyce se for RD
         deal_custom_fields: [
           {custom_field_id: '63763ae8c62c24000cbc1032', value: oferta},
           {custom_field_id: '63505233968a250014767d55', value: nomeUnidade},
           {custom_field_id: '63ced2631bc670000ca81466', value: nomeAPN},
           {custom_field_id: '6544fe33f62610000d22077d', value: requisicao.body.payload.name}, // nome do responsavel trocar pela joyce
           {custom_field_id: '641b4c5dba8773002266f528', value: new Date(requisicao.body.payload.scheduled_event.start_time).toLocaleDateString('pt-BR')},
-          {custom_field_id: '63f8ced05edf4300218e297f', value: apresentador.name} // Aqui também.
+          {custom_field_id: '63f8ced05edf4300218e297f', value: nameUserOportunidade} // Aqui também.
     
         ]
       },
@@ -275,7 +282,7 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
                             activity: {
                               deal_id: oportunidade._id,
                               text: escopo,
-                              user_id: apresentador.id
+                              user_id: idUserOportunidade
                             }});
 
           url = 'https://crm.rdstation.com/api/v1/activities?token=6303f05b46f5b6001b61b603';                 
