@@ -202,12 +202,12 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
 
   if (fonteRD) {
 
-    nomeAPN = "Joyce Lopes";
+    nomeAPN = "Joyce Santos";
     codigoEtapaFunilRD = "6335b2d8e9137a0014b0dc24";
     idUserOportunidade = "635036d5a4137d0017eb6f34"
-    nameUserOportunidade = "Joyce Lopes";
+    nameUserOportunidade = "Joyce Santos";
 
-    //emailRequisitante = "Joyce Lopes";
+    //emailRequisitante = "Joyce Santos";
       
       /*if (emailRequisitante == 'jonathan.lopes@rdstation.com') {
         nomeAPN = 'Jonathan Lopes (RD)';
@@ -237,7 +237,7 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
           {custom_field_id: '63ced2631bc670000ca81466', value: nomeAPN},
           //{custom_field_id: '6544fe33f62610000d22077d', value: requisicao.body.payload.name}, // nome do responsavel trocar pela joyce
           {custom_field_id: '641b4c5dba8773002266f528', value: new Date(requisicao.body.payload.scheduled_event.start_time).toLocaleDateString('pt-BR')},
-          {custom_field_id: '63f8ced05edf4300218e297f', value: nameUserOportunidade} // Aqui também.
+          {custom_field_id: '63f8ced05edf4300218e297f', value: apresentador.name} // Aqui também.
     
         ]
       },
