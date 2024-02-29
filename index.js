@@ -290,36 +290,29 @@ app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
           fetch(url, opcoesOPeCom)
           .then(res => res.json())
           .then(comentario => { console.log(comentario); 
-            
-            let dataHoraReuniao = new Date(requisicao.body.payload.scheduled_event.start_time);
-            let comentDataHoraReuniao = "Reunião marcada para " + dataHoraReuniao.toLocaleDateString() + 
-                                        " com início as " + dataHoraReuniao.toLocaleTimeString();
-
-
-            opcoesOPeCom.body = JSON.stringify({
+                let dataHoraReuniao = new Date(requisicao.body.payload.scheduled_event.start_time);
+                let comentDataHoraReuniao = "Reunião marcada para " + dataHoraReuniao.toLocaleDateString() + 
+                                            " com início as " + dataHoraReuniao.toLocaleTimeString();
+  
+                console.log("comentDataHoraReuniao " + comentDataHoraReuniao);                          
+                
+                opcoesOPeCom.body = JSON.stringify({
                 activity: {
                     deal_id: oportunidade._id,
                     text: comentDataHoraReuniao,
                     user_id: idUserOportunidade
-                }});     
+                }}); 
             
-            fetch(url, opcoesOPeCom)
-            .then(res => res.json())
-            .then(comentario2 => { console.log(comentario2);})})
-            .catch(err => {console.log(err);  webhookresponse = err});
-            
-            
-            
-            
-            
-            resposta.status(201).send()})})
+                fetch(url, opcoesOPeCom).then(res => res.json()).then(comentario2 => { 
+                        console.log("Novo comentário: "); console.log(comentario2);
+                }).catch(err => {console.log(err);  webhookresponse = err});
+                
+                resposta.status(201).send()})
+        
+        })
           .catch(err => {console.log(err);  webhookresponse = err});
 
-          
-
-
-    })
-    .catch(err => { console.log(err); webhookresponse = err });
+    }).catch(err => { console.log(err); webhookresponse = err });
 })
   
 app.post('/mentorwebhook/', encodeUrl, (requisicao, resposta) => {
