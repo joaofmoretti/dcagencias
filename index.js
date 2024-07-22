@@ -7,10 +7,17 @@ let mapaAgenciaClient = new Map();
 
 let app = express();
 
-let campoToken = "Token";
-let segredo = '';
 
-let dados = require('./views/AgenciasParceiras.json');
+let dados = require('./data/AgenciasParceiras.json');
+
+let cases; 
+
+try {
+  cases = require("./data/cases.json");
+} catch(erroReadingCasesFile) {
+  console.log("erroReadingCasesFile");
+  console.log(erroReadingCasesFile);
+}
 
 let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
 
@@ -57,322 +64,6 @@ app.use(("/projetos/", router))
 let encodeUrl = bodyParser.urlencoded({ extended: false });
 
 let projetos = []
-
-// Inicio Integração RD
-let webhookbody;
-let webhookresponse;
-
-app.get('/webhook/response/', (req, res) => {
-
-  res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(webhookresponse));
-  //res.sendFile(__dirname + '/views/login.html');
-}); 
-
-app.get('/webhook/', (req, res) => {
-
-  res.writeHead(200, {"Content-Type": "application/json"});
-    res.end(JSON.stringify(webhookbody));
-  //res.sendFile(__dirname + '/views/login.html');
-}); 
-
-function retornaApresentador(json) {
-
-    let mail = json.payload.scheduled_event.event_memberships[0].user_email
-    
-    let usersRD = [
-      {
-        "id": "6361707267edf7001b72b4c7",
-        "name": "Fernando Gordilho",
-        "email": "fernando.gordilho@totvs.com.br"
-  
-      },
-  
-      {
-        "id": "63514b20a7e955000c0ece48",
-        "name": "Ruan Fagundes",
-        "email": "ruan.fagundes@totvs.com.br"
-  
-      },
-      {
-        "id": "637671145c04e200168f1de9",
-        "name": "João Moretti",
-        "email": "joao.moretti@fluig.com"
-      },
-      {
-        "id": "62db0782987f1a000c1c86c3",
-        "name": "Jhon",
-        "email": "jhonatans.aguiar@totvs.com.br"
-      }
-    ];
-  
-  
-    return usersRD.find((u) => u.email == mail);
-  
-  }
-
-async function obtemObjetoEmpresa(nome) {
-      let nomeEmpresa = nome;
-      console.log('nomeEmpresa ' + nomeEmpresa);
-      return new Promise((resolve, reject) => {
-      
-      let url = 'https://crm.rdstation.com/api/v1/organizations?token=6303f05b46f5b6001b61b603';
-      let opcoesEmpresa = {
-        method: 'POST',
-        headers: {accept: 'application/json', 'content-type': 'application/json'},
-        body: JSON.stringify({organization: {name: nomeEmpresa}})
-      };
-    
-      fetch(url, opcoesEmpresa)
-      .then(res => res.json())
-      .then(empresa => { if (empresa.errors != undefined && empresa.errors.name == 'Valor já existente.') {throw new Error()} 
-                             else {
-                             console.log("empresa nova criada");
-                             resolve(empresa)
-                             }})
-      .catch((error) => {
-        let opcoesBuscaEmpresa = {
-          method: 'GET',
-          headers: {accept: 'application/json', 'content-type': 'application/json'},
-          
-        };
-  
-        let urlBuscaEmpresa = 'https://crm.rdstation.com/api/v1/organizations?token=6303f05b46f5b6001b61b603&q='
-             + nomeEmpresa + '&limit=200';
-  
-        fetch(urlBuscaEmpresa, opcoesBuscaEmpresa)
-        .then(res => res.json())
-        .then(empresasLocalizadas => { console.log("Empresas: " + empresasLocalizadas.organizations.length);
-                                       let empresa = empresasLocalizadas.organizations.find((emp) => emp.name == nomeEmpresa); 
-                                       
-                                       //console.log("nova empresa"); console.log(empresa) 
-                                       if (empresa == null) {empresa = empresasLocalizadas.organizations.filter((emp) => emp.name.toLowerCase().indexOf(nomeEmpresa) > -1)[0]}
-                                      // if (empresa == null) {console.log("Deu coco")} else {console.log(empresa)}
-                                      resolve(empresa);
-                                       
-                                      })
-        .catch((Error) => {console.log("Nao criou nem achou"); reject(Error);})                               
-
-      }).catch(erroEmpresa => {console.log("Erro na parada"); 
-                             console.log(erroEmpresa)
-                             reject(erroEmpresa);
-                            
-                            })
-    })                        
-}
-
-app.post('/webhook/', encodeUrl, (requisicao, resposta) => {
-  console.log("webhoook------------------------------------------")
-  console.log(requisicao.body);
-  webhookbody = requisicao.body;
-  
-  let nomeEmpresa = requisicao.body.payload.questions_and_answers.find((q) => q.question == 'Empresa').answer;
-  let escopo = requisicao.body.payload.questions_and_answers.find((q) => q.position == 4).answer;
-  let apresentador = retornaApresentador(requisicao.body);
-  let origem = requisicao.body.payload.questions_and_answers.find((q) => q.position == 6).answer
-  let telefoneCliente = requisicao.body.payload.questions_and_answers.find((q) => q.question == 'Celular do Cliente').answer;
-  let nomeCliente = requisicao.body.payload.questions_and_answers.find((q) => q.position == 1).answer;
-  let nomeUnidade = requisicao.body.payload.questions_and_answers.find((q) => q.position == 5).answer;
-  let oferta = requisicao.body.payload.scheduled_event.name.toUpperCase().trim().replace('E-COMMERCE B2B', '');
-  let cargoCliente = requisicao.body.payload.questions_and_answers.find((q) => q.position == 3).answer;
-  let campaingId = '6532c91f3ae6b1000de593a5';
-  let sourceId = '63651c290de1b20019712080';
-  let emailRequisitante = requisicao.body.payload.email.toString().toLowerCase();
-  let fonteRD = (origem == "RD STATION");
-  let nomeAPN;
-  let codigoEtapaFunilRD = '651f23bc471bcb000d59202c';
-  let idUserOportunidade = apresentador.id;
-  let nameUserOportunidade = apresentador.name;
-
- console.debug("origem: " + origem);
-
-  if (origem == "RD CONVERSAS") {
-    sourceId = '6557bdc659db5d001c3c4684';
-  } else if (origem == "EXACT SALES") {
-    sourceId = '6557bdb23770f2001bb8b82e';
-  } else if (origem == "TOTVS") {
-    sourceId = '63651c290de1b20019712080';
-  } else if (origem == "RD STATION") {
-    sourceId = '6556783ed1f311000f84c37c';
-  } else if (origem == "AGÊNCIAS") {
-    sourceId = '6557bdb93770f2001bb8b83f';
-  }
-
- 
-
-  if (fonteRD) {
-
-    nomeAPN = "Joyce Santos";
-    codigoEtapaFunilRD = "6335b2d8e9137a0014b0dc24";
-    idUserOportunidade = "635036d5a4137d0017eb6f34"
-    nameUserOportunidade = "Joyce Santos";
-
-    //emailRequisitante = "Joyce Santos";
-      
-      /*if (emailRequisitante == 'jonathan.lopes@rdstation.com') {
-        nomeAPN = 'Jonathan Lopes (RD)';
-      } else if (emailRequisitante == 'gabriela.cidade@rdstation.com') {
-        nomeAPN = 'Gabriela Cidade (RD)';
-      } else if (emailRequisitante == 'gabriel.calixto@rdstation.com') {
-        nomeAPN = 'Gabriel Calixto (RD)';
-      }*/
-  } 
-    
-
-  let promessaEmpresa = obtemObjetoEmpresa(nomeEmpresa);
-
-  promessaEmpresa.then(empresa => {
-    
-    console.log(empresa);
-    let conteudobody = {
-      campaign: {_id: campaingId},
-      deal: {
-        deal_stage_id: codigoEtapaFunilRD, 
-        name: oferta + ' - ' + nomeEmpresa,
-        rating: 2,
-        user_id: idUserOportunidade, // Aqui é a Joyce se for RD
-        deal_custom_fields: [
-          {custom_field_id: '63763ae8c62c24000cbc1032', value: oferta},
-          {custom_field_id: '63505233968a250014767d55', value: nomeUnidade},
-          {custom_field_id: '63ced2631bc670000ca81466', value: nomeAPN},
-          //{custom_field_id: '6544fe33f62610000d22077d', value: requisicao.body.payload.name}, // nome do responsavel trocar pela joyce
-          {custom_field_id: '641b4c5dba8773002266f528', value: new Date(requisicao.body.payload.scheduled_event.start_time).toLocaleDateString('pt-BR')},
-          {custom_field_id: '63f8ced05edf4300218e297f', value: apresentador.name} // Aqui também.
-    
-        ]
-      },
-      deal_source: {_id: sourceId},
-      organization: {_id: empresa._id},
-      contacts: [
-        {
-          //emails: [{email: requisicao.body.payload.email}],
-          name: nomeCliente,
-          title: cargoCliente,
-          phones: [{type: 'cellphone', phone: telefoneCliente}]
-        }
-      ]
-    };
-
-    if (origem != "TOTVS") {
-      conteudobody.deal.deal_custom_fields.push({custom_field_id: '64cd438ff3fc640014b2f5a5', value: "N/A"});
-      conteudobody.deal.deal_custom_fields.push({custom_field_id: '6474edfabb0aba000da1378f', value: "NÃO"});
-    }
-
-    let opcoesOPeCom = {
-      method: 'POST',
-      headers: {accept: 'application/json', 'content-type': 'application/json'}
-    };
-
-    opcoesOPeCom.body = JSON.stringify(conteudobody);
-
-    
-  console.log("O que ele vai enviar para o RD =================");
-  console.log(opcoesOPeCom.body)
-  console.log("fim dO que ele vai enviar para o RD =================");
-    
-
-    url = 'https://crm.rdstation.com/api/v1/deals?token=6303f05b46f5b6001b61b603';
-    fetch(url, opcoesOPeCom)
-    .then(res => res.json())
-    .then(oportunidade => { 
-          console.log("resposta ");
-          console.log(oportunidade);
-          webhookresponse = oportunidade;
-          opcoesOPeCom.body = JSON.stringify({
-                            activity: {
-                              deal_id: oportunidade._id,
-                              text: escopo,
-                              user_id: idUserOportunidade
-                            }});
-
-          url = 'https://crm.rdstation.com/api/v1/activities?token=6303f05b46f5b6001b61b603';                 
-          
-          fetch(url, opcoesOPeCom)
-          .then(res => res.json())
-          .then(comentario => { console.log(comentario); 
-                let dataHoraReuniao = new Date(requisicao.body.payload.scheduled_event.start_time);
-                let comentDataHoraReuniao = "Reunião marcada para " + dataHoraReuniao.toLocaleDateString() + 
-                                            " com início as " + dataHoraReuniao.toLocaleTimeString();
-  
-                console.log("comentDataHoraReuniao " + comentDataHoraReuniao);                          
-                
-                opcoesOPeCom.body = JSON.stringify({
-                activity: {
-                    deal_id: oportunidade._id,
-                    text: comentDataHoraReuniao,
-                    user_id: idUserOportunidade
-                }}); 
-            
-                fetch(url, opcoesOPeCom).then(res => res.json()).then(comentario2 => { 
-                        console.log("Novo comentário: "); console.log(comentario2);
-                }).catch(err => {console.log(err);  webhookresponse = err});
-                
-                resposta.status(201).send()})
-        
-        })
-          .catch(err => {console.log(err);  webhookresponse = err});
-
-    }).catch(err => { console.log(err); webhookresponse = err });
-})
-  
-app.post('/mentorwebhook/', encodeUrl, (requisicao, resposta) => {
-	
-		console.log("mentor --------------------------------------------");
-  console.log(requisicao.body);
-  console.log("fim do body mentor --------------------------------------------");
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYXBpIiwicHJvcGVydGllcyI6eyJrZXlJZCI6ImtleV8wMUhLV0RBNFpOWjJZMktaQTM5OVJWWk1LMSIsIndvcmtzcGFjZUlkIjoid3BjXzAxSEtTWVBOSEtIMDIzNzYwVkJXV1dOUlA3IiwidXNlcklkIjoidXNlcl9hcGkifSwiaWF0IjoxNzA0OTgxNzYzfQ.RYKjA9vaOUWg4RW4qX99wVs0brKs1dVpr0xA-6xJt_YpEC_0ohwWJ-stT0gNT2ahTMkjAl9qkBXF2Nk1c4Jy5wZ9otlcMAnkMlnJvmBw_eksrmKSUjKHpLVGQCMhQd8gT9QG0S0hPXwHzu7iNUWa7Fc0Ziwlkd43yCunScNkYVDBw0LeHsiSaiCmNyhKtutqzoQ_I09lXCaj7cjbLvPTFZUsdZoZcxmqf4ofVBAENo_0uBf3JWdNV27EDzdLsM6pWTRGR_Z5gWdINWhMyF56jq-b3WQz6UNbWJqnU3WAlxHMsRHGW3r8CDdp5OcU3m45InyY29HAWlxpZjOLmZa6oQ");
-  
-  var raw = JSON.stringify({
-    "0": {
-      "json": {
-        "promptId": "question_answer",
-        "data": {
-          "question": requisicao.body.pergunta
-        },
-        "kbs": []
-      }
-    }
-  });
-  
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
-  
-  fetch("https://api.conteudo.rdstationmentoria.com.br/trpc/copywriting.create?batch=1", requestOptions)
-    .then(response => response.text())
-    .then(result => {//console.log(result)
-		
-		let resultMentor = JSON.parse(result);
-		
-		let respostaMentor = {
-			"resposta": resultMentor[0].result.data.json.content
-		}
-		
-		
-		
-      resposta.status(200).send(respostaMentor);
-    
-    } )
-    .catch(error => {console.log('error', error) 
-                    resposta.status(404).send(error); 
-                     });
-
-
-
-
-  
-})
-app.get('/ping', (req, res) => {
-    console.log("ping " + req.ip);
-    res.status(201).send("pong")
-  })
-// Fim Integração RD
-
 app.get('/', (req, res) => {
     
     res.redirect('/projeto/');
@@ -409,30 +100,7 @@ app.get('/projeto/', (req, res) => {
     res.sendFile(__dirname + '/views/projeto.html');
 });
 
-
-
-
-app.post('/login/', encodeUrl, (requisicao, resposta) => {
-
-    var usuario = requisicao.body.usuario;
-    var senha = requisicao.body.senha;
-
-    if (usuario == 'teste' && senha == 'teste') {
-        segredo = senha;
-        resposta.redirect('/form/');
-        
-    } else {
-        resposta.send("<script>alert('Usuário ou senha inválidos!'); history.go(-1);</script>");
-    }
-
-    
-});
-
-app.get('/login/', (req, res) => {
-    res.sendFile(__dirname + '/views/login.html');
-}); 
-
-    
+   
 app.get('/api/v1/agencias/nomes/', (req, res) => {
     
   
@@ -484,7 +152,7 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
             }
         }
   
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) })  
+        fs.writeFile('./data/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) })  
     
     } catch (erro) {
         console.log(erro);
@@ -507,7 +175,7 @@ app.post('/api/v1/agencias/dados/cases', (req, res) => {
     try {
         dados['CASES POR AGÊNCIA '] = []
         dados['CASES POR AGÊNCIA '] = req.body;
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
+        fs.writeFile('./data/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
         
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
@@ -558,7 +226,7 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
             }
 
         }
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
+        fs.writeFile('./data/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
     } catch (erro) {
         resultString = "Erro ao atualizar dados das agências " + erro;
         httpCode = 500;
@@ -864,7 +532,7 @@ app.post('/api/v1/score/', (req, res) => {
     
     
     try {
-        fs.writeFile('./views/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err)});
+        fs.writeFile('./data/AgenciasParceiras.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err)});
             res.writeHead(statusHttp, {"Content-Type": "application/json"});
         res.end(JSON.stringify("Pontuacao atualizadda com sucesso"));
      } catch (erro) {
@@ -920,27 +588,7 @@ function array_move(arr, old_index, new_index) {
     }
     arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
     return arr; // for testing
-};
-
-
-app.get("/user/getUserToken/", (requisicao, resposta) => {
-    let dados = {
-        'Data': new Date(),
-        'id' : 'Univille'
-    }
-    if (segredo == '') {
-        resposta.writeHead(401, {"Content-Type": "application/json"});
-        resposta.end(JSON.stringify("Você deve se logar para receber um token"));
-        
-    }
-    let token = ''//jwt.sign(dados, segredo);
-
-    let jsonRes = {
-           'token': token
-    };
-
-    resposta.send(jsonRes);
-});
+}
 
 app.get('/styleapp.css', (req, res) => {
     res.sendFile(__dirname + '/views/styleapp.css'); 
@@ -985,7 +633,7 @@ app.get('/asteroid-alert.js', (req, res) => {
 
 
 app.get('/AgenciasParceiras.json', (req, res) => {
-    res.sendFile(__dirname + '/views/AgenciasParceiras.json'); 
+    res.sendFile(__dirname + '/data/AgenciasParceiras.json'); 
 });
 
 app.get('/icon_38.png', (req, res) => {
