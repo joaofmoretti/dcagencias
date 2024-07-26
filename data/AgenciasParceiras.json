@@ -3061,6 +3061,9 @@
     "caseSegmento": 500,
     "caseSegmentoPlatafoma": 1000,
     "caseModeloNegocio": 1500,
-    "porcentagemAgenciaPreferencial": 30
+    "porcentagemAgenciaPreferencial": 30,
+    "cateogoriaSite": 1500,
+    "cnaeFiscal": 1500,
+     "cnaeSecundario": 1000
     }
     }

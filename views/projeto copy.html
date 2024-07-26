@@ -21,8 +21,106 @@
             <div class="h5 font-weight-bold text-center mb-3">Cadastro do projeto</div>
             <div id="divnomecliente" class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-user"></span></div>
-                <input id="nome" autocomplete="off" type="text" class="form-control" placeholder="Informe aqui o endereço do ecommerce" required>
+                <input id="nome" autocomplete="off" type="text" class="form-control" placeholder="Nome do cliente" required>
             </div>
+
+
+            <div id="divsegmento" class="form-group d-flex align-items-center">
+                <!-- form-control -->
+
+                <select id="segmento" class="form-control" placeholder="Segmento" required />
+                <option value="">Segmento</option>
+                <option value="Calçados" class="others">Calçados</option>
+                <option value="Casa e móveis" class="others">Casa e móveis</option>
+                <option value="Comidas Bebidas /Grocery" class="others">Comidas Bebidas / Grocery</option>
+                <option value="Cosméticos" class="others">Cosméticos</option>
+                <option value="Educação, Livros e Papelaria" class="others">Educação, Livros e Papelaria</option>
+                <option value="Eletrônicos e eletrodomésticos" class="others">Eletrônicos e eletrodomésticos</option>
+                <option value="Esportes" class="others">Esportes</option>
+                <option value="Farmácia e Saúde" class="others">Farmácia e Saúde</option>
+                <option value="Ferramentas Acessórios" class="others">Ferramentas Acessórios </option>
+                <option value="Importados" class="others">Importados </option>
+                <option value="Infantil " class="others">Infantil</option>
+                <option value="Ítens automotivos" class="others">Ítens automotivos</option>
+                <option value="Moda e Acessórios" class="others">Moda e acessórios</option>
+                <option value="Pet" class="others">Pet</option>
+                <option value="Presentes e Flores" class="others">Presentes e Flores</option>
+                <option value="Turismo" class="others">Turismo </option>
+                <option value="Governo" class="others">Governo</option>
+                </select>
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <select id="agenciapref" class="form-control" placeholder="Agência Preferencial" />
+                <option value="">Agência Preferencial</option>
+                </select>
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+
+                <span autocomplete="off" type="text" class="form-control">Modelos de Negócio</span>
+            </div>
+
+
+
+
+            <div class="mb-2">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <label class="option">B2B
+    
+                                <input type="checkbox" id="b2b" onclick="Javascript:setSFforB2B()">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="option">B2C
+                                <input type="checkbox" id="b2c">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <label class="option">D2C
+                                <input type="checkbox" id="D2C">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="option">Marketplace
+                                <input type="checkbox" id="marketplace">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <label class="option">Omni
+                                <input type="checkbox" id="Omni">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="mb-2">
+                            <label class="option">Certificação shopify Plus
+                                <input id="certificacao" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+
+                    </td>
+                </tr>
+            </table>
 
 
 
@@ -56,7 +154,7 @@
             <br> <br>
             <div id="final">
                 <div id="btConfirma" class="btn btn-primary mb-3" onclick="Javascript:saveProject()">Confirmar</div>
-               
+                <div id="btOutraAgencia" class="btn btn-primary mb-3" onclick="Javascript:outraAgencia()">Sugerir outra Agência</div>
                 <div class="btn btn-primary mb-3" onclick="Javascript:mostrarClassificacao()">Lista Classificatória
                 </div>
                 <div class="btn btn-primary mb-3" onclick="Javascript:voltar()">Voltar</div>

@@ -90,7 +90,15 @@
             projeto = {
                 nome: document.getElementById('nome').value,
                 
-                
+                segmento: document.getElementById('segmento').value,
+                agenciapreferencial: document.getElementById('agenciapref').value,
+               
+                b2b: document.getElementById('b2b').checked,
+                b2c: document.getElementById('b2c').checked,
+                D2C: document.getElementById('D2C').checked,
+                Omni: document.getElementById('Omni').checked,
+                marketplace:document.getElementById('marketplace').checked,
+                shopifyplus:document.getElementById('certificacao').checked,
                 };
 
                 
@@ -102,7 +110,7 @@
 
        
                let method = "POST";
-               let endereco = '/dadosGoverno/';
+               let endereco = '/api/v1/sugestaoagencia/';
          
 
            var myHeaders = new Headers();

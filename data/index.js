@@ -3,8 +3,6 @@ let bodyParser = require('body-parser');
 var fs = require('fs');
 const cors = require('cors');
 
-const registroBR_URL = 'https://rdap.registro.br/domain'
-
 let mapaAgenciaClient = new Map();
 
 let app = express();
@@ -337,12 +335,12 @@ app.get('/api/v1/sugestaoagencia/nome/:nome/next/:next', (req, res) => {
 
 });
 
-function sugerirAgencia(requisicao) {
+app.post('/api/v1/sugestaoagencia/', encodeUrl, (req, res) => {
 	
 	
-   
-    
-    console.log(requisicao);
+    res.writeHead(200, {"Content-Type": "application/json"});
+    let sugestao = req.body;
+    console.log(sugestao);
     
 
     let agenciasSugeridas = [];
@@ -359,12 +357,15 @@ function sugerirAgencia(requisicao) {
 
         if (!agenciaAvaliada["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
 
-        //if (sugestao.shopifyplus && (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus') == -1)) continue
+        
         let nomeAgencia = agenciaAvaliada['Nome Agência '].toLowerCase().trim();
         
         let score = 0;
 
-        
+        if (sugestao.agenciapreferencial.trim() == '') {
+            console.log('dados.pontuacao.Base ' + dados.pontuacao.base + ' iag  ' + iag + ' dados.pontuacao.MultiPosicaoFila ' + dados.pontuacao.MultiPosicaoFila);
+            score =  dados.pontuacao.Base - (iag * dados.pontuacao.MultiPosicaoFila);
+        } 
 
 
         if (agenciaAvaliada["Atuante na plataforma Shopify "] != undefined && agenciaAvaliada["Atuante na plataforma Shopify "].toLowerCase().trim() == 'sim') {
@@ -384,13 +385,21 @@ function sugerirAgencia(requisicao) {
         if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
             score = score + dados.pontuacao.certShopifyPlus;
 
-            
+            if (sugestao.shopifyplus) {
+                score = score + dados.pontuacao.projetoShopifyPlus;
+            }
         }
 
        
-       
+        if (sugestao.agenciapreferencial.toLowerCase().trim() != '') {
+            if (nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) > -1) {
+                console.log("nomeAgencia " + nomeAgencia + " sugestao " + sugestao.agenciapreferencial.toLowerCase().trim() + " " + nomeAgencia.indexOf(sugestao.agenciapreferencial.toLowerCase().trim()) );
+                agenciaPreferida = agenciaAvaliada;
+                score = score + dados.pontuacao.agenciaPreferencial;
+            }
+        } 
 
-        let casesAG = retornaCases(nomeAgencia);
+        let casesAG = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomeAgencia) > -1)
         let plataformCaseScore = 0
         let segmentoCaseScore = 0;
         let b2bCaseScore = 0;
@@ -398,7 +407,6 @@ function sugerirAgencia(requisicao) {
         let d2dCaseScore = 0;
         let marketplaceCaseScore = 0;
         let omniCaseScore = 0;
-        let cnaeFiscalScore = 0
         
         agenciaAvaliada.qtCases = contaCases(nomeAgencia);
         
@@ -406,24 +414,47 @@ function sugerirAgencia(requisicao) {
             let caso = casesAG[conta];
             console.log(caso);
             if (caso["Segmento:"] != undefined) {
-                if (caso["Segmento:"].toLowerCase().trim().indexOf(requisicao.segmento.toLowerCase().trim()) > -1) {
+                if (caso["Segmento:"].toLowerCase().trim().indexOf(sugestao.segmento.toLowerCase().trim()) > -1) {
                     segmentoCaseScore = dados.pontuacao.caseSegmento;
                 }
 
-                if ((caso["Segmento:"].toLowerCase().trim().indexOf(requisicao.segmento.toLowerCase().trim()) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
+                if ((caso["Segmento:"].toLowerCase().trim().indexOf(sugestao.segmento.toLowerCase().trim()) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
                     plataformCaseScore = dados.pontuacao.caseSegmentoPlatafoma;
                 }
             }
+            
 
-            if (caso.CnaeFiscal != null && caso.CnaeFiscal == requisicao.estabelecimento.atividade_principal.id) {
-                cnaeFiscalScore = dados.pontuacao.cnaeFiscal;
+            if (caso['Modelos de negócios atendidos:'] != undefined) {
+                let mercados = caso['Modelos de negócios atendidos:'].toLowerCase();
+                if (sugestao.b2b && (mercados.indexOf('b2b') > -1)) {
+                    b2bCaseScore =  dados.pontuacao.caseModeloNegocio;
+                }
+
+                if (sugestao.b2c && (mercados.indexOf('b2c') > -1)) {
+                    b2cCaseScore = dados.pontuacao.caseModeloNegocio;
+                }
+
+              
+
+                if (sugestao.d2c && (mercados.indexOf('d2c') > -1)) {
+                    d2dCaseScore =  dados.pontuacao.caseModeloNegocio;
+                }
+
+                if (sugestao.marketplace && (mercados.indexOf('marketplace') > -1)) {
+                   marketplaceCaseScore =  dados.pontuacao.caseModeloNegocio;
+                }
+
+                if (sugestao.Omni && (mercados.indexOf('omni') > -1)) {
+                    omniCaseScore = dados.pontuacao.caseModeloNegocio;
+                }
+
             }
 
-            
-            
+
+
 
         }
-        score = score + plataformCaseScore + cnaeFiscalScore + segmentoCaseScore + b2bCaseScore + b2cCaseScore + d2dCaseScore +marketplaceCaseScore + omniCaseScore;
+        score = score + plataformCaseScore + segmentoCaseScore + b2bCaseScore + b2cCaseScore + d2dCaseScore +marketplaceCaseScore + omniCaseScore;
 
 
         agenciaAvaliada.score = score - iag;
@@ -450,7 +481,7 @@ function sugerirAgencia(requisicao) {
     }
     
 
-    mapaAgenciaClient.set(requisicao.nome, agenciasSugeridas);
+    mapaAgenciaClient.set(sugestao.nome, agenciasSugeridas);
 
    
 
@@ -458,25 +489,15 @@ function sugerirAgencia(requisicao) {
     
    
     console.log(agenciasSugeridas[0]['Nome Agência '] + ' score ' + agenciasSugeridas[0].score);
-    return agenciasSugeridas[0];
+    res.end(JSON.stringify(agenciasSugeridas[0]));
 
     
 
-}
-
-function retornaCases(nomedaAgencia) {
-    let nomeAgencia = nomedaAgencia.toLowerCase().trim();
-    let casesshopify = cases.filter(caso => caso['Solução'] == "SHOPIFY" && caso['Agências'] == nomedaAgencia);
-
-	//let casosdaAgencia = casesshopify.filter(cs => cs.Agências.toLowerCase().trim().indexOf(nomeAgencia) > -1);
-
-    return casesshopify;
-}
+});
 
 function contaCases(nomedaAgencia) {
-  
-
-	let casosdaAgencia = retornaCases(nomedaAgencia);
+    let nomeAgencia = nomedaAgencia.toLowerCase().trim();
+	let casosdaAgencia = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomeAgencia) > -1);
 
     if (casosdaAgencia != null) {
         return casosdaAgencia.length;
@@ -682,12 +703,12 @@ const parsePage = (body, url) => {
 
 app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
 
-    var busca = req.body.nome;;
-    let url = new URL(busca);
+    var busca = req.body.busca;;
+    let urlHost = new URL(busca);
     let cnpjEncontrado = ''
     let num = '';
     let result = {}
-    console.debug("DadosGoverno - pegando dados para: " + url);
+    console.debug("Pagina !!!!!!!!!!!!!!!!!!!!!!!222222 " + url);
     let pageCNPJ = fetch(url)
             .then(resp => resp.text()) // parse response's body as text
             .then(body => parsePage(body, url)) // extract <title> from body
@@ -702,7 +723,7 @@ app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
                   fetch(urlGover)
                   // Tratamento do sucesso
                   .then(response => response.json())  // converter para json
-                  .then(json => {res.send(sugerirAgencia(json)); })    //imprimir dados no console
+                  .then(json => {res.send(json); })    //imprimir dados no console
                   .catch(err => console.debug('Erro de solicitação', err));
                   
                 }
@@ -737,7 +758,7 @@ app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
             fetch(urlGover)
             // Tratamento do sucesso
             .then(response => response.json())  // converter para json
-            .then(json => {res.send(sugerirAgencia(json));})    //imprimir dados no console
+            .then(json => {res.send(json);})    //imprimir dados no console
             .catch(err => console.debug('Erro de solicitação', err));
             
           }
