@@ -15,7 +15,7 @@ let dados = require('./data/AgenciasParceiras.json');
 let cases; 
 
 try {
-  cases = require("./data/cases.json");
+  cases = require("./data/referencias.json");
 } catch(erroReadingCasesFile) {
   console.log("erroReadingCasesFile");
   console.log(erroReadingCasesFile);
