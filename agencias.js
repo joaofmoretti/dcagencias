@@ -11,11 +11,18 @@ let app = express();
 
 
 let dados = require('./data/AgenciasParceiras.json');
-
-let cases; 
+let cases;
+let referencias; 
 
 try {
-  cases = require("./data/referencias.json");
+    referencias = require("./data/referencias.json");
+  } catch(erroReadingCasesFile) {
+    console.log("erroReadingCasesFile");
+    console.log(erroReadingCasesFile);
+  }
+
+try {
+  cases = dados["CASES POR AGÊNCIA  "]
 } catch(erroReadingCasesFile) {
   console.log("erroReadingCasesFile");
   console.log(erroReadingCasesFile);
@@ -187,6 +194,44 @@ app.post('/api/v1/agencias/dados/cases', (req, res) => {
     res.writeHead(httpCode, {"Content-Type": "application/json"});
     res.end(JSON.stringify(resultString));
 });
+
+app.post('/api/v1/agencias/dados/referencias', (req, res) => {
+    
+    let resultString = "Cases referencia business process";
+    let httpCode = 200;
+    console.log("Postando dados de REferencias");
+    console.log(req.body);
+    
+    try {
+        referencias = []
+        referencias = req.body;
+        fs.writeFile('./data/referencias.json', JSON.stringify(dados), { encoding: "utf8"}, (err) => {console.log(err) }) 
+        
+    } catch (erro) {
+        resultString = "Erro ao atualizar dados das agências " + erro;
+        httpCode = 500;
+    }
+
+    res.writeHead(httpCode, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(resultString));
+});
+
+app.get('/api/v1/agencias/dados/referencias/:nomeAgencia', (req, res) => { 
+    console.log("novo método referencias");
+    console.log(req.params);
+    console.log(req.params.nomeAgencia);
+    
+   let filtrados = referencias.filter((pro) => pro.Agências.toLowerCase().indexOf(Agências.toLowerCase() - 1));
+   console.log(filtrados)
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(filtrados));
+
+}) 
+
+
+
+
 
 app.post('/api/v1/agencias/dados/', (req, res) => {
     
@@ -401,16 +446,21 @@ function sugerirAgencia(requisicao) {
         let cnaeFiscalScore = 0
         
         agenciaAvaliada.qtCases = contaCases(nomeAgencia);
+
+
+        console.log("requisicao " );
+        console.log(requisicao);
+        console.log("Fim requisicao!!!")
         
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
-            console.log(caso);
+            //console.log(caso);
             if (caso["Segmento:"] != undefined) {
                 if (caso["Segmento:"].toLowerCase().trim().indexOf(requisicao.segmento.toLowerCase().trim()) > -1) {
                     segmentoCaseScore = dados.pontuacao.caseSegmento;
                 }
 
-                if ((caso["Segmento:"].toLowerCase().trim().indexOf(requisicao.segmento.toLowerCase().trim()) > -1) && (caso['Plataforma do Case '].toLowerCase().indexOf("shopify") > -1)) {
+                if ((caso["Segmento:"].toLowerCase().trim().indexOf(requisicao.segmento.toLowerCase().trim()) > -1) ) {
                     plataformCaseScore = dados.pontuacao.caseSegmentoPlatafoma;
                 }
             }
@@ -464,13 +514,25 @@ function sugerirAgencia(requisicao) {
 
 }
 
-function retornaCases(nomedaAgencia) {
+function retornaReferencias(nomedaAgencia) {
     
     let casesshopify = cases.filter(caso => caso['Solução'] == "SHOPIFY" && caso['Agências'] == nomedaAgencia);
 
 	//let casosdaAgencia = casesshopify.filter(cs => cs.Agências.toLowerCase().trim().indexOf(nomeAgencia) > -1);
 
     console.log("A agncia " + nomedaAgencia + " tem " + casesshopify.length + " cases ");
+
+    return casesshopify;
+}
+
+
+function retornaCases(nomedaAgencia) {
+    
+    let casesshopify = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomedaAgencia.trim().toLowerCase()) > -1)
+
+	//let casosdaAgencia = casesshopify.filter(cs => cs.Agências.toLowerCase().trim().indexOf(nomeAgencia) > -1);
+
+    console.log("A agência " + nomedaAgencia + " tem " + casesshopify.length + " cases ");
 
     return casesshopify;
 }
