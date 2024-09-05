@@ -138,12 +138,19 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
         for (let ca =0; ca <  dados.agencias.length; ca++) { 
             let agen = dados.agencias[ca];
             console.log(agen);
+            if (agen["Homologado TOTVS"] != null && agen["Homologado TOTVS"] != undefined) {
+                let hom = "";
+                hom = agen["Homologado TOTVS"].toLowerCase().trim();
+                if (hom == 'homologado') {
+                    agenciasHomologadas.push(agen);
+                }
+            }
 
             console.log("------------------" + agen["Nome Agência"] + " " + agen["Homologado TOTVS"] + "-------------");
 
         }
 
-        agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS"] != undefined && aga["Homologado TOTVS"].toLowerCase().trim() == 'homologado');
+       // agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS"] != undefined && aga["Homologado TOTVS"].toLowerCase().trim() == 'homologado');
         
         
         nomeAgencias = [];
