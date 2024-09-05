@@ -143,7 +143,7 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
 
         }
 
-        agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS"].toLowerCase().trim() == 'homologado');
+        agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS"] != undefined && aga["Homologado TOTVS"].toLowerCase().trim() == 'homologado');
         
         
         nomeAgencias = [];
