@@ -561,6 +561,8 @@ function retornaReferencias(nomedaAgencia) {
 
 function retornaCases(nomedaAgencia) {
     
+    console.log("nomedaAgencia " + nomedaAgencia);
+
     let casesshopify = dados["CASES POR AGÊNCIA "].filter(caso => caso['Agência:'].toLowerCase().trim().indexOf(nomedaAgencia.trim().toLowerCase()) > -1)
 
 	//let casosdaAgencia = casesshopify.filter(cs => cs.Agências.toLowerCase().trim().indexOf(nomeAgencia) > -1);
