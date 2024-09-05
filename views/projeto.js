@@ -76,8 +76,11 @@
 
                         agenciaSugerida = data;
 
-                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + agenciaSugerida["Site Agência "] + '"/>' + agenciaSugerida["Nome Agência"] +'</a>');
-                        $('#responsavel').html('<b>Responsavel: </b>' + agenciaSugerida["Nome responsável "] );
+                        alert(agenciaSugerida);
+
+
+                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + agenciaSugerida["Site Agência"] + '"/>' + agenciaSugerida["Nome Agência"] +'</a>');
+                        $('#responsavel').html('<b>Responsavel: </b>' + agenciaSugerida["Nome responsável"] );
                   
                     })
                     .catch((err) => {$confirm("Esta é a última agência disponível para teste projeto", "#E74C3C"); proximaAgencia=0; console.dir(err);});
@@ -132,7 +135,7 @@
                     agenciaSugerida = data;
 
                     $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência"] +'</a>');
-                    $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
+                    $('#responsavel').html('<b>Responsavel: </b>' + data.responsavel );
                     sleep(200).then(() => { $('#resultado').fadeIn(200); });
                    
                     carregaClassifica();
@@ -352,10 +355,12 @@
 
                         if (mudouFila) {
 
+
+                            console.log('filadeAgencias.length  ' + filadeAgencias.length);
                             filadeAgencias = data;
                             tableBody.empty();
                             for (let i = 0; i < filadeAgencias.length; i++) {
-                            
+                                console.log(filadeAgencias[i]);
                                 let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + 
                                 '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência'] + 
                                 ' </div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i].score + '</div></td></tr>' ;

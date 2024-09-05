@@ -38,7 +38,21 @@ for (let ca =0; ca <  dados.agencias.length; ca++) {
     if (agen["Homologado TOTVS"] != null && agen["Homologado TOTVS"] != undefined) {
         let hom = "";
         hom = agen["Homologado TOTVS"].toLowerCase().trim();
+        if (agen["ID Partner"] != null) {
+            agen.id = agen["ID Partner"];
+        }
+
+        if (agen["Nome responsável"] != null) {
+            agen.responsavel = agen["Nome responsável"];
+        }
+
+        if (agen["Nome Agência"] != null) {
+            agen.agencia = agen["Nome Agência"];
+        }
+
         if (hom == 'homologado') {
+
+            agen.homologada = true;
             agenciasHomologadas.push(agen);
         }
     }
@@ -47,7 +61,7 @@ for (let ca =0; ca <  dados.agencias.length; ca++) {
 let nomeAgencias = [];
 
 for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
-    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência']);
     agenciasHomologadas[ca].posicaoFila = ca+1;
     if (agenciasHomologadas[ca].qtProj == undefined) {
         agenciasHomologadas[ca].qtProj = 0;
@@ -466,11 +480,11 @@ function sugerirAgencia(requisicao, url) {
         
     
 
-        if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('foundation')) {
+        if (agenciaAvaliada['Certificação Shopify'] != null && agenciaAvaliada['Certificação Shopify'].toLowerCase().trim().indexOf('foundation')) {
             score = score + dados.pontuacao.certShopify;
         }
 
-        if (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus')) {
+        if (agenciaAvaliada['Certificação Shopify'] != null && agenciaAvaliada['Certificação Shopify'].toLowerCase().trim().indexOf('plus')) {
             score = score + dados.pontuacao.certShopifyPlus;
 
             
