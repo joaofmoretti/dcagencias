@@ -1,5 +1,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
+
+
 var fs = require('fs');
 const cors = require('cors');
 
@@ -8,7 +10,8 @@ const registroBR_URL = 'https://rdap.registro.br/domain'
 let mapaAgenciaClient = new Map();
 
 let app = express();
-
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 let dados = require('./data/AgenciasParceiras.json');
 let cases;
