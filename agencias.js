@@ -158,7 +158,11 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
         
         for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
             nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência']);
-            let dadoAnterior = dadosAntigos.agencias.filter((da) => da['Nome Agência'].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência'].toLowerCase().trim());
+            let dadoAnterior = null;
+            try {
+                dadoAnterior = dadosAntigos.agencias.filter((da) => da['Nome Agência'].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência'].toLowerCase().trim());
+            } catch (err){};
+            
             agenciasHomologadas[ca].posicaoFila = ca+1;
             if (dadoAnterior != null) {
                 if (dadoAnterior.qtProj != undefined) {
