@@ -85,10 +85,10 @@
         }
         
 
-        function salvar() {
+        function sugerirAgenciaSite() {
             if(!validateForm()) return;
             projeto = {
-                nome: document.getElementById('nome').value,
+                site: document.getElementById('site').value,
                 
                 
                 };
@@ -102,7 +102,7 @@
 
        
                let method = "POST";
-               let endereco = '/dadosGoverno/';
+               let endereco = '/api/v1/sugeriragencia/';
          
 
            var myHeaders = new Headers();
@@ -323,16 +323,22 @@
         }
         
         function carregaClassifica() {
-            let method = "get";
-            let endereco = '/api/v1/sugestaoagencia/nome/' + document.getElementById('nome').value;
+            let method = "post";
+            let endereco = '/api/v1/sugeriragencia/classificacao/';
+            projeto = {
+                site: document.getElementById('site').value,
+                
+                
+                };
             var myHeaders = new Headers();
             myHeaders.append("Token", '');
             myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify(projeto);
 
             var requestOptions = {
                     method: method,
                     headers: myHeaders,
-                    
+                    body: raw,
                     redirect: 'follow'
                 };
             let tableBody = $("#classificados tbody"); 

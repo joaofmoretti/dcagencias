@@ -357,10 +357,18 @@ app.get('/api/v1/agencias/homologadas', (req, res) => {
 }); 
 
 
-app.get('/api/v1/sugestaoagencia/nome/:nome', (req, res) => {
+app.post('/api/v1/sugeriragencia/classificacao', (req, res) => {
+
+    console.log('req.params.site ' + req.body.site);
+    let enderecoProspect = new URL(req.body.site);
+    
    
-    let agenciasdoCliente = mapaAgenciaClient.get(req.params.nome);
+    let agenciasdoCliente = mapaAgenciaClient.get(enderecoProspect.host);
     let statusHttp = 200;
+
+    console.log("agencias do cliente");
+    console.log(agenciasdoCliente);
+    console.log("fim das agencias");
    
 
     res.writeHead(statusHttp, {"Content-Type": "application/json"});
@@ -369,15 +377,16 @@ app.get('/api/v1/sugestaoagencia/nome/:nome', (req, res) => {
 });
 
 
-app.get('/api/v1/sugestaoagencia/nome/:nome/next/:next', (req, res) => {
+app.post('/api/v1/sugeriragencia/classificacao/posicao', (req, res) => {
    console.log("proxima agencia sugerida");
-    let agenciasdoCliente = mapaAgenciaClient.get(req.params.nome);
-    let next = Number.parseInt(req.params.next);
+   let enderecoProspect = new URL(req.body.site);
+    let agenciasdoCliente = mapaAgenciaClient.get(enderecoProspect.host);
+    let posicao = Number.parseInt(req.body.posicao);
 
-    console.log('next ' + next);
+    console.log('posicao ' + posicao);
     let statusHttp = 200;
 
-    let agenciaLocalizada = agenciasdoCliente[next];
+    let agenciaLocalizada = agenciasdoCliente[posicao];
 
     if (agenciaLocalizada == null) {
         statusHttp = 404;
@@ -390,13 +399,13 @@ app.get('/api/v1/sugestaoagencia/nome/:nome/next/:next', (req, res) => {
 
 });
 
-function sugerirAgencia(requisicao) {
+function sugerirAgencia(requisicao, url) {
 	
 	
    
-    
+    console.log("inicio requisicao-----------------------");
     console.log(requisicao);
-    
+    console.log("fim requisicao---------------------------------");
 
     let agenciasSugeridas = [];
     
@@ -456,9 +465,7 @@ function sugerirAgencia(requisicao) {
         agenciaAvaliada.qtCases = contaCases(nomeAgencia);
 
 
-        console.log("requisicao " );
-        console.log(requisicao);
-        console.log("Fim requisicao!!!")
+    
         
         for (let conta=0; conta < casesAG.length; conta++) {
             let caso = casesAG[conta];
@@ -507,9 +514,10 @@ function sugerirAgencia(requisicao) {
         }
     }
     
-
-    mapaAgenciaClient.set(requisicao.nome, agenciasSugeridas);
-
+    console.log("url " + url);
+    let enderecoProspect = new URL(url);
+    mapaAgenciaClient.set(enderecoProspect.host, agenciasSugeridas);
+    console.log("enderecoProspect.host " + enderecoProspect.host);
    
 
    console.log("primeira agencia sugerida como resposta");
@@ -752,9 +760,9 @@ const parsePage = (body, url) => {
     "cnpj" : ""
 }
 
-app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
+app.post('/api/v1/sugeriragencia/', encodeUrl,   (req, res) => {
 
-    var busca = req.body.nome;;
+    var busca = req.body.site;;
     let url = new URL(busca);
     let cnpjEncontrado = ''
     let num = '';
@@ -774,7 +782,7 @@ app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
                   fetch(urlGover)
                   // Tratamento do sucesso
                   .then(response => response.json())  // converter para json
-                  .then(json => {res.send(sugerirAgencia(json)); })    //imprimir dados no console
+                  .then(json => {res.send(sugerirAgencia(json, url)); })    //imprimir dados no console
                   .catch(err => console.debug('Erro de solicitação', err));
                   
                 }
@@ -809,7 +817,7 @@ app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
             fetch(urlGover)
             // Tratamento do sucesso
             .then(response => response.json())  // converter para json
-            .then(json => {res.send(sugerirAgencia(json));})    //imprimir dados no console
+            .then(json => {res.send(sugerirAgencia(json, url));})    //imprimir dados no console
             .catch(err => console.debug('Erro de solicitação', err));
             
           }
@@ -831,9 +839,9 @@ app.post('/dadosGoverno/', encodeUrl,   (req, res) => {
           if (!response.ok) return resolve(result)
           return response.json();
         }).then((jsonData) => {
-          console.debug(jsonData)
+          //console.debug(jsonData)
           result = jsonData
-          console.debug(result);		
+          //console.debug(result);		
           let cnpj = [result.entities[0].publicIds[0].identifier];
           let num = cnpj[0].replace(/\D/g,'').substring(0,14);
               resolve(result)
