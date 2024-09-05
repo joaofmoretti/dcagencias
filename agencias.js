@@ -705,8 +705,8 @@ app.get('/tabulator.min.js', (req, res) => {
 
 });
 
-app.listen(5001, () => {
-    console.log("Aplicação de API subiu na porta 5001");
+app.listen(10000, () => {
+    console.log("Aplicação de API subiu na porta 10000");
 });
 
 const parsePage = (body, url) => {
