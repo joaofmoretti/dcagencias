@@ -53,7 +53,7 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
 
-    console.log(agenciasHomologadas[ca]);
+    
     
     agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência']);
     
@@ -150,7 +150,7 @@ app.post('/api/v1/agencias/dados/cadastrais', (req, res) => {
         agenciasHomologadas = [];
         for (let ca =0; ca <  dados.agencias.length; ca++) { 
             let agen = dados.agencias[ca];
-            console.log(agen);
+           
             if (agen["Homologado TOTVS"] != null && agen["Homologado TOTVS"] != undefined) {
                 let hom = "";
                 hom = agen["Homologado TOTVS"].toLowerCase().trim();

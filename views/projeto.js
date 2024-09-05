@@ -76,7 +76,7 @@
 
                         agenciaSugerida = data;
 
-                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + agenciaSugerida["Site Agência "] + '"/>' + agenciaSugerida["Nome Agência "] +'</a>');
+                        $('#agencia').html('<b>Agência escolhida: </b><a href="' + agenciaSugerida["Site Agência "] + '"/>' + agenciaSugerida["Nome Agência"] +'</a>');
                         $('#responsavel').html('<b>Responsavel: </b>' + agenciaSugerida["Nome responsável "] );
                   
                     })
@@ -131,7 +131,7 @@
 
                     agenciaSugerida = data;
 
-                    $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência "] +'</a>');
+                    $('#agencia').html('<b>Agência escolhida: </b><a href="' + data["Site Agência "] + '"/>' + data["Nome Agência"] +'</a>');
                     $('#responsavel').html('<b>Responsavel: </b>' + data["Nome responsável "] );
                     sleep(200).then(() => { $('#resultado').fadeIn(200); });
                    
@@ -192,7 +192,7 @@
             myHeaders.append("Content-Type", "application/json");
 
             //agenciaSugerida.cliente = $("#nome")[0].value;
-            projeto.agencia = agenciaSugerida["Nome Agência "];
+            projeto.agencia = agenciaSugerida["Nome Agência"];
             projeto.score = agenciaSugerida.score;
             projeto.dataSolicitacao = new Date();
 
@@ -311,7 +311,7 @@
                         tableBody.empty();
                         for (let i = 0; i < filadeAgencias.length; i++) {
                         
-                            let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência '] + ' </div></td></tr>' ;
+                            let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência'] + ' </div></td></tr>' ;
                             tableBody.append(codlinha);    
                             
                         }
@@ -357,7 +357,7 @@
                             for (let i = 0; i < filadeAgencias.length; i++) {
                             
                                 let codlinha = '<tr><td align="center"><div class="mb-2" style="color:white;">' + (i+1) + 
-                                '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência '] + 
+                                '</div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i]['Nome Agência'] + 
                                 ' </div></td><td align="center"><div class="mb-2" style="color:white;">' + filadeAgencias[i].score + '</div></td></tr>' ;
                                 tableBody.append(codlinha);    
                                 
