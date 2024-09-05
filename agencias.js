@@ -36,13 +36,13 @@ let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].
 let nomeAgencias = [];
 
 for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
-    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
+    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência']);
     agenciasHomologadas[ca].posicaoFila = ca+1;
     if (agenciasHomologadas[ca].qtProj == undefined) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
     
-    agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência ']);
+    agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência']);
     
 }
 
@@ -278,8 +278,8 @@ app.post('/api/v1/agencias/dados/', (req, res) => {
         nomeAgencias = [];
         
         for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
-            nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
-            let dadoAnterior = dadosAntigos.agencias.filter((da) => da['Nome Agência '].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência '].toLowerCase().trim());
+            nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência']);
+            let dadoAnterior = dadosAntigos.agencias.filter((da) => da['Nome Agência'].toLowerCase().trim() == agenciasHomologadas[ca]['Nome Agência'].toLowerCase().trim());
             agenciasHomologadas[ca].posicaoFila = ca+1;
             if (dadoAnterior != null) {
                 if (dadoAnterior.qtProj != undefined) {
@@ -356,7 +356,7 @@ app.get('/api/v1/agencias/', (req, res) => {
             dados.agencias[ca].score = 0;
         }
 
-        dados.agencias[ca].qtCases = contaCases(dados.agencias[ca]['Nome Agência ']);
+        dados.agencias[ca].qtCases = contaCases(dados.agencias[ca]['Nome Agência']);
        
 
     }
@@ -439,7 +439,7 @@ function sugerirAgencia(requisicao, url) {
         if (!agenciaAvaliada["Homologado TOTVS "].toLowerCase().trim() == 'homologado') continue
 
         //if (sugestao.shopifyplus && (agenciaAvaliada['Certificação Shopify '].toLowerCase().trim().indexOf('plus') == -1)) continue
-        let nomeAgencia = agenciaAvaliada['Nome Agência '] // .toLowerCase().trim();
+        let nomeAgencia = agenciaAvaliada['Nome Agência'] // .toLowerCase().trim();
         
         let score = 0;
 
@@ -516,7 +516,7 @@ function sugerirAgencia(requisicao, url) {
     agenciasSugeridas.sort((a, b) => (a.score < b.score ? 1 : -1));
 
     if (agenciaPreferida != null) {
-        console.log("melhor: " + agenciasSugeridas[0]['Nome Agência '] + ' ' + agenciasSugeridas[0].score + " favorita: " + agenciaPreferida['Nome Agência '] + ' ' + agenciaPreferida.score);
+        console.log("melhor: " + agenciasSugeridas[0]['Nome Agência'] + ' ' + agenciasSugeridas[0].score + " favorita: " + agenciaPreferida['Nome Agência'] + ' ' + agenciaPreferida.score);
         if (agenciasSugeridas[0].score > agenciaPreferida.score) {
             let porcentagem = 100 - ((agenciaPreferida.score * 100) / agenciasSugeridas[0].score);
             console.log("porcentagem " + porcentagem);
@@ -540,7 +540,7 @@ function sugerirAgencia(requisicao, url) {
    console.log("primeira agencia sugerida como resposta");
     
    
-    console.log(agenciasSugeridas[0]['Nome Agência '] + ' score ' + agenciasSugeridas[0].score);
+    console.log(agenciasSugeridas[0]['Nome Agência'] + ' score ' + agenciasSugeridas[0].score);
     return agenciasSugeridas[0];
 
     
@@ -633,8 +633,8 @@ app.post('/api/v1/projeto/', encodeUrl, (req, res) => {
     projeto.id = Date.now();
     
     projetos.push(projeto);
-    let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência '].toLowerCase() == projeto.agencia.toLowerCase());
-    console.log("Agencia localizada " + agenciaalocada['Nome Agência ']);
+    let agenciaalocada = agenciasHomologadas.find(a => a['Nome Agência'].toLowerCase() == projeto.agencia.toLowerCase());
+    console.log("Agencia localizada " + agenciaalocada['Nome Agência']);
     console.log("posicao da agencia " + agenciasHomologadas.indexOf(agenciaalocada)) ;
 
 
