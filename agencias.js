@@ -36,13 +36,15 @@ let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].
 let nomeAgencias = [];
 
 for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
-    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência']);
+    nomeAgencias.push(agenciasHomologadas[ca]['Nome Agência ']);
     agenciasHomologadas[ca].posicaoFila = ca+1;
     if (agenciasHomologadas[ca].qtProj == undefined) {
         agenciasHomologadas[ca].qtProj = 0;
     } 
+
+    console.log(agenciasHomologadas[ca]);
     
-    agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência']);
+    agenciasHomologadas[ca].qtCases = contaCases(agenciasHomologadas[ca]['Nome Agência ']);
     
 }
 
