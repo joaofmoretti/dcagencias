@@ -280,7 +280,7 @@ console.log('busca ' + busca);
 
    // console.log(referencias);
     
-   let filtrados = referencias.filter((pro) => pro.categoria == busca);
+   let filtrados = referencias.filter((pro) => pro.categoria == busca.toLowerCase());
    console.log(filtrados)
 
     res.writeHead(200, {"Content-Type": "application/json"});
