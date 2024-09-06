@@ -260,11 +260,11 @@ app.post('/api/v1/agencias/dados/referencias', (req, res) => {
     res.end(JSON.stringify(resultString));
 });
 
-app.get('/api/v1/agencias/dados/referencias/:nomeAgencia', (req, res) => { 
+app.get('/api/v1/referencias/:categoria', (req, res) => { 
     console.log("novo método referencias");
     console.log(req.params);
     
-let busca = req.params.nomeAgencia.toString().toLowerCase();
+let busca = req.params.categoria
 
 console.log('busca ' + busca);
 
@@ -729,6 +729,10 @@ app.get('/form/asteroid-alert.js', (req, res) => {
 
 app.get('/asteroid-alert.js', (req, res) => {
     res.sendFile(__dirname + '/views/asteroid-alert.js'); 
+});
+
+app.get('/referncias.json', (req, res) => {
+    res.sendFile(__dirname + '/data/referencias.json'); 
 });
 
 
