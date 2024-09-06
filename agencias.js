@@ -1,7 +1,10 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 var os = require("os");
-console.log( os.hostname());
+console.log( os.hostname);
+var networkInterfaces = os.networkInterfaces();
+
+console.log(networkInterfaces);
 
 var fs = require('fs');
 const cors = require('cors');
@@ -914,8 +917,8 @@ app.post('/api/v1/sugeriragencia/', encodeUrl,   (req, res) => {
   }
   console.log("app.request.hostname " + app.request.hostname);
   app.get('/ping', (req, res) => {
-    console.log(req);
-    res.status(201).send(req.hostname + " " + os.hostname());
+    console.log(req.baseUrl);
+    res.status(201).send(networkInterfaces);
   })
 
 
