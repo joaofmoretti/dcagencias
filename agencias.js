@@ -934,23 +934,23 @@ app.post('/api/v1/sugeriragencia/', encodeUrl,   (req, res) => {
 
     let vendedores = [];
 
-    if (busca.indexOf("Mango") > -1) {
+    if (busca == 1507732) {
         vendedores = [377152, 377151];
-    } else if (busca.indexOf("My E-shop") > -1) {
+    } else if (busca == 1567749) {
         vendedores = [377150];
-    } else if (busca.indexOf("Fiji") > -1) {
+    } else if (busca == 2942271) {
         vendedores =[ 377154, 377165 ];
-    } else if (busca.indexOf("Alfinet") > -1) {
+    } else if (busca == 3333333) {
         vendedores = [
             377161,
             377162
           ];
-    } else if (busca.indexOf("Codeby") > -1) {
+    } else if (busca == 22222) {
         vendedores = [
             377155,
             377156
           ];
-    }  else if (busca.indexOf("Checkstore") > -1) {
+    }  else if (busca == 571401) {
         vendedores = [
             377158,
             377157
