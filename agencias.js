@@ -924,7 +924,10 @@ app.post('/api/v1/sugeriragencia/', encodeUrl,   (req, res) => {
     })
   }
   
-
+  app.get('/ping', (req, res) => {
+    console.log(req);
+    res.status(201).send(req.hostname);
+  })
 
 
 
