@@ -19,6 +19,16 @@ let referencias;
 
 try {
     referencias = require("./data/referencias.json");
+    for (let ca =0; ca <  referencias.length; ca++) {
+        let ref = referencias[ca];
+
+        if (ref["Cateogoria Site"] != null) {
+            ref.categoria = ref["Cateogoria Site"].toLowerCase();
+        } else {
+        ref.categoria = '';
+        }
+
+     }
   } catch(erroReadingCasesFile) {
     console.log("erroReadingCasesFile");
     console.log(erroReadingCasesFile);
@@ -270,11 +280,27 @@ console.log('busca ' + busca);
 
    // console.log(referencias);
     
-   let filtrados = referencias.filter((pro) => pro['Agências'] != undefined && pro['Agências'].toLowerCase().indexOf(busca) > -1);
+   let filtrados = referencias.filter((pro) => pro.categoria == busca);
    console.log(filtrados)
 
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(filtrados));
+
+}) 
+
+app.get('/api/v1/referencias/', (req, res) => { 
+    console.log("novo método referencias");
+   
+    
+
+
+
+   // console.log(referencias);
+    
+   
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(referencias));
 
 }) 
 

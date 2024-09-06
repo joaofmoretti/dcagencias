@@ -21,7 +21,7 @@ try {
   console.log(erroReadingCasesFile);
 }
 
-let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS "].toLowerCase().trim() == 'homologado');
+let agenciasHomologadas = dados.agencias.filter(aga => aga["Homologado TOTVS"].toLowerCase().trim() == 'homologado');
 
 let nomeAgencias = [];
 
