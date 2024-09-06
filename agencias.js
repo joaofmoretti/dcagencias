@@ -270,11 +270,11 @@ app.post('/api/v1/agencias/dados/referencias', (req, res) => {
     res.end(JSON.stringify(resultString));
 });
 
-app.get('/api/v1/referencias/:categoria', (req, res) => { 
-    console.log("novo método referencias");
-    console.log(req.params);
+app.get('/api/v1/referencias', (req, res) => { 
+    console.log("novo método referencias com categoria ");
+    console.log(req.query.cat);
     
-let busca = req.params.categoria
+let busca = req.query.cat
 
 console.log('busca ' + busca);
 
@@ -289,12 +289,8 @@ console.log('busca ' + busca);
 }) 
 
 app.get('/api/v1/referencias/', (req, res) => { 
-    console.log("novo método referencias");
+    console.log("listagem referencias");
    
-    
-
-
-
    // console.log(referencias);
     
    
