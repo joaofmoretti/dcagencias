@@ -90,6 +90,7 @@ for (let ca =0; ca <  agenciasHomologadas.length; ca++) {
 const { application } = require('express');
 const { json } = require('body-parser');
 const { throws } = require('assert');
+const { waitForDebugger } = require('inspector');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -936,15 +937,36 @@ function montaMapaVendedores() {
     return mapa
 } 
 
+function getHorario(datafor) {
+    let horario = []
+    let dataenv = new Date(datafor);
+    let hora = dataenv.getHours();
+    let minutos = dataenv.getMinutes();
+
+    if (hora < 10) {
+        horario.push("0")
+
+    }
+    horario.push(hora.toString())
+    horario.push(":")
+
+    if (minutos < 10) {
+        horario.push("0")
+    }
+    horario.push(minutos.toString());
+    return horario.join("")
+}
 app.post('/api/v1/agencias/agendamentos/salvar', encodeUrl,   (req, res) => {
 
     var sitecliente  = req.body.site
     var agencia = req.body.agencia;
     var databox = req.body.databox;
-    var horaini = req.body.horaIni;
-    var horafim = req.body.horaFim
+    var horaini = getHorario(req.body.horaIni);
+    var horafim = getHorario(req.body.horaFim);
     var diainteiro = req.body.diaInt
     var observa = req.body.observa;
+
+
 
     var vendedorId = mapaVendedores.get(agencia)[0];
     
