@@ -428,9 +428,10 @@ app.post('/api/v1/sugeriragencia/classificacao', (req, res) => {
     let enderecoProspect = new URL(req.body.site);
     
    
+    
     let agenciasdoCliente = mapaAgenciaClient.get(enderecoProspect.host);
     let statusHttp = 200;
-
+    console.log("pegando  como " + enderecoProspect.host + " " + agenciasdoCliente.length + " agencias "  );
        
 
     res.writeHead(statusHttp, {"Content-Type": "application/json"});
@@ -444,6 +445,7 @@ app.post('/api/v1/sugeriragencia/classificacao/posicao', (req, res) => {
    let enderecoProspect = new URL(req.body.site);
     let agenciasdoCliente = mapaAgenciaClient.get(enderecoProspect.host);
     let posicao = Number.parseInt(req.body.posicao);
+    console.log("pegando  como " + enderecoProspect.host + " " + agenciasdoCliente.length + " agencias "  );
 
     console.log('posicao ' + posicao);
     let statusHttp = 200;
@@ -573,6 +575,8 @@ function sugerirAgencia(requisicao, url) {
     }
     
     let enderecoProspect = new URL(url);
+
+    console.log("Salvando como " + enderecoProspect.host + " " + agenciasSugeridas.length + " agencias "  );
     mapaAgenciaClient.set(enderecoProspect.host, agenciasSugeridas);
     
 
