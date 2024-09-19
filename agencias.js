@@ -1022,14 +1022,18 @@ app.post('/api/v1/agencias/agendamentos', encodeUrl,   (req, res) => {
     var busca = req.body.agencia;
 
     let vendedores = mapaVendedores.get(busca);
+
+    let dataIni = new Date();
+    let dataFim = new Date(new Date().getTime()+(15*24*60*60*1000));;
+
    
     const myHeaders = new Headers();
 myHeaders.append("authorization", exactToken );
 myHeaders.append("Content-Type", "application/json");
 
 const raw = JSON.stringify({
-  "dataInicial": "2024-07-28T03:00:00.000Z",
-  "dataFinal": "2024-09-08T03:00:00.000Z",
+  "dataInicial": dataIni.toISOString(),
+  "dataFinal": dataFim.toISOString(),
   "UsuarioVendedorId": vendedores
 });
 
