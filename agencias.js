@@ -97,8 +97,8 @@ app.use(cors());
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/views/form.html'));
 app.use(express.static(__dirname + '/views/agenciasfila.html'));
-app.use(express.static(__dirname + '/views/cadastroagencia.html'));
-app.use(express.static(__dirname + '/views/cadastroprojetos.html'));
+app.use(express.static(__dirname + '/views/agencias/cadastroagencia.html'));
+app.use(express.static(__dirname + '/views/agencias/cadastroprojetos.html'));
 app.use(express.static(__dirname + '/views/styleforms.css'));
 app.use(express.static(__dirname + '/views/form.js'));
 app.use(express.static(__dirname + '/views/libs/tabulator.min.css'));
@@ -141,12 +141,12 @@ app.get('/agencias/fila', (req, res) => {
 
 app.get('/agencias/consulta', (req, res) => {
     
-    res.sendFile(__dirname + '/views/cadastroagencias.html');
+    res.sendFile(__dirname + '/views/agencias/cadastroagencias.html');
 });
 
 app.get('/projetos/consulta', (req, res) => {
     
-    res.sendFile(__dirname + '/views/cadastroprojetos.html');
+    res.sendFile(__dirname + '/views/agencias/cadastroprojetos.html');
 });
 
 app.get('/projeto/', (req, res) => {
@@ -734,12 +734,12 @@ app.get('/form/form.js', (req, res) => {
     res.sendFile(__dirname + '/views/form.js'); 
 });
 
-app.get('/form/projeto.js', (req, res) => {
-    res.sendFile(__dirname + '/views/projeto.js'); 
+app.get('/view/agencias/projeto.js', (req, res) => {
+    res.sendFile(__dirname + '/views/agencias/projeto.js'); 
 });
 
-app.get('/views/agencias.js', (req, res) => {
-    res.sendFile(__dirname + '/views/agencias.js'); 
+app.get('/views/agencias/agencias.js', (req, res) => {
+    res.sendFile(__dirname + '/views/agencias/agencias.js'); 
 });
 
 app.get('/form/asteroid-alert.js', (req, res) => {

@@ -1,5 +1,5 @@
 let tableAgencias;
-let homologadas = false;
+let homologadas = true;
 
 
 function prepararAgencias(agencias) {
@@ -48,7 +48,7 @@ function carregaAgencias() {
             redirect: 'follow'
         };
 
-        fetch("../api/v1/agencias/", requestOptions)
+        fetch("../api/v1/agencias/homologadas", requestOptions)
         .then(response => response.json())
         .then(result => {tabledata = prepararAgencias(result);
            
@@ -58,6 +58,7 @@ function carregaAgencias() {
                     data:tabledata,
                     renderHorizontal:"virtual",
                     columns:[
+                        {title:"#Fila", field:"posicaoFila", hozAlign:"center", width:80},
                         {title:"Agência", field:"Nome Agência", width:200, editor:false},
                         {title:"Homologado", field:"totvs", hozAlign:"center", editor:false, formatter:"tickCross"},
                         {title:"Responsável", field:"Nome responsável", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
@@ -66,7 +67,7 @@ function carregaAgencias() {
                         {title:"Shopify", field:"shopify", hozAlign:"center", editor:false, formatter:"tickCross"},
                         {title:"Plus", field:"plus", hozAlign:"center", editor:false, formatter:"tickCross"},
                         {title:"Último Score", field:"score", hozAlign:"center", width:130},
-                        {title:"#Fila", field:"posicaoFila", hozAlign:"center", width:80},
+                        
                         {title:"Cases", field:"qtCases", hozAlign:"center", width:80},
                         {title:"Projetos", field:"qtProj", hozAlign:"center", width:110},
                         
