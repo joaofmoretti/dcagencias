@@ -463,7 +463,7 @@ app.post('/api/v1/sugeriragencia/classificacao/posicao', (req, res) => {
 
 });
 
-function sugerirAgencia(requisicao, url) {
+function sugerirAgencia( url) {
 	
 	
    
@@ -540,7 +540,7 @@ function sugerirAgencia(requisicao, url) {
                // }
             }
 
-            if (caso.CnaeFiscal != null && caso.CnaeFiscal == requisicao.estabelecimento.atividade_principal.id) {
+            if (caso.CnaeFiscal != null && caso.CnaeFiscal == 4729699) {
                 cnaeFiscalScore = dados.pontuacao.cnaeFiscal;
             }
 
@@ -738,7 +738,7 @@ app.get('/form/projeto.js', (req, res) => {
     res.sendFile(__dirname + '/views/projeto.js'); 
 });
 
-app.get('/agencias.js', (req, res) => {
+app.get('/views/agencias.js', (req, res) => {
     res.sendFile(__dirname + '/views/agencias.js'); 
 });
 
@@ -831,96 +831,10 @@ app.post('/api/v1/sugeriragencia/', encodeUrl,   (req, res) => {
 
     var busca = req.body.site;;
     let url = new URL(busca);
-    let cnpjEncontrado = ''
-    let num = '';
-    let result = {}
-    console.debug("DadosGoverno - pegando dados para: " + url);
-    let pageCNPJ = fetch(url)
-            .then(resp => resp.text()) // parse response's body as text
-            .then(body => parsePage(body, url)) // extract <title> from body
-            .then(pagina => { 
-              if (pagina != null && pagina.cnpj != "") {
-                cnpjEncontrado = pagina.cnpj;
-                num = cnpjEncontrado.replace(/\D/g,'').substring(0,14);
-                if (num.length >= 14)  {
-                    let urlGover = 'https://publica.cnpj.ws/cnpj/' + num.toString();
-                    //let urlGover = 'https://publica.cnpj.ws/cnpj/' + num.toString();
-                  console.debug("urlGover sem passar pelo RegistroBR" + urlGover);
-                  fetch(urlGover)
-                  // Tratamento do sucesso
-                  .then(response => response.json())  // converter para json
-                  .then(json => {res.send(sugerirAgencia(json, url)); })    //imprimir dados no console
-                  .catch(err => console.debug('Erro de solicitação', err));
-                  
-                }
-            
-              }
-  
-              
-  
-            }) // send the result back
-            .catch(e => { console.debug(e)})
-  
-  
-    pageCNPJ.then((result) => {
-  
-        console.debug('cnpjEncontrado ' + cnpjEncontrado)
-        if (cnpjEncontrado != '') return;
-        let registro = fetchRegistroBr(busca);
-        registro.then((result) => {
-      
-          try{
-            cnpjEncontrado = [result.entities[0].publicIds[0].identifier];
-            num = cnpjEncontrado[0].replace(/\D/g,'').substring(0,14);
-          } catch (erro) {
-            console.debug("Não foi possível pegar o CNPJ do domímio");
-            console.debug(result)
-          }  
-          if (num.length >= 14)  {
-        
-            let dados = null;
-            let urlGover = 'https://publica.cnpj.ws/cnpj/' + num.toString();
-            console.debug("urlGover " + urlGover);
-            fetch(urlGover)
-            // Tratamento do sucesso
-            .then(response => response.json())  // converter para json
-            .then(json => {res.send(sugerirAgencia(json, url));})    //imprimir dados no console
-            .catch(err => console.debug('Erro de solicitação', err));
-            
-          }
-        }).catch(erroRegistro => {console.debug("erro na requisicao que recupera o Registro"); console.debug(erroRegistro)});
-      }).catch(erroCNPJ => {console.debug("erro na requisicao que recupera o cnpj"); console.debug(erroCNPJ)})    
+    res.status(201).send(sugerirAgencia(url))
+    
+    
   })
-
-  async function fetchRegistroBr(inputAddress) {
-
-    let urlHost = new URL(inputAddress);
-  
-    let result = {}
-  
-    return new Promise((resolve, reject) => {
-      console.debug(registroBR_URL + '/' + urlHost.host);
-      fetch(registroBR_URL + '/' +  urlHost.host)
-        .then((response) => {
-          console.debug(response)
-          if (!response.ok) return resolve(result)
-          return response.json();
-        }).then((jsonData) => {
-          //console.debug(jsonData)
-          result = jsonData
-          //console.debug(result);		
-          let cnpj = [result.entities[0].publicIds[0].identifier];
-          let num = cnpj[0].replace(/\D/g,'').substring(0,14);
-              resolve(result)
-        }).catch((err) => {
-              console.debug("erro da parada")  
-          console.debug(err)
-          reject(err)
-          //throw err
-          
-        });
-    })
-  }
   console.log("app.request.hostname " + app.request.hostname);
   app.get('/ping', (req, res) => {
     //console.log(req.hostname);

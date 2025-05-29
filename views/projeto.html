@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="icon_38.png">
-    <title>Cadastro de Projeto</title>
+    <title>Gestão de Fila de Agências</title>
 
     <link rel="stylesheet" href="/styleapp.css" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 <body classname="snippet-body">
     <div class="wrapper" id="formulario">
         <form action="#">
-            <div class="h5 font-weight-bold text-center mb-3">Cadastro do projeto</div>
+            <div class="h5 font-weight-bold text-center mb-3">Gestão de projetos e Agências</div>
             <div id="divnomecliente" class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-user"></span></div>
                 <input id="site" autocomplete="off" type="text" class="form-control" placeholder="Informe aqui o endereço do ecommerce" required>
@@ -29,7 +29,7 @@
 
             <div id="edicao">
                 <div class="btn btn-primary mb-3" onclick="Javascript:sugerirAgenciaSite()">Sugerir Agência</div>
-                <div class="btn btn-primary mb-3" onclick="Javascript:mostrarFilaAgencias()">Fila de Agências</div>
+                <div class="btn btn-primary mb-3" onclick="Javascript:mostrarFilaAgencias()">Fila das Agências</div>
 
             </div>
 
@@ -115,9 +115,9 @@
         </form>
     </div>
     <script>$('#classificacao').hide()</script>
-    <div class="wrapper" id="filaagencias">
+    <div class="wrapper" id="filaagencias" style="max-width: 450px">
        
-            <div class="h5 font-weight-bold text-center mb-3">Fila de agências</div>
+            <div class="h5 font-weight-bold text-center mb-1">Fila das agências</div>
            
 
 

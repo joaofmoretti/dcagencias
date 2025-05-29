@@ -43,6 +43,19 @@
   background: linear-gradient(to bottom, #000428, #004683);
 }
 
+
+.wrappermedium {
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 20px 30px;
+  min-height: 300px;
+  background-color: #ffffff27;
+  border-top: 1px solid #ffffff6e;
+  border-left: 1px solid #ffffff6e;
+  border-radius: 15px;
+}
+
+
 .wrapper {
   max-width: 650px;
   margin: 50px auto;

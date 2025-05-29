@@ -210,7 +210,7 @@
 
             fetch(endereco , requestOptions).then((res) => res.json())
                     .then((data) => {
-
+ 
                                          
                     
 
@@ -218,7 +218,7 @@
                    
 					$toast("Projeto confirmado", "#FF9100");
                        
-
+                    /*    
                     document.getElementById('nome').value = '';
                 
                     document.getElementById('segmento').selectedIndex = 0;
@@ -231,7 +231,7 @@
                     document.getElementById('marketplace').checked = false;
                     document.getElementById('certificacao').checked = false;
                       
-                       
+                      */ 
                        
                     })
                     .catch((err) => {$confirm("Erro ao salvar projeto", "#E74C3C"); console.dir(err);});

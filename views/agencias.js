@@ -9,21 +9,26 @@ function prepararAgencias(agencias) {
 
     
     
-        if (agencia['Homologado TOTVS '].toLowerCase().indexOf('homologado') > -1) {
+        if (agencia['Homologado TOTVS'] != undefined && agencia['Homologado TOTVS'].toLowerCase().indexOf('homologado') > -1) {
             agencia.totvs = true;
         } else {
             agencia.totvs = false;
         }
+        
+        if (agencia['Certificação Shopify'] != undefined) {
+            if (agencia['Certificação Shopify'].toLowerCase().indexOf('foundations') > -1) {
+                agencia.shopify = true;
+            } else {
+                agencia.shopify = false;
+            }
 
-        if (agencia['Certificação Shopify '].toLowerCase().indexOf('foundations') > -1) {
-            agencia.shopify = true;
+            if (agencia['Certificação Shopify'].toLowerCase().indexOf('plus') > -1) {
+                agencia.plus = true;
+            } else {
+                agencia.plus = false;
+            }
         } else {
             agencia.shopify = false;
-        }
-
-        if (agencia['Certificação Shopify '].toLowerCase().indexOf('plus') > -1) {
-            agencia.plus = true;
-        } else {
             agencia.plus = false;
         }
     }    
@@ -53,9 +58,9 @@ function carregaAgencias() {
                     data:tabledata,
                     renderHorizontal:"virtual",
                     columns:[
-                        {title:"Agência", field:"Nome Agência ", width:200, editor:false},
+                        {title:"Agência", field:"Nome Agência", width:200, editor:false},
                         {title:"Homologado", field:"totvs", hozAlign:"center", editor:false, formatter:"tickCross"},
-                        {title:"Responsável", field:"Nome responsável ", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
+                        {title:"Responsável", field:"Nome responsável", width:130, editor:"list", editorParams:{autocomplete:"true", allowEmpty:true,listOnEmpty:true, valuesLookup:true}},
                         //{title:"Cidade", field:"Cidade ", width:100},
                         //{title:"UF", field:"Estado ", width:60},
                         {title:"Shopify", field:"shopify", hozAlign:"center", editor:false, formatter:"tickCross"},
